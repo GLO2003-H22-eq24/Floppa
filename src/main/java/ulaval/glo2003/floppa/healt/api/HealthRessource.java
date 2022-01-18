@@ -7,11 +7,10 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-
+@Path("health")
 public class HealthRessource {
 
 	@GET
-	@Path("health")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response healthCheck() {
 		return Response.ok().build();
