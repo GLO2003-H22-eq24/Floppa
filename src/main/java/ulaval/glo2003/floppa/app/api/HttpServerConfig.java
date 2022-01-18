@@ -8,7 +8,7 @@ public class HttpServerConfig extends ResourceConfig {
 	private static final String APP_NAME = "FLOPPA";
 
 	public HttpServerConfig() {
-		//this.packages(SRC_PACKAGE);
+		this.packages(SRC_PACKAGE);
 		this.property(ServerProperties.APPLICATION_NAME, APP_NAME);
 		this.registerBinders();
 		this.getResources();
