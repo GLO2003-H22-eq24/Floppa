@@ -16,5 +16,6 @@ public class HttpServerConfig extends ResourceConfig {
 
 	private void registerBinders() {
 		//Ce que tu instancie ici, va pouvoir être injected dans les Ressources @Inject
+		//voir https://riptutorial.com/jersey/example/23632/basic-dependency-injection-using-jersey-s-hk2
 	}
 }

@@ -8,7 +8,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 @Path("health")
-public class HealthRessource {
+public class HealthResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
