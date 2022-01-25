@@ -15,6 +15,8 @@ import java.util.Map;
 
 @Path("/seller")
 public class SellerResource {
+    private final String DATE_FORMAT = "yyyy-MM-dd";
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -27,7 +29,7 @@ public class SellerResource {
             String name = body.get("name").toString();
             String bio = body.get("bio").toString();
 
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
             Date birthDate = formatter.parse(body.get("birthDate").toString());
 
             if (name.isEmpty() || bio.isEmpty()) {
