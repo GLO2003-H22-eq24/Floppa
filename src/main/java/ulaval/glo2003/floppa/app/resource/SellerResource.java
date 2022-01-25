@@ -15,18 +15,6 @@ import java.util.Map;
 
 @Path("/seller")
 public class SellerResource {
-
-//    @POST
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response PostSeller(@QueryParam("name") String name, @QueryParam("bio") String bio, @QueryParam("birthDate") @DateFormat Date birthDate) {
-////        if (
-//        System.out.println(name);
-//        System.out.println(bio);
-//        System.out.println(birthDate.toString());
-//
-//        return Response.ok().build();
-//    }
-
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
