@@ -13,14 +13,18 @@ import java.util.ArrayList;
 
 @Path("/seller")
 public class SellerResource {
-    private SellerService sellerService;
+    private final SellerService sellerService;
+    private final SellerAssembler sellerAssembler;
 
     //J'ai aucune idée comment faire fonctionner le Inject, alors j'ai mis ça pour l'instant
     //Ce qui est en commentaire est ce qui devrait être là théoriquement
-//    @Inject
-    public SellerResource(/*SellerService sellerService*/) {
-//        this.sellerService = sellerService;
-        this.sellerService = new SellerService(new SellerRepository(new ArrayList<>()));
+    @Inject
+    public SellerResource(SellerService sellerService, SellerAssembler sellerAssembler) {
+       this.sellerService = sellerService;
+       //ajout sellerAssembler ici ? Je crois que c'est good demême -cw
+       this.sellerAssembler=sellerAssembler;
+
+        //this.sellerService = new SellerService(new SellerRepository(new ArrayList<>()));
     }
 
     @POST
