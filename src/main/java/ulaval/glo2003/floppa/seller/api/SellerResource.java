@@ -31,7 +31,7 @@ public class SellerResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response SaveSeller(SellerDto sellerDto) throws ErrorException {
-        Seller seller = SellerAssembler.fromDto(sellerDto);
+        Seller seller = sellerAssembler.fromDto(sellerDto);
         sellerService.SaveSeller(seller);
         return Response.ok().build();
     }
