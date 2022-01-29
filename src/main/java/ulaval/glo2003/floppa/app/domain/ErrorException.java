@@ -1,18 +1,10 @@
 package ulaval.glo2003.floppa.app.domain;
 
-import jakarta.json.bind.annotation.JsonbProperty;
-import jakarta.json.bind.annotation.JsonbTransient;
 
 public class ErrorException extends Exception{
-	@JsonbProperty("code")
-	private String code;
-	@JsonbProperty("description")
-	private String description;
-	@JsonbTransient
-	private int statusCode;
-
-	public ErrorException() {
-	}
+	private final String code;
+	private final String description;
+	private final int statusCode;
 
 	public ErrorException(ErrorCode errorCode) {
 		this.code = errorCode.name();

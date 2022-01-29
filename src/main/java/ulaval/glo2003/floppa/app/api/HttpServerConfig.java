@@ -3,6 +3,7 @@ package ulaval.glo2003.floppa.app.api;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
+import ulaval.glo2003.floppa.app.api.mapper.ErrorExceptionAssembler;
 import ulaval.glo2003.floppa.seller.api.SellerAssembler;
 import ulaval.glo2003.floppa.seller.app.SellerService;
 import ulaval.glo2003.floppa.seller.domain.SellerRepository;
@@ -42,6 +43,12 @@ public class HttpServerConfig extends ResourceConfig {
 			@Override
 			protected void configure() {
 				bind(new SellerAssembler()).to(SellerAssembler.class);
+			}
+		});
+		register(new AbstractBinder() {
+			@Override
+			protected void configure() {
+				bind(new ErrorExceptionAssembler()).to(ErrorExceptionAssembler.class);
 			}
 		});
 	}
