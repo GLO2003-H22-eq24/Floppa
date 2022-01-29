@@ -13,10 +13,6 @@ import static java.util.Objects.isNull;
 
 public class SellerAssembler {
     public Seller fromDto(SellerDto sellerDto) throws ErrorException {
-        //TODO: faire la validation sur les champs non-null et le format de la date
-        // Dans les assembleur on fait juste de la validation de création d'objet.
-        // raise new exception si cela ne respecte pas la création d'un Seller.
-
         // Vérifie que les paramètres nécessaires sont présent
         if (isNull(sellerDto.getName()) || isNull(sellerDto.getBio()) || isNull(sellerDto.getBirthDate())){
             throw new ErrorException(ErrorCode.MISSING_PARAM);
