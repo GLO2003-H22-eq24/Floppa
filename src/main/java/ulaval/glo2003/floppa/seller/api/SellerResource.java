@@ -16,22 +16,17 @@ public class SellerResource {
     private final SellerService sellerService;
     private final SellerAssembler sellerAssembler;
 
-    //J'ai aucune idée comment faire fonctionner le Inject, alors j'ai mis ça pour l'instant
-    //Ce qui est en commentaire est ce qui devrait être là théoriquement
     @Inject
     public SellerResource(SellerService sellerService, SellerAssembler sellerAssembler) {
        this.sellerService = sellerService;
-       //ajout sellerAssembler ici ? Je crois que c'est good demême -cw
        this.sellerAssembler=sellerAssembler;
-
-        //this.sellerService = new SellerService(new SellerRepository(new ArrayList<>()));
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response SaveSeller(SellerDto sellerDto) throws ErrorException {
-        Seller seller = SellerAssembler.fromDto(sellerDto);
+        Seller seller = sellerAssembler.fromDto(sellerDto);
         sellerService.SaveSeller(seller);
         return Response.ok().build();
     }

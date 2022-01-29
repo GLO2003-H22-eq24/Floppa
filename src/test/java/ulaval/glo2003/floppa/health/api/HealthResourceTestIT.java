@@ -1,4 +1,4 @@
-package ulaval.glo2003.floppa.healt.api;
+package ulaval.glo2003.floppa.health.api;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.Test;

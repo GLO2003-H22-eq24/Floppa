@@ -1,4 +1,4 @@
-package ulaval.glo2003.floppa.healt.api;
+package ulaval.glo2003.floppa.health.api;
 
 
 import jakarta.ws.rs.GET;
