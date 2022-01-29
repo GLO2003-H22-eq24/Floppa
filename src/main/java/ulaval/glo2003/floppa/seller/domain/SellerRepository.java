@@ -13,7 +13,7 @@ public class SellerRepository {
         sellers.add(seller);
     }
 
-    public int GetSellerIndex(Seller seller) {
+    public int getSellerIndex(Seller seller) {
         return sellers.indexOf(seller);
     }
 }

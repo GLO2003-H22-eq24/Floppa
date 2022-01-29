@@ -23,19 +23,14 @@ public class SellerAssembler {
             throw new ErrorException(ErrorCode.INVALID_PARAM);
         }
 
-        int age = 0;
         try {
             // Vérifie que la date de naissance est dans le bon format
             LocalDate birthDate = LocalDate.parse(sellerDto.getBirthDate(), DateTimeFormatter.ISO_DATE);
-            age = Period.between(birthDate, LocalDate.now()).getYears();
-            // Vérifie que le vendeur à 18 ans ou plus
-            if (age < 18){
-                throw new ErrorException(ErrorCode.INVALID_PARAM);
-            }
+            int age = Period.between(birthDate, LocalDate.now()).getYears();
+
+            return new Seller(sellerDto.getName(), sellerDto.getBio(), age);
         } catch (DateTimeParseException e) {
             throw new ErrorException(ErrorCode.INVALID_PARAM);
         }
-
-        return new Seller(sellerDto.getName(), sellerDto.getBio(), age);
     }
 }

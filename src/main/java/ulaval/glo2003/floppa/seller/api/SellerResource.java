@@ -32,6 +32,6 @@ public class SellerResource {
     public Response SaveSeller(SellerDto sellerDto, @Context UriInfo uriInfo) throws ErrorException {
         Seller seller = sellerAssembler.fromDto(sellerDto);
         sellerService.SaveSeller(seller);
-        return Response.ok().location(URI.create(uriInfo.getBaseUri() + "sellers/" + sellerService.GetSellerIndex(seller))).build();
+        return Response.ok().location(URI.create(uriInfo.getBaseUri() + "sellers/" + sellerService.getSellerIndex(seller))).build();
     }
 }

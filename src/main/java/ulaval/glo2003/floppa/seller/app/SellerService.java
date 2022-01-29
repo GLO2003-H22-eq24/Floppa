@@ -14,7 +14,7 @@ public class SellerService {
         sellerRepository.saveSeller(seller);
     }
 
-    public int GetSellerIndex(Seller seller) {
-        return sellerRepository.GetSellerIndex(seller);
+    public int getSellerIndex(Seller seller) {
+        return sellerRepository.getSellerIndex(seller);
     }
 }
