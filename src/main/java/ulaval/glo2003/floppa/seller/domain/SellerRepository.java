@@ -1,8 +1,5 @@
 package ulaval.glo2003.floppa.seller.domain;
 
-import jakarta.inject.Inject;
-import org.glassfish.jersey.process.internal.RequestScoped;
-
 import java.util.List;
 
 public class SellerRepository {
@@ -14,5 +11,9 @@ public class SellerRepository {
 
     public void saveSeller(Seller seller) {
         sellers.add(seller);
+    }
+
+    public int getSellerIndex(Seller seller) {
+        return sellers.indexOf(seller);
     }
 }

@@ -13,4 +13,8 @@ public class SellerService {
     public void SaveSeller(Seller seller) {
         sellerRepository.saveSeller(seller);
     }
+
+    public int getSellerIndex(Seller seller) {
+        return sellerRepository.getSellerIndex(seller);
+    }
 }
