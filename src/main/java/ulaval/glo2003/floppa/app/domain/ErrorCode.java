@@ -1,7 +1,6 @@
 package ulaval.glo2003.floppa.app.domain;
 
 import jakarta.json.bind.annotation.JsonbProperty;
-import jakarta.json.bind.annotation.JsonbTransient;
 
 public enum ErrorCode {
 	MISSING_PARAM("un paramètre (URL, header, JSON, etc.) est manquant", 400),
