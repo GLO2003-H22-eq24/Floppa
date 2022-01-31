@@ -24,7 +24,7 @@ public class Seller {
     public Seller(String name, String bio, LocalDate birthDate) throws ErrorException{
         this.birthDate = birthDate;
         if (this.computeAge() < 18){
-            throw new ErrorException(ErrorCode.INVALID_PARAM);
+            throw new ErrorException(ErrorCode.INVALID_PARAMETER);
 
         }
         this.name = name;

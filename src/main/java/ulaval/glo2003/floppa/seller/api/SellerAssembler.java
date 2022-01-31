@@ -27,12 +27,12 @@ public class SellerAssembler {
         // Vérifie que les paramètres nécessaires sont présent
 
         if (isNull(sellerDtoRequest.getName()) || isNull(sellerDtoRequest.getBio()) || isNull(sellerDtoRequest.getBirthDate())){
-            throw new ErrorException(ErrorCode.MISSING_PARAM);
+            throw new ErrorException(ErrorCode.MISSING_PARAMETER);
         }
 
         // Vérifie que les paramètres nécessaires contiennent une valeur
         if (sellerDtoRequest.getBio().isBlank() || sellerDtoRequest.getName().isBlank()) {
-            throw new ErrorException(ErrorCode.INVALID_PARAM);
+            throw new ErrorException(ErrorCode.INVALID_PARAMETER);
 
         }
 
