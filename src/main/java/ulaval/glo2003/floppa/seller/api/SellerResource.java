@@ -14,7 +14,7 @@ import ulaval.glo2003.floppa.seller.domain.SellerRepository;
 
 import java.net.URI;
 
-@Path("/seller")
+@Path("/sellers")
 public class SellerResource {
     private final SellerRepository sellerRepository;
     private final SellerAssembler sellerAssembler;
