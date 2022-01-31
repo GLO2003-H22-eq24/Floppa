@@ -1,19 +1,10 @@
 package ulaval.glo2003.floppa.seller.domain;
 
-import java.util.List;
 
-public class SellerRepository {
-    private List<Seller> sellers;
+import ulaval.glo2003.floppa.app.domain.ErrorException;
 
-    public SellerRepository(List<Seller> sellers) {
-        this.sellers = sellers;
-    }
+public interface SellerRepository {
+	void saveSeller(Seller seller);
 
-    public void saveSeller(Seller seller) {
-        sellers.add(seller);
-    }
-
-    public int getSellerIndex(Seller seller) {
-        return sellers.indexOf(seller);
-    }
+	Seller retrieveSeller(String sellerId) throws ErrorException;
 }
