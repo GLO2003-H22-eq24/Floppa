@@ -25,6 +25,7 @@ public class SellerAssembler {
 
     public Seller fromDto(SellerDtoRequest sellerDtoRequest) throws ErrorException {
         // Vérifie que les paramètres nécessaires sont présent
+
         if (isNull(sellerDtoRequest.getName()) || isNull(sellerDtoRequest.getBio()) || isNull(sellerDtoRequest.getBirthDate())){
             throw new ErrorException(ErrorCode.MISSING_PARAM);
         }
@@ -32,6 +33,7 @@ public class SellerAssembler {
         // Vérifie que les paramètres nécessaires contiennent une valeur
         if (sellerDtoRequest.getBio().isBlank() || sellerDtoRequest.getName().isBlank()) {
             throw new ErrorException(ErrorCode.INVALID_PARAM);
+
         }
 
         try {
@@ -39,7 +41,7 @@ public class SellerAssembler {
             LocalDate birthDate = LocalDate.parse(sellerDtoRequest.getBirthDate(), DateTimeFormatter.ISO_DATE);
             return new Seller(sellerDtoRequest.getName(), sellerDtoRequest.getBio(), birthDate);
         } catch (DateTimeParseException e) {
-            throw new ErrorException(ErrorCode.INVALID_PARAM);
+            throw new ErrorException(ErrorCode.INVALID_PARAMETER);
         }
     }
 

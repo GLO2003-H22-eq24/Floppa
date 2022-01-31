@@ -25,6 +25,7 @@ public class Seller {
         this.birthDate = birthDate;
         if (this.computeAge() < 18){
             throw new ErrorException(ErrorCode.INVALID_PARAM);
+
         }
         this.name = name;
         this.bio = bio;
