@@ -1,22 +1,23 @@
 # TP1
 ##Project Floppa
-![img.png](img.png)
+![img.png](ScreenShots/TP1/img.png)
 
 ##Milestone
-![img_1.png](img_1.png)
+![img_1.png](ScreenShots/TP1/img_1.png)
 
 ##Issues
+##Global
+![img_2.png](ScreenShots/TP1/img_2.png)
 ###Seller
-![img_2.png](img_2.png)
-###Planification
-![img_3.png](img_3.png)
+![img_3.png](ScreenShots/TP1/img_3.png)
+###Labels
+![img_4.png](ScreenShots/TP1/img_4.png)
 
 ##Pull Requests
+###Global
+![img_5.png](ScreenShots/TP1/img_5.png)
+###Seller Ressource
+![img_6.png](ScreenShots/TP1/img_6.png)
+###PR de finition
+![img_7.png](ScreenShots/TP1/img_7.png)
 
-
-#à delete du rapport ->
-##SCREENSHOT À AVOIR :
-* 1 pour le Project comprenant les colonnes et les issues associées
-* 1 pour le milestone comprenant le titre, la description et les issues associées
-* 3 pour les issues avec tous les éléments demandés visibles
-* 3 pour les PR avec tous les éléments demandés visibles
