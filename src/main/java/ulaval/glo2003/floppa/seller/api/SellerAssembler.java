@@ -15,12 +15,12 @@ public class SellerAssembler {
     public Seller fromDto(SellerDto sellerDto) throws ErrorException {
         // Vérifie que les paramètres nécessaires sont présent
         if (isNull(sellerDto.getName()) || isNull(sellerDto.getBio()) || isNull(sellerDto.getBirthDate())){
-            throw new ErrorException(ErrorCode.MISSING_PARAM);
+            throw new ErrorException(ErrorCode.MISSING_PARAMETER);
         }
 
         // Vérifie que les paramètres nécessaires contiennent une valeur
         if (sellerDto.getBio().isBlank() || sellerDto.getName().isBlank()) {
-            throw new ErrorException(ErrorCode.INVALID_PARAM);
+            throw new ErrorException(ErrorCode.INVALID_PARAMETER);
         }
 
         try {
@@ -30,7 +30,7 @@ public class SellerAssembler {
 
             return new Seller(sellerDto.getName(), sellerDto.getBio(), age);
         } catch (DateTimeParseException e) {
-            throw new ErrorException(ErrorCode.INVALID_PARAM);
+            throw new ErrorException(ErrorCode.INVALID_PARAMETER);
         }
     }
 }

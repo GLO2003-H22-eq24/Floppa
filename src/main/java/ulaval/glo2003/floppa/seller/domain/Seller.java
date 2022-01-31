@@ -11,7 +11,7 @@ public class Seller {
 
     public Seller(String name, String bio, int age) throws ErrorException{
         if (age < 18){
-            throw new ErrorException(ErrorCode.INVALID_PARAM);
+            throw new ErrorException(ErrorCode.INVALID_PARAMETER);
         }
         this.name = name;
         this.bio = bio;
