@@ -1,6 +1,6 @@
-package ulaval.glo2003.floppa.seller.api;
+package ulaval.glo2003.floppa.seller.api.message;
 
-public class SellerDto {
+public class SellerDtoRequest {
     private String name;
     private String bio;
     private String birthDate;

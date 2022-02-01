@@ -1,18 +1,10 @@
 package ulaval.glo2003.floppa.seller.domain;
 
-import jakarta.inject.Inject;
-import org.glassfish.jersey.process.internal.RequestScoped;
 
-import java.util.List;
+import ulaval.glo2003.floppa.app.domain.ErrorException;
 
-public class SellerRepository {
-    private List<Seller> sellers;
+public interface SellerRepository {
+	void saveSeller(Seller seller);
 
-    public SellerRepository(List<Seller> sellers) {
-        this.sellers = sellers;
-    }
-
-    public void saveSeller(Seller seller) {
-        sellers.add(seller);
-    }
+	Seller retrieveSeller(String sellerId) throws ErrorException;
 }
