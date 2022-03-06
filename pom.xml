@@ -129,14 +129,6 @@
                         <goals>
                             <goal>java</goal>
                         </goals>
-                        <configuration>
-                            <excludes>
-                                <exclude>none</exclude>
-                            </excludes>
-                            <includes>
-                                <include>**/*IT</include>
-                            </includes>
-                        </configuration>
                     </execution>
                 </executions>
                 <configuration>
