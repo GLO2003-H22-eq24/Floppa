@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SellerResourceITTest extends ServerTestIT {
+
 //
 //    @Test
 //    void whenSaveSeller_withGoodParam_thenStatus200() throws JsonProcessingException {
@@ -53,22 +54,22 @@ public class SellerResourceITTest extends ServerTestIT {
 //        SaveSeller("name", "bio", LocalDate.now().format(DateTimeFormatter.ISO_DATE)).then().assertThat().statusCode(400);
 //    }
 //
-//    public static io.restassured.response.Response SaveSeller(String name, String bio, String birthDate) throws JsonProcessingException {
-//        Map<String, String> body = new HashMap<>();
-//        if (name != null) {
-//            body.put("name", name);
-//        }
-//        if (bio != null) {
-//            body.put("bio", bio);
-//        }
-//        if (birthDate != null) {
-//            body.put("birthDate", birthDate);
-//        }
-//
-//        return RestAssured.given()
-//                .header("Content-Type", "application/json")
-//                .port(PORT)
-//                .body(new ObjectMapper().writeValueAsString(body))
-//                .post("/seller");
-//    }
+    public static io.restassured.response.Response SaveSeller(String name, String bio, String birthDate) throws JsonProcessingException {
+        Map<String, String> body = new HashMap<>();
+        if (name != null) {
+            body.put("name", name);
+        }
+        if (bio != null) {
+            body.put("bio", bio);
+        }
+        if (birthDate != null) {
+            body.put("birthDate", birthDate);
+        }
+
+        return RestAssured.given()
+                .header("Content-Type", "application/json")
+                .port(PORT)
+                .body(new ObjectMapper().writeValueAsString(body))
+                .post("/seller");
+    }
 }
