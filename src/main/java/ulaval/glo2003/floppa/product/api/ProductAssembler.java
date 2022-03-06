@@ -7,6 +7,7 @@ import ulaval.glo2003.floppa.offers.api.OffersDto;
 import ulaval.glo2003.floppa.product.api.message.ProductCreationDtoRequest;
 import ulaval.glo2003.floppa.product.domain.Product;
 import ulaval.glo2003.floppa.product.domain.ProductCategory;
+import ulaval.glo2003.floppa.seller.domain.Seller;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -23,6 +24,12 @@ public class ProductAssembler {
 	}
 
 	public ProductDto toDto(Product product){
+		OffersDto offersDto = offersAssembler.toDto(product);
+		Double amount = BigDecimal.valueOf(product.getSuggestedPrice()).setScale(2, RoundingMode.HALF_UP).doubleValue();
+		return new ProductDto(product.getId(), product.getCreatedDate(), product.getTitle(), product.getDescription(), amount, offersDto);
+	}
+
+	public ProductDto toDto(Product product, Seller seller) {
 		OffersDto offersDto = offersAssembler.toDto(product);
 		Double amount = BigDecimal.valueOf(product.getSuggestedPrice()).setScale(2, RoundingMode.HALF_UP).doubleValue();
 		return new ProductDto(product.getId(), product.getCreatedDate(), product.getTitle(), product.getDescription(), amount, offersDto);

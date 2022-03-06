@@ -66,4 +66,8 @@ public class Product {
 	public List<Offers> getOffers() {
 		return offers;
 	}
+
+	public List<ProductCategory> getCategories() {
+		return categories;
+	}
 }
