@@ -22,8 +22,9 @@ public class ProductAssembler {
 		return new ProductDto(product.getId(), product.getCreatedDate(), product.getTitle(), product.getDescription(), amount, offersDto);
 	}
 
-	public Product fromDto(ProductCreationDtoRequest productCreationDtoRequest){
+	public Product fromDto(ProductCreationDtoRequest productCreationDtoRequest)  {
 		//TODO: faire le product
 		return null;
 	}
+
 }
