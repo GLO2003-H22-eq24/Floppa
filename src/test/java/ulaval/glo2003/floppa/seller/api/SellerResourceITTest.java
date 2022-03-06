@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SellerResourceTestIT extends ServerTestIT {
+public class SellerResourceITTest extends ServerTestIT {
 
     @Test
     void whenSaveSeller_withGoodParam_thenStatus200() throws JsonProcessingException {
