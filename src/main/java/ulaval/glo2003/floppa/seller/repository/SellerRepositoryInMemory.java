@@ -5,8 +5,10 @@ import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.seller.domain.Seller;
 import ulaval.glo2003.floppa.seller.domain.SellerRepository;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,5 +30,11 @@ public class SellerRepositoryInMemory implements SellerRepository {
     public Seller retrieveSeller(String sellerId) throws ErrorException {
         return Optional.ofNullable(this.sellersById.get(sellerId))
                 .orElseThrow(()->new ErrorException(ErrorCode.ITEM_NOT_FOUND));
+    }
+
+    @Override
+    public List<Seller> retrieveSeller(List<Function<Seller, Boolean>> filterConditions) {
+        //TODO
+        return null;
     }
 }
