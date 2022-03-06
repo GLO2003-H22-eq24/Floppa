@@ -31,15 +31,6 @@ public class HttpServerConfig extends ResourceConfig {
 		bindAssembler();
 	}
 
-	private void bindService(SellerRepository sellerRepository) {
-		register(new AbstractBinder() {
-			@Override
-			protected void configure() {
-				bind(new ProductService(sellerRepository)).to(ProductService.class);
-			}
-		});
-	}
-
 	private void bindRepository(SellerRepository sellerRepository) {
 		register(new AbstractBinder() {
 			@Override
@@ -49,7 +40,19 @@ public class HttpServerConfig extends ResourceConfig {
 		});
 	}
 
+	private void bindService(SellerRepository sellerRepository) {
+		register(new AbstractBinder() {
+			@Override
+			protected void configure() {
+				bind(new ProductService(sellerRepository)).to(ProductService.class);
+			}
+		});
+	}
+
 	private void bindAssembler() {
+		OffersAssembler offersAssembler = new OffersAssembler();
+		ProductAssembler productAssembler = new ProductAssembler(offersAssembler);
+		SellerAssembler sellerAssembler = new SellerAssembler(productAssembler);
 		register(new AbstractBinder() {
 			@Override
 			protected void configure() {

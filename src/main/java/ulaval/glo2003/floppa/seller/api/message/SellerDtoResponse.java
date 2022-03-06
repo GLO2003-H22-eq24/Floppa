@@ -1,7 +1,8 @@
 package ulaval.glo2003.floppa.seller.api.message;
 
 import jakarta.json.bind.annotation.JsonbNillable;
-import ulaval.glo2003.floppa.product.api.ProductDto;
+import jakarta.json.bind.annotation.JsonbProperty;
+import ulaval.glo2003.floppa.product.api.message.ProductDtoResponse;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -10,14 +11,22 @@ import java.util.List;
 public class SellerDtoResponse {
 	private String id;
 	private String name;
+	@JsonbProperty(nillable = true)
 	private LocalTime createdAt;
+	@JsonbProperty(nillable = true)
 	private String bio;
-	private List<ProductDto> products;
+	@JsonbProperty(nillable = true)
+	private List<ProductDtoResponse> products;
 
 	public SellerDtoResponse() {
 	}
 
-	public SellerDtoResponse(String id, String name, LocalTime createdAt, String bio, List<ProductDto> products) {
+	public SellerDtoResponse(String id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	public SellerDtoResponse(String id, String name, LocalTime createdAt, String bio, List<ProductDtoResponse> products) {
 		this.id = id;
 		this.name = name;
 		this.createdAt = createdAt;
@@ -41,7 +50,7 @@ public class SellerDtoResponse {
 		return bio;
 	}
 
-	public List<ProductDto> getProducts() {
+	public List<ProductDtoResponse> getProducts() {
 		return products;
 	}
 }
