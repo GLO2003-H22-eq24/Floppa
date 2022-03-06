@@ -12,7 +12,7 @@ public interface SellerRepository {
 
 	Seller retrieveSeller(String sellerId) throws ErrorException;
 
-	List<Product> findProductsByConditions(List<Function<Seller, Boolean>> sellerConditions, List<Function<Product, Boolean>> productConditions);
+	List<Product> findProducts(List<Function<Seller, Boolean>> sellerConditions, List<Function<Product, Boolean>> productConditions);
 
 	List<Seller> retrieveSeller(List<Function<Seller, Boolean>> sellerConditions);
 }

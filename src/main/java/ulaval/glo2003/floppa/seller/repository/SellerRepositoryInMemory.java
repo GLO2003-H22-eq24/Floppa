@@ -34,10 +34,8 @@ public class SellerRepositoryInMemory implements SellerRepository {
                 .orElseThrow(()->new ErrorException(ErrorCode.ITEM_NOT_FOUND));
     }
     @Override
-    public List<Product> findProductsByConditions(List<Function<Seller, Boolean>> sellerConditions, List<Function<Product, Boolean>> productConditions){
-        List<Product> products = this.retrieveSeller(sellerConditions).stream()
-                .map(Seller::getProducts)
-                .flatMap(List::stream).collect(Collectors.toList());
+    public List<Product> findProducts(List<Function<Seller, Boolean>> sellerConditions, List<Function<Product, Boolean>> productConditions){
+        List<Product> products = getProductsBySellerConditions(sellerConditions);
         return products.stream()
                 .filter(product -> productConditions.stream()
                         .allMatch(productCondition -> productCondition.apply(product)))
@@ -45,7 +43,13 @@ public class SellerRepositoryInMemory implements SellerRepository {
     }
 
     @Override
-    public List<Seller> retrieveSeller(List<Function<Seller, Boolean>> filterConditions) {
-        return this.sellersById.values().stream().filter(seller -> filterConditions.stream().allMatch(condition -> condition.apply(seller))).collect(Collectors.toList());
+    public List<Seller> retrieveSeller(List<Function<Seller, Boolean>> sellerConditions) {
+        return this.sellersById.values().stream().filter(seller -> sellerConditions.stream().allMatch(condition -> condition.apply(seller))).collect(Collectors.toList());
+    }
+
+    private List<Product> getProductsBySellerConditions(List<Function<Seller, Boolean>> sellerConditions) {
+        return this.retrieveSeller(sellerConditions).stream()
+                .map(Seller::getProducts)
+                .flatMap(List::stream).collect(Collectors.toList());
     }
 }
