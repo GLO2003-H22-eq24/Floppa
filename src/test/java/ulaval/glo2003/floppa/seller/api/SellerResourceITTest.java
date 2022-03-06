@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SellerResourceITTest extends ServerTestIT {
-
+//TODO: Remove comments and fix tests
 //
 //    @Test
 //    void whenSaveSeller_withGoodParam_thenStatus200() throws JsonProcessingException {
