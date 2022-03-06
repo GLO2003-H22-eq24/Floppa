@@ -127,7 +127,7 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>test</goal>
+                            <goal>java</goal>
                         </goals>
                         <configuration>
                             <excludes>
