@@ -1,5 +1,6 @@
 package ulaval.glo2003.floppa.product.api;
 
+import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.offers.api.OffersAssembler;
 import ulaval.glo2003.floppa.offers.api.OffersDto;
 import ulaval.glo2003.floppa.product.api.message.ProductCreationDtoRequest;
