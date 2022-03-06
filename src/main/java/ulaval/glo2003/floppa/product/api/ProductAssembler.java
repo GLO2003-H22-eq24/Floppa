@@ -6,10 +6,14 @@ import ulaval.glo2003.floppa.offers.api.OffersAssembler;
 import ulaval.glo2003.floppa.offers.api.OffersDto;
 import ulaval.glo2003.floppa.product.api.message.ProductCreationDtoRequest;
 import ulaval.glo2003.floppa.product.domain.Product;
+import ulaval.glo2003.floppa.product.domain.ProductCategory;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.util.Objects.isNull;
 
 public class ProductAssembler {
 	private final OffersAssembler offersAssembler;
@@ -26,25 +30,28 @@ public class ProductAssembler {
 
 	public Product fromDto(ProductCreationDtoRequest productCreationDtoRequest) throws ErrorException {
 
-// Vérifie que les paramètres nécessaires sont présent
-
-		if (isNull(productCreationDtoRequest.getTitle()) || isNull(productCreationDtoRequest.getDescription()) || isNull(productCreationDtoRequest.getCategories()) || isNull(productCreationDtoRequest.getSuggestedPrice()) ) {
+		// Vérifie que les paramètres nécessaires sont présent
+		if (isNull(productCreationDtoRequest.getTitle()) || isNull(productCreationDtoRequest.getDescription())  || isNull(productCreationDtoRequest.getSuggestedPrice()) ) {
 			throw new ErrorException(ErrorCode.MISSING_PARAMETER);
 		}
 		// Vérifie que les paramètres nécessaires contiennent une valeur
 		if (productCreationDtoRequest.getTitle().isBlank() || productCreationDtoRequest.getDescription().isBlank() || productCreationDtoRequest.getCategories().isBlank() || productCreationDtoRequest.getSuggestedPrice().isBlank()) {
 			throw new ErrorException(ErrorCode.INVALID_PARAMETER);
-
 		}
 
-		try {
+		List<ProductCategory> productCategories = new ArrayList<>();
+		extractProductCategories(productCreationDtoRequest, productCategories);
 
-			//LocalDate birthDate = LocalDate.parse(sellerDtoRequest.getBirthDate(), DateTimeFormatter.ISO_DATE);
-			return new Product(productCreationDtoRequest.getTitle(), productCreationDtoRequest.getDescription(), productCreationDtoRequest.getCategories(), productCreationDtoRequest.getSuggestedPrice());
-		} catch (DateTimeParseException e) {
-			throw new ErrorException(ErrorCode.INVALID_PARAMETER);
+
+		return new Product(productCreationDtoRequest.getTitle(), productCreationDtoRequest.getDescription(), productCreationDtoRequest.getSuggestedPrice(), productCategories);
+	}
+
+	private void extractProductCategories(ProductCreationDtoRequest productCreationDtoRequest, List<ProductCategory> productCategories) throws ErrorException {
+		if (!isNull(productCreationDtoRequest.getCategories())){
+			for (String categoryString : productCreationDtoRequest.getCategories()) {
+				productCategories.add(ProductCategory.toEnum(categoryString));
+			}
 		}
-
 	}
 
 }
