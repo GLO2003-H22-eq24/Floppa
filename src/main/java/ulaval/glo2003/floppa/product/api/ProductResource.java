@@ -1,5 +1,6 @@
 package ulaval.glo2003.floppa.product.api;
 
+import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -35,5 +36,7 @@ public class ProductResource {
 		return Response.status(Response.Status.CREATED).location(URI.create(uriInfo.getBaseUri() + "products/" + product.getId())).build();
 	}
 
-
+	private String getSellerId(HttpHeaders headers) throws ErrorException {
+		return Optional.ofNullable(headers.getRequestHeaders().getFirst("X-Seller-Id")).orElseThrow(() -> new ErrorException(ErrorCode.MISSING_PARAMETER));
+	}
 }
