@@ -24,6 +24,6 @@ jobs:
       - name: Maven Checkstyle
         run: mvn -B verify checkstyle:checkstyle
       - name: Tests
-        run: mvn -B test --file pom.xml
+        run: mvn -B testIt --file pom.xml
 
 
