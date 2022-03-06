@@ -31,20 +31,20 @@ public class HttpServerConfig extends ResourceConfig {
 		bindAssembler();
 	}
 
-	private void bindService(SellerRepository sellerRepository) {
-		register(new AbstractBinder() {
-			@Override
-			protected void configure() {
-				bind(new ProductService(sellerRepository)).to(ProductService.class);
-			}
-		});
-	}
-
 	private void bindRepository(SellerRepository sellerRepository) {
 		register(new AbstractBinder() {
 			@Override
 			protected void configure() {
 				bind(sellerRepository).to(SellerRepository.class);
+			}
+		});
+	}
+
+	private void bindService(SellerRepository sellerRepository) {
+		register(new AbstractBinder() {
+			@Override
+			protected void configure() {
+				bind(new ProductService(sellerRepository)).to(ProductService.class);
 			}
 		});
 	}
