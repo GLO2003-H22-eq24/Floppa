@@ -1,5 +1,6 @@
 package ulaval.glo2003.floppa.product.api;
 
+import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.offers.api.OffersAssembler;
 import ulaval.glo2003.floppa.offers.api.OffersDto;
 import ulaval.glo2003.floppa.product.api.message.ProductCreationDtoRequest;
@@ -21,8 +22,9 @@ public class ProductAssembler {
 		return new ProductDto(product.getId(), product.getCreatedDate(), product.getTitle(), product.getDescription(), amount, offersDto);
 	}
 
-	public Product fromDto(ProductCreationDtoRequest productCreationDtoRequest){
+	public Product fromDto(ProductCreationDtoRequest productCreationDtoRequest)  {
 		//TODO: faire le product
 		return null;
 	}
+
 }
