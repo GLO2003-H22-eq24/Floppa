@@ -1,5 +1,7 @@
 package ulaval.glo2003.floppa.product.domain;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,7 +17,7 @@ public class FilterBuilderProduct {
 	}
 
 	public FilterBuilderProduct addProductTitleCondition(String title){
-		Optional.ofNullable(title).ifPresent(val -> this.productConditions.add( otherProduct -> org.apache.commons.lang3.StringUtils.containsIgnoreCase(title, otherProduct.getTitle())));
+		Optional.ofNullable(title).ifPresent(val -> this.productConditions.add( otherProduct -> StringUtils.containsIgnoreCase(title, otherProduct.getTitle())));
 		return this;
 	}
 
