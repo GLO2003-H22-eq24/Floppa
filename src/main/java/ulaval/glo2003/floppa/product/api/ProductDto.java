@@ -13,6 +13,7 @@ public class ProductDto {
 	private String description;
 	private Double suggestedPrice;
 	private OffersDto offers;
+	//TODO ajout objet Seler
 
 	public ProductDto() {
 	}
