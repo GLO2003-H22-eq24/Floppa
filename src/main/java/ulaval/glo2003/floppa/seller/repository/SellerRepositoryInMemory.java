@@ -46,7 +46,6 @@ public class SellerRepositoryInMemory implements SellerRepository {
 
     @Override
     public List<Seller> retrieveSeller(List<Function<Seller, Boolean>> filterConditions) {
-        //TODO
-        return null;
+        return this.sellersById.values().stream().filter(seller -> filterConditions.stream().allMatch(condition -> condition.apply(seller))).collect(Collectors.toList());
     }
 }
