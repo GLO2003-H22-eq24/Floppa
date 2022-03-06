@@ -46,9 +46,8 @@ public class ProductResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveProduct(@PathParam("productId") String id) throws ErrorException {
-		Product product = this.productService.retriveProductByConditions(new FilterBuilderSeller().build(), new FilterBuilderProduct().addProductIdCondition(id).build())
-				.stream().findFirst().orElseThrow();
-		Seller seller = this.productService.retriveSellerByProduct(product);
+		Product product = this.productService.retrieveProductByConditions(new FilterBuilderSeller().build(), new FilterBuilderProduct().addProductIdCondition(id).build());
+		Seller seller = this.productService.retrieveSellerByProduct(product);
 		ProductDtoResponse productWithSellerDtoResponse = productAssembler.toDto(product, seller);
 		return Response.ok().entity(productWithSellerDtoResponse).build();
 	}

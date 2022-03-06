@@ -1,7 +1,9 @@
 package ulaval.glo2003.floppa.product.applicative;
 
 import ulaval.glo2003.floppa.app.domain.ErrorException;
+import ulaval.glo2003.floppa.product.domain.FilterBuilderProduct;
 import ulaval.glo2003.floppa.product.domain.Product;
+import ulaval.glo2003.floppa.seller.domain.FilterBuilderSeller;
 import ulaval.glo2003.floppa.seller.domain.Seller;
 import ulaval.glo2003.floppa.seller.domain.SellerRepository;
 
@@ -23,18 +25,13 @@ public class ProductService {
 		sellerRepository.saveSeller(seller);
 	}
 
-	public List<Product> retriveProductByConditions(List<Function<Seller, Boolean>> sellerConditions, List<Function<Product, Boolean>> productConditions) {
-		List<Product> products = sellerRepository.retrieveSeller(sellerConditions).stream()
-				.map(Seller::getProducts)
-				.flatMap(List::stream).collect(Collectors.toList());
-		return products.stream()
-				.filter(product -> productConditions.stream()
-						.allMatch(productCondition -> productCondition.apply(product)))
-				.collect(Collectors.toList());
+	public Product retrieveProductByConditions(List<Function<Seller, Boolean>> sellerConditions, List<Function<Product, Boolean>> productConditions) {
+		return this.sellerRepository.findProductsByConditions(sellerConditions, productConditions).stream().findFirst().orElseThrow();
 	}
 
-	public Seller retriveSellerByProduct(Product product) {
-		//TODO
-		return null;
+	public Seller retrieveSellerByProduct(Product product) {
+		List<Function<Product, Boolean>> productConditions = new FilterBuilderProduct().addProductIdCondition(product.getId()).build();
+		List<Function<Seller, Boolean>> sellerConditions = new FilterBuilderSeller().addProductFilterCondition(productConditions).build();
+		return this.sellerRepository.retrieveSeller(sellerConditions).stream().findFirst().orElseThrow();
 	}
 }
