@@ -35,7 +35,7 @@ public class ProductAssembler {
 			throw new ErrorException(ErrorCode.MISSING_PARAMETER);
 		}
 		// Vérifie que les paramètres nécessaires contiennent une valeur
-		if (productCreationDtoRequest.getTitle().isBlank() || productCreationDtoRequest.getDescription().isBlank() || productCreationDtoRequest.getCategories().isBlank() || productCreationDtoRequest.getSuggestedPrice().isBlank()) {
+		if (productCreationDtoRequest.getTitle().isBlank() || productCreationDtoRequest.getDescription().isBlank() ) {
 			throw new ErrorException(ErrorCode.INVALID_PARAMETER);
 		}
 
