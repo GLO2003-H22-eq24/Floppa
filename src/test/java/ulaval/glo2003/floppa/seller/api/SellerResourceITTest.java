@@ -11,8 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SellerResourceTestIT extends ServerTestIT {
-
+public class SellerResourceITTest extends ServerTestIT {
     @Test
     void whenSaveSeller_withGoodParam_thenStatus200() throws JsonProcessingException {
         SaveSeller("name", "bio", "2000-12-25").then().assertThat().statusCode(200);
@@ -69,6 +68,6 @@ public class SellerResourceTestIT extends ServerTestIT {
                 .header("Content-Type", "application/json")
                 .port(PORT)
                 .body(new ObjectMapper().writeValueAsString(body))
-                .post("/seller");
+                .post("/sellers");
     }
 }
