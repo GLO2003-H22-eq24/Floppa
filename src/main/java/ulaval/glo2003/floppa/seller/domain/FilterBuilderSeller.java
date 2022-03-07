@@ -5,13 +5,14 @@ import ulaval.glo2003.floppa.product.domain.Product;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
 
 public class FilterBuilderSeller {
 	private final List<Function<Seller, Boolean>> sellerConditions = new ArrayList<>();
 
 	public FilterBuilderSeller addSellerIdCondition(String sellerId) {
-		this.sellerConditions.add(otherSeller -> Objects.equals(sellerId, otherSeller.getId()));
+		Optional.ofNullable(sellerId).ifPresent(id -> this.sellerConditions.add(otherSeller -> Objects.equals(sellerId, otherSeller.getId())));
 		return this;
 	}
 
@@ -23,7 +24,14 @@ public class FilterBuilderSeller {
 		return this;
 	}
 
+	private void addDefaultTrueCondition(){
+		this.sellerConditions.add(otherSeller -> true);
+	}
+
 	public List<Function<Seller, Boolean>> build(){
+		if (this.sellerConditions.isEmpty()) {
+			this.addDefaultTrueCondition();
+		}
 		return this.sellerConditions;
 	}
 }

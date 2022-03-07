@@ -10,10 +10,12 @@ import ulaval.glo2003.floppa.product.api.message.ProductDtoResponse;
 import ulaval.glo2003.floppa.product.applicative.ProductService;
 import ulaval.glo2003.floppa.product.domain.FilterBuilderProduct;
 import ulaval.glo2003.floppa.product.domain.Product;
+import ulaval.glo2003.floppa.product.domain.ProductCategory;
 import ulaval.glo2003.floppa.seller.domain.FilterBuilderSeller;
 import ulaval.glo2003.floppa.seller.domain.Seller;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @Path("/products")
@@ -47,6 +49,28 @@ public class ProductResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveProduct(@PathParam("productId") String id) throws ErrorException {
 		Product product = this.productService.retrieveProductByConditions(new FilterBuilderSeller().build(), new FilterBuilderProduct().addProductIdCondition(id).build());
+		Seller seller = this.productService.retrieveSellerByProduct(product);
+		ProductDtoResponse productWithSellerDtoResponse = productAssembler.toDto(product, seller);
+		return Response.ok().entity(productWithSellerDtoResponse).build();
+	}
+
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response retrieveProductWithFilter(@QueryParam("sellerId") String sellerId,
+	                                          @QueryParam("title") String title,
+	                                          @QueryParam("categories") List<String> productCategories,
+	                                          @QueryParam("minPrice") Double minPrice,
+	                                          @QueryParam("maxPrice") Double maxPrice) throws ErrorException {
+		Product product = this.productService.retrieveProductByConditions(new FilterBuilderSeller()
+						.addSellerIdCondition(sellerId)
+						.build(),
+				new FilterBuilderProduct()
+						.addProductTitleCondition(title)
+						.addCategoriesCondition(ProductCategory.toEnum(productCategories))
+						.addMinPriceCondition(minPrice)
+						.addMaxPriceCondition(maxPrice)
+						.build());
 		Seller seller = this.productService.retrieveSellerByProduct(product);
 		ProductDtoResponse productWithSellerDtoResponse = productAssembler.toDto(product, seller);
 		return Response.ok().entity(productWithSellerDtoResponse).build();
