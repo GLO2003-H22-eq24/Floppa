@@ -1,6 +1,8 @@
-package ulaval.glo2003.floppa.product.domain;
+package ulaval.glo2003.floppa.product.applicative;
 
 import org.apache.commons.lang3.StringUtils;
+import ulaval.glo2003.floppa.product.domain.Product;
+import ulaval.glo2003.floppa.product.domain.ProductCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,20 +10,20 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class FilterBuilderProduct {
+public class ConditionBuilderProduct {
 	private final List<Function<Product, Boolean>> productConditions = new ArrayList<>();
 
-	public FilterBuilderProduct addProductIdCondition(String id) {
+	public ConditionBuilderProduct addProductIdCondition(String id) {
 		Optional.ofNullable(id).ifPresent(productId -> this.productConditions.add(otherProduct -> Objects.equals(id, otherProduct.getId())));
 		return this;
 	}
 
-	public FilterBuilderProduct addProductTitleCondition(String title){
-		Optional.ofNullable(title).ifPresent(val -> this.productConditions.add( otherProduct -> StringUtils.containsIgnoreCase(title, otherProduct.getTitle())));
+	public ConditionBuilderProduct addProductTitleCondition(String title){
+		Optional.ofNullable(title).ifPresent(val -> this.productConditions.add( otherProduct -> StringUtils.containsIgnoreCase(otherProduct.getTitle(), title)));
 		return this;
 	}
 
-	public FilterBuilderProduct addCategoriesCondition(List<ProductCategory> productCategories) {
+	public ConditionBuilderProduct addCategoriesCondition(List<ProductCategory> productCategories) {
 		Optional.ofNullable(productCategories)
 				.filter(categories -> !categories.isEmpty())
 				.ifPresent(val ->this.productConditions.add( otherProduct -> productCategories.stream()
@@ -29,12 +31,12 @@ public class FilterBuilderProduct {
 		return this;
 	}
 
-	public FilterBuilderProduct addMinPriceCondition(Double minPrice) {
+	public ConditionBuilderProduct addMinPriceCondition(Double minPrice) {
 		Optional.ofNullable(minPrice).ifPresent(val ->this.productConditions.add( otherProduct -> minPrice <= otherProduct.getSuggestedPrice()));
 		return this;
 	}
 
-	public FilterBuilderProduct addMaxPriceCondition(Double maxPrice) {
+	public ConditionBuilderProduct addMaxPriceCondition(Double maxPrice) {
 		Optional.ofNullable(maxPrice).ifPresent(val ->this.productConditions.add( otherProduct -> maxPrice >= otherProduct.getSuggestedPrice()));
 		return this;
 	}
