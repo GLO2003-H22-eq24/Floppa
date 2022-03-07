@@ -6,6 +6,7 @@ import org.glassfish.jersey.server.ServerProperties;
 import ulaval.glo2003.floppa.app.api.mapper.ErrorExceptionAssembler;
 import ulaval.glo2003.floppa.offers.api.OffersAssembler;
 import ulaval.glo2003.floppa.product.api.ProductAssembler;
+import ulaval.glo2003.floppa.product.applicative.ProductService;
 import ulaval.glo2003.floppa.seller.api.SellerAssembler;
 import ulaval.glo2003.floppa.seller.domain.SellerRepository;
 import ulaval.glo2003.floppa.seller.repository.SellerRepositoryInMemory;
@@ -24,28 +25,48 @@ public class HttpServerConfig extends ResourceConfig {
 	}
 
 	private void registerBinders() {
-		//Ce que tu instancie ici, va pouvoir être injected dans les Ressources @Inject
-		//voir https://riptutorial.com/jersey/example/23632/basic-dependency-injection-using-jersey-s-hk2
-		bindRepository();
+		SellerRepository sellerRepository = new SellerRepositoryInMemory(new HashMap<>());
+		bindRepository(sellerRepository);
+		bindService(sellerRepository);
 		bindAssembler();
 	}
 
-	private void bindRepository() {
+	private void bindRepository(SellerRepository sellerRepository) {
 		register(new AbstractBinder() {
 			@Override
 			protected void configure() {
-				bind(new SellerRepositoryInMemory(new HashMap<>())).to(SellerRepository.class);
+				bind(sellerRepository).to(SellerRepository.class);
+			}
+		});
+	}
+
+	private void bindService(SellerRepository sellerRepository) {
+		register(new AbstractBinder() {
+			@Override
+			protected void configure() {
+				bind(new ProductService(sellerRepository)).to(ProductService.class);
 			}
 		});
 	}
 
 	private void bindAssembler() {
+		ProductAssembler productAssembler = new ProductAssembler(new OffersAssembler());
+		SellerAssembler sellerAssembler = new SellerAssembler(productAssembler);
+
 		register(new AbstractBinder() {
 			@Override
 			protected void configure() {
-				bind(new SellerAssembler(new ProductAssembler(new OffersAssembler()))).to(SellerAssembler.class);
+				bind(sellerAssembler).to(SellerAssembler.class);
 			}
 		});
+
+		register(new AbstractBinder() {
+			@Override
+			protected void configure() {
+				bind(productAssembler).to(ProductAssembler.class);
+			}
+		});
+
 		register(new AbstractBinder() {
 			@Override
 			protected void configure() {

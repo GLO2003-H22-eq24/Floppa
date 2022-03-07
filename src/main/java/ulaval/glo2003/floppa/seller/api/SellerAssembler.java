@@ -3,7 +3,7 @@ package ulaval.glo2003.floppa.seller.api;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.product.api.ProductAssembler;
-import ulaval.glo2003.floppa.product.api.ProductDto;
+import ulaval.glo2003.floppa.product.api.message.ProductDtoResponse;
 import ulaval.glo2003.floppa.seller.api.message.SellerDtoRequest;
 import ulaval.glo2003.floppa.seller.api.message.SellerDtoResponse;
 import ulaval.glo2003.floppa.seller.domain.Seller;
@@ -46,7 +46,7 @@ public class SellerAssembler {
     }
 
     public SellerDtoResponse toDto(Seller seller) {
-        List<ProductDto> productDtos = seller.getProducts().stream().map(productAssembler::toDto).collect(Collectors.toList());
-        return new SellerDtoResponse(seller.getId(), seller.getName(), seller.getCreatedDate(), seller.getBio(), productDtos);
+        List<ProductDtoResponse> productDtoResponses = seller.getProducts().stream().map(productAssembler::toDto).collect(Collectors.toList());
+        return new SellerDtoResponse(seller.getId(), seller.getName(), seller.getCreatedDate(), seller.getBio(), productDtoResponses);
     }
 }
