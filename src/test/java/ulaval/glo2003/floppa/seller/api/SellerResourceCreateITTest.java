@@ -15,51 +15,52 @@ import java.util.Map;
 public class SellerResourceCreateITTest extends ServerTestIT {
 
     private String anyName = "name";
+    private String anyBio= "bio";
     private String validBirthdate ="2000-12-25";
 
     @Test
     void givenSellerInfo_whenSaveSeller_thenStatus201() throws JsonProcessingException {
-        SaveSeller(anyName, "bio", validBirthdate).then().assertThat().statusCode(201);
+        SaveSeller(anyName, anyBio, validBirthdate).then().assertThat().statusCode(201);
     }
 
     @Test
     void givenSellerInfoWithNullName_whenSaveSeller_thenStatus400() throws JsonProcessingException {
-        SaveSeller(null, "bio", "2000-12-25").then().assertThat().statusCode(400);
+        SaveSeller(null, anyBio, validBirthdate).then().assertThat().statusCode(400);
     }
 
     @Test
     void givenSellerInfoWithNullBio_whenSaveSeller_thenStatus400() throws JsonProcessingException {
-        SaveSeller("name", null, "2000-12-25").then().assertThat().statusCode(400);
+        SaveSeller(anyName, null, validBirthdate).then().assertThat().statusCode(400);
     }
 
     @Test
     void givenSellerInfoWithNullBirthDate_whenSaveSeller_thenStatus400() throws JsonProcessingException {
-        SaveSeller("name", "bio", null).then().assertThat().statusCode(400);
+        SaveSeller(anyName, anyBio, null).then().assertThat().statusCode(400);
     }
 
     @Test
     void givenSellerInfoWithBlankName_whenSaveSeller_thenStatus400() throws JsonProcessingException {
-        SaveSeller("", "bio", "2000-12-25").then().assertThat().statusCode(400);
+        SaveSeller("", anyBio, validBirthdate).then().assertThat().statusCode(400);
     }
 
     @Test
     void givenSellerInfoWithBlankBio_whenSaveSeller_thenStatus400() throws JsonProcessingException {
-        SaveSeller("name", "", "2000-12-25").then().assertThat().statusCode(400);
+        SaveSeller(anyName, "", validBirthdate).then().assertThat().statusCode(400);
     }
 
     @Test
     void givenSellerInfoWithNotDateBirthDate_whenSaveSeller_thenStatus400() throws JsonProcessingException {
-        SaveSeller("name", "bio", "abcd").then().assertThat().statusCode(400);
+        SaveSeller(anyName, anyBio, "abcd").then().assertThat().statusCode(400);
     }
 
     @Test
     void givenSellerInfoWithNotFormattedAsYYYY_MM_DD_whenSaveSeller_thenStatus400() throws JsonProcessingException {
-        SaveSeller("name", "bio", LocalDate.now().format(DateTimeFormatter.ISO_DATE)).then().assertThat().statusCode(400);
+        SaveSeller(anyName, anyBio, LocalDate.now().format(DateTimeFormatter.ISO_DATE)).then().assertThat().statusCode(400);
     }
 
     @Test
     void givenSellerInfo_whenSaveSeller_thenNotNullLocationId() throws JsonProcessingException {
-        String sellerId = getSellerIdByLocation(SaveSeller("name", "bio", "2000-12-25"));
+        String sellerId = getSellerIdByLocation(SaveSeller(anyName, anyBio, validBirthdate));
 
         Assertions.assertNotNull(sellerId);
     }
