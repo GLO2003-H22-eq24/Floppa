@@ -17,7 +17,7 @@ public class ErrorExceptionMapper implements ExceptionMapper<ErrorException> {
 
 	@Override
 	public Response toResponse(ErrorException errorException) {
-		return Response.status(errorException.getStatusCode())
+		return Response.status(ErrorCodeStatus.mapToErrorStatus(errorException.getCode()).getStatusCode())
 				.type(MediaType.APPLICATION_JSON)
 				.entity(errorExceptionAssembler.toDto(errorException))
 				.build();
