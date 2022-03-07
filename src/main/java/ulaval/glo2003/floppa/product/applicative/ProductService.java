@@ -9,8 +9,11 @@ import ulaval.glo2003.floppa.product.domain.Product;
 import ulaval.glo2003.floppa.seller.applicative.ConditionBuilderSeller;
 import ulaval.glo2003.floppa.seller.domain.Seller;
 import ulaval.glo2003.floppa.seller.domain.SellerRepository;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class ProductService {
 	private final SellerRepository sellerRepository;
@@ -26,8 +29,8 @@ public class ProductService {
 		sellerRepository.saveSeller(seller);
 	}
 
-	public Product retrieveProductByConditions(List<Function<Seller, Boolean>> sellerConditions, List<Function<Product, Boolean>> productConditions) throws ErrorException {
-		return this.sellerRepository.findProducts(sellerConditions, productConditions).stream().findFirst().orElseThrow(() -> new ErrorException(ErrorCode.ITEM_NOT_FOUND));
+	public List<Product> retrieveProductByConditions(List<Function<Seller, Boolean>> sellerConditions, List<Function<Product, Boolean>> productConditions) throws ErrorException {
+		return this.sellerRepository.findProducts(sellerConditions, productConditions);
 	}
 
 	public Seller retrieveSellerByProduct(Product product) throws ErrorException {
