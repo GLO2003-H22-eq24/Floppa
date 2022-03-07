@@ -31,7 +31,7 @@ public class SellerResource {
     public Response saveSeller(SellerDtoRequest sellerDtoRequest, @Context UriInfo uriInfo) throws ErrorException {
         Seller seller = sellerAssembler.fromDto(sellerDtoRequest);
         sellerRepository.saveSeller(seller);
-        return Response.ok().location(URI.create(uriInfo.getBaseUri() + "sellers/" + seller.getId())).build();
+        return Response.status(Response.Status.CREATED).location(URI.create(uriInfo.getBaseUri() + "sellers/" + seller.getId())).build();
     }
 
     @GET
