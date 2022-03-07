@@ -1,6 +1,7 @@
-package ulaval.glo2003.floppa.seller.domain;
+package ulaval.glo2003.floppa.seller.applicative;
 
 import ulaval.glo2003.floppa.product.domain.Product;
+import ulaval.glo2003.floppa.seller.domain.Seller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,15 +9,15 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class FilterBuilderSeller {
+public class ConditionBuilderSeller {
 	private final List<Function<Seller, Boolean>> sellerConditions = new ArrayList<>();
 
-	public FilterBuilderSeller addSellerIdCondition(String sellerId) {
+	public ConditionBuilderSeller addSellerIdCondition(String sellerId) {
 		Optional.ofNullable(sellerId).ifPresent(id -> this.sellerConditions.add(otherSeller -> Objects.equals(sellerId, otherSeller.getId())));
 		return this;
 	}
 
-	public FilterBuilderSeller addProductFilterCondition(List<Function<Product, Boolean>> productConditions){
+	public ConditionBuilderSeller addProductFilterCondition(List<Function<Product, Boolean>> productConditions){
 		this.sellerConditions.add(otherSeller -> otherSeller
 				.getProducts().stream()
 				.anyMatch(product -> productConditions.stream()
