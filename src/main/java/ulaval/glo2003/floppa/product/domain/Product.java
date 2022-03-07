@@ -36,7 +36,7 @@ public class Product {
 	}
 
 	public Double computeMeanOffers(){
-		return this.offers.stream().map(Offers::getOfferAmount).reduce(0.00, Double::sum) / this.computeNumberOfOffers();
+		return this.computeNumberOfOffers() != 0 ? this.offers.stream().map(Offers::getOfferAmount).reduce(0.00, Double::sum) / this.computeNumberOfOffers(): null;
 	}
 
 	public int computeNumberOfOffers(){

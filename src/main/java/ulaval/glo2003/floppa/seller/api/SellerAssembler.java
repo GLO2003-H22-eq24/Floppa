@@ -38,7 +38,7 @@ public class SellerAssembler {
 
         try {
             // Vérifie que la date de naissance est dans le bon format
-            LocalDate birthDate = LocalDate.parse(sellerDtoRequest.getBirthDate(), DateTimeFormatter.ofPattern("YYYY-DD-MM HH:MM:SS"));
+            LocalDate birthDate = LocalDate.parse(sellerDtoRequest.getBirthDate(), DateTimeFormatter.ISO_LOCAL_DATE);
             return new Seller(sellerDtoRequest.getName(), sellerDtoRequest.getBio(), birthDate);
         } catch (DateTimeParseException e) {
             throw new ErrorException(ErrorCode.INVALID_PARAMETER);

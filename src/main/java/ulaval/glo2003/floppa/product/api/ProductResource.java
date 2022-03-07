@@ -8,6 +8,10 @@ import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.product.api.message.ProductCreationDtoRequest;
 import ulaval.glo2003.floppa.product.api.message.ProductDtoResponse;
 import ulaval.glo2003.floppa.product.applicative.ProductService;
+import ulaval.glo2003.floppa.product.domain.FilterBuilderProduct;
+import ulaval.glo2003.floppa.product.domain.Product;
+import ulaval.glo2003.floppa.product.domain.ProductCategory;
+import ulaval.glo2003.floppa.seller.domain.FilterBuilderSeller;
 import ulaval.glo2003.floppa.product.applicative.ConditionBuilderProduct;
 import ulaval.glo2003.floppa.product.domain.Product;
 import ulaval.glo2003.floppa.product.domain.ProductCategory;
@@ -48,7 +52,9 @@ public class ProductResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveProduct(@PathParam("productId") String id) throws ErrorException {
-		Product product = this.productService.retrieveProductByConditions(new ConditionBuilderSeller().build(), new ConditionBuilderProduct().addProductIdCondition(id).build());
+		Product product = this.productService.retrieveProductByConditions(new FilterBuilderSeller().build(), new FilterBuilderProduct().addProductIdCondition(id).build());
+		//Product product = this.productService.retrieveProductByConditions(new ConditionBuilderSeller().build(), new ConditionBuilderProduct().addProductIdCondition(id).build());
+    
 		Seller seller = this.productService.retrieveSellerByProduct(product);
 		ProductDtoResponse productWithSellerDtoResponse = productAssembler.toDto(product, seller);
 		return Response.ok().entity(productWithSellerDtoResponse).build();
@@ -62,6 +68,12 @@ public class ProductResource {
 	                                          @QueryParam("categories") List<String> productCategories,
 	                                          @QueryParam("minPrice") Double minPrice,
 	                                          @QueryParam("maxPrice") Double maxPrice) throws ErrorException {
+
+//		Product product = this.productService.retrieveProductByConditions(new FilterBuilderSeller()
+//						.addSellerIdCondition(sellerId)
+//						.build(),
+//				new FilterBuilderProduct()
+
 		Product product = this.productService.retrieveProductByConditions(new ConditionBuilderSeller()
 						.addSellerIdCondition(sellerId)
 						.build(),

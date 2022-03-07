@@ -17,7 +17,7 @@ public class ProductDtoResponse {
 	private Double suggestedPrice;
 	private OffersDto offers;
 	private List<String> categories;
-	@JsonbProperty(nillable = true)
+	@JsonbProperty(value = "seller",nillable = true)
 	private SellerDtoResponse sellerDtoResponse;
 	public ProductDtoResponse() {
 	}
@@ -54,6 +54,14 @@ public class ProductDtoResponse {
 
 	public OffersDto getOffers() {
 		return offers;
+	}
+
+	public List<String> getCategories() {
+		return categories;
+	}
+
+	public SellerDtoResponse getSellerDtoResponse() {
+		return sellerDtoResponse;
 	}
 
 	public void setSellerDtoResponse(SellerDtoResponse sellerDtoResponse) {
