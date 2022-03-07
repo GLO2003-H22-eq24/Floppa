@@ -6,6 +6,7 @@ import ulaval.glo2003.floppa.offers.api.OffersDto;
 import ulaval.glo2003.floppa.seller.api.message.SellerDtoResponse;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @JsonbNillable
 public class ProductDtoResponse {
@@ -15,18 +16,20 @@ public class ProductDtoResponse {
 	private String description;
 	private Double suggestedPrice;
 	private OffersDto offers;
+	private List<String> categories;
 	@JsonbProperty(nillable = true)
 	private SellerDtoResponse sellerDtoResponse;
 	public ProductDtoResponse() {
 	}
 
-	public ProductDtoResponse(String id, LocalTime createdAt, String title, String description, Double suggestedPrice, OffersDto offers) {
+	public ProductDtoResponse(String id, LocalTime createdAt, String title, String description, Double suggestedPrice, OffersDto offers, List<String> categories) {
 		this.id = id;
 		this.createdAt = createdAt;
 		this.title = title;
 		this.description = description;
 		this.suggestedPrice = suggestedPrice;
 		this.offers = offers;
+		this.categories = categories;
 	}
 
 	public String getId() {
