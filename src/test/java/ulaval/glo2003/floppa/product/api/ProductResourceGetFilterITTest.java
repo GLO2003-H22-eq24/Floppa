@@ -5,7 +5,7 @@ import io.restassured.RestAssured;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.floppa.ServerTestIT;
 import ulaval.glo2003.floppa.product.api.message.ProductDtoResponse;
-import ulaval.glo2003.floppa.
+import ulaval.glo2003.floppa.seller.api.message.SellerDtoRequest;
 
 import java.util.Arrays;
 import java.util.HashMap;
