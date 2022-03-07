@@ -4,6 +4,7 @@ import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.product.domain.Product;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Period;
@@ -29,10 +30,9 @@ public class Seller {
         }
         this.name = name;
         this.bio = bio;
-        this.createdDate = now();
+        this.createdDate = LocalTime.from(Instant.now());
         this.products = new ArrayList<>();
-        this.id = "111";
-        //this.id = UUID.randomUUID().toString();
+        this.id = UUID.randomUUID().toString();
     }
 
 	public String getId() {
