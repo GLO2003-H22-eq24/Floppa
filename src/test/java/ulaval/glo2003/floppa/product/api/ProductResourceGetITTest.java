@@ -2,6 +2,7 @@ package ulaval.glo2003.floppa.product.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.restassured.RestAssured;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.floppa.ServerTestIT;
@@ -29,12 +30,18 @@ public class ProductResourceGetITTest extends ServerTestIT {
 	private SellerDtoResponse seller;
 	private List<String> categories = List.of("SPORTS","ELECTRONICS","APPAREL","BEAUTY","HOUSING","OTHER");
 
+	private String savedTitle = "title";
+	private String savedDescription = "desc";
+	private double savedSuggestedPrice = 2.0;
+	private String validBirthDate = "2000-12-25";
+	private static String subPathSellerById = "/sellers/{id}";
+
 
 
 	@BeforeEach
 	void givenProduct() throws JsonProcessingException {
-		String sellerId = getSellerIdByLocation(SaveSeller("test", "test", "2000-12-25"));
-		productLocation = createProduct("title", "desc", 2.0, categories, sellerId).header("location");
+		String sellerId = getSellerIdByLocation(SaveSeller(savedTitle, savedDescription, validBirthDate));
+		productLocation = createProduct(savedTitle, savedDescription, savedSuggestedPrice, categories, sellerId).header("location");
 	}
 
 	@Test
@@ -56,6 +63,13 @@ public class ProductResourceGetITTest extends ServerTestIT {
 		ProductDtoResponse productDtoResponse = retrieveProduct(productLocation).as(ProductDtoResponse.class);
 
 		productDtoResponse.getCategories();
+		Assertions.assertEquals(savedTitle, productDtoResponse.getTitle());
+		Assertions.assertEquals(savedDescription, productDtoResponse.getDescription());
+		Assertions.assertEquals(savedSuggestedPrice, productDtoResponse.getSuggestedPrice());
+		Assertions.assertEquals(categories, productDtoResponse.getCategories());
+
+
+
 	}
 
 

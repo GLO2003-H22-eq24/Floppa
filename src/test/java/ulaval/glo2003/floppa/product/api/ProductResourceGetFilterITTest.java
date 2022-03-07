@@ -23,6 +23,11 @@ public class ProductResourceGetFilterITTest extends ServerTestIT {
 	private String savedSellerId;
 	private String productLocation;
 
+	private String savedName = "test";
+	private String savedBio = "test";
+	private String savedBirthDate = "2000-12-25";
+
+
 	@BeforeEach
 	void givenProduct() throws JsonProcessingException {
 		savedSellerId = getSellerIdByLocation(SaveSeller(savedName, savedBio, savedBirthDate));
@@ -64,35 +69,6 @@ public class ProductResourceGetFilterITTest extends ServerTestIT {
 		GetProductWithFilter(savedSellerId, savedTitle, savedCategories, savedPrice - 1, null).then().assertThat().statusCode(200);
 	}
 
-	@Test
-	void givenMissingMinPrice_whenRetrieveProductWithFilter_thenStatus200() throws JsonProcessingException {
-		String title = "test";
-		List<String> categories = Arrays.asList("SPORTS", "HOUSING");
-		String sellerId = getSellerId(SaveSeller("test", "test", "2000-12-25"));
-		createProduct(title, "desc", 2.0, categories, sellerId);
-		var response = GetProductWithFilter(sellerId, title, categories, null, 5.0);
-		response.then().assertThat().statusCode(200);
-	}
-
-	@Test
-	void givenMissingMaxPrice_whenRetrieveProductWithFilter_thenStatus200() throws JsonProcessingException {
-		String title = "test";
-		List<String> categories = Arrays.asList("SPORTS", "HOUSING");
-		String sellerId = getSellerId(SaveSeller("test", "test", "2000-12-25"));
-		createProduct(title, "desc", 2.0, categories, sellerId);
-		var response = GetProductWithFilter(sellerId, title, categories, 1.5, null);
-		response.then().assertThat().statusCode(200);
-	}
-
-	@Test
-	void givenMissingCategories_whenRetrieveProductWithFilter_thenStatus200() throws JsonProcessingException {
-		String title = "test";
-		List<String> categories = Arrays.asList("SPORTS", "HOUSING");
-		String sellerId = getSellerId(SaveSeller("test", "test", "2000-12-25"));
-		createProduct(title, "desc", 2.0, categories, sellerId);
-		var response = GetProductWithFilter(sellerId, title, null, 1.5, 5.0);
-		response.then().assertThat().statusCode(200);
-	}
 
 	public static io.restassured.response.Response GetProductWithFilter(String sellerId, String title, List<String> categories, Double minPrice, Double maxPrice) throws JsonProcessingException {
 		Map<String, Object> queryParams = new HashMap<>();

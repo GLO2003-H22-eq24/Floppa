@@ -12,14 +12,14 @@ import ulaval.glo2003.floppa.seller.api.message.SellerDtoResponse;
 public class SellerResourceGetITTest extends ServerTestIT {
 
 	private String currentSellerId;
-	private String anyName = "name";
-	private String anyBio = "bio";
+	private String savedName = "name";
+	private String savedBio = "bio";
 	private String validBirthDate = "2000-12-25";
 	private static String subPathSellerById = "/sellers/{id}";
 
 	@BeforeEach
 	void givenSeller() throws JsonProcessingException {
-		currentSellerId = SellerResourceCreateITTest.getSellerIdByLocation(SellerResourceCreateITTest.SaveSeller(anyName, anyBio, validBirthDate));
+		currentSellerId = SellerResourceCreateITTest.getSellerIdByLocation(SellerResourceCreateITTest.SaveSeller(savedName, savedBio, validBirthDate));
 	}
 
 	@Test
@@ -38,8 +38,8 @@ public class SellerResourceGetITTest extends ServerTestIT {
 	void givenSellerId_whenGetSeller_thenSellerDtoResponse() {
 		SellerDtoResponse sellerDtoResponse = retrieveSeller(currentSellerId).as(SellerDtoResponse.class);
 
-		Assertions.assertEquals(anyName, sellerDtoResponse.getName());
-		Assertions.assertEquals(anyBio, sellerDtoResponse.getBio());
+		Assertions.assertEquals(savedName, sellerDtoResponse.getName());
+		Assertions.assertEquals(savedBio, sellerDtoResponse.getBio());
 		Assertions.assertEquals(currentSellerId, sellerDtoResponse.getId());
 	}
 
