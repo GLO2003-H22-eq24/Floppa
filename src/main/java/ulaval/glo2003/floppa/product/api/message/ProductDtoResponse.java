@@ -18,6 +18,7 @@ public class ProductDtoResponse {
 	private OffersDto offers;
 	private List<String> categories;
 	@JsonbProperty(value = "seller",nillable = true)
+	//@JsonbProperty(nillable = true)
 	private SellerDtoResponse sellerDtoResponse;
 	public ProductDtoResponse() {
 	}
