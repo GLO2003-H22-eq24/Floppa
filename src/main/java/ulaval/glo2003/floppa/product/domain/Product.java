@@ -4,7 +4,9 @@ import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.offers.domain.Offers;
 
+import java.time.Clock;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -26,7 +28,7 @@ public class Product {
 		this.categories = categories;
 		this.offers = new ArrayList<>();
 		this.id = UUID.randomUUID().toString();
-		this.createdDate = LocalTime.now();
+		this.createdDate = LocalTime.now(Clock.system(ZoneId.of("-05:00")));
 	}
 
 	private void validatePrice(Double suggestedPrice) throws ErrorException {

@@ -53,4 +53,5 @@ public class SellerDtoResponse {
 	public List<ProductDtoResponse> getProducts() {
 		return products;
 	}
+
 }
