@@ -4,7 +4,7 @@ import io.restassured.RestAssured;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.floppa.ServerTestIT;
 
-class HealthResourceTestIT extends ServerTestIT {
+class HealthResourceITTest extends ServerTestIT {
 
 	@Test
 	void whenCheckHealth_thenStatus200() {

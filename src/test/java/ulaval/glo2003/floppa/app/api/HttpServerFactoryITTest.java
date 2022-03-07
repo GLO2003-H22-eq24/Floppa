@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class HttpServerFactoryTestIT {
+class HttpServerFactoryITTest {
 
 	private HttpServerFactory httpServerFactory;
 	private final ResourceConfig anyResourceConfig = new ResourceConfig();
