@@ -30,7 +30,7 @@ public class Seller {
         }
         this.name = name;
         this.bio = bio;
-        this.createdDate = LocalTime.from(Instant.now());
+        this.createdDate = now();
         this.products = new ArrayList<>();
         this.id = UUID.randomUUID().toString();
     }

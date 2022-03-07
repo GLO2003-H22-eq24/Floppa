@@ -69,20 +69,20 @@ public class ProductResource {
 	                                          @QueryParam("minPrice") Double minPrice,
 	                                          @QueryParam("maxPrice") Double maxPrice) throws ErrorException {
 
-		Product product = this.productService.retrieveProductByConditions(new FilterBuilderSeller()
+//		Product product = this.productService.retrieveProductByConditions(new FilterBuilderSeller()
+//						.addSellerIdCondition(sellerId)
+//						.build(),
+//				new FilterBuilderProduct()
+
+		Product product = this.productService.retrieveProductByConditions(new ConditionBuilderSeller()
 						.addSellerIdCondition(sellerId)
 						.build(),
-				new FilterBuilderProduct()
-
-		//Product product = this.productService.retrieveProductByConditions(new ConditionBuilderSeller()
-		//				.addSellerIdCondition(sellerId)
-		//				.build(),
-		//		new ConditionBuilderProduct()
-		//				.addProductTitleCondition(title)
-		//				.addCategoriesCondition(ProductCategory.toEnum(productCategories))
-		//				.addMinPriceCondition(minPrice)
-		//				.addMaxPriceCondition(maxPrice)
-		//				.build());
+				new ConditionBuilderProduct()
+						.addProductTitleCondition(title)
+						.addCategoriesCondition(ProductCategory.toEnum(productCategories))
+						.addMinPriceCondition(minPrice)
+						.addMaxPriceCondition(maxPrice)
+						.build());
 		Seller seller = this.productService.retrieveSellerByProduct(product);
 		ProductDtoResponse productWithSellerDtoResponse = productAssembler.toDto(product, seller);
 		return Response.ok().entity(productWithSellerDtoResponse).build();
