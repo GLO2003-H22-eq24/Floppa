@@ -36,41 +36,47 @@ public class ProductResourceGetFilterITTest extends ServerTestIT {
 
 	@Test
 	void givenFilters_whenRetrieveProductWithFilter_thenStatus200() throws JsonProcessingException {
-		GetProductWithFilter(savedSellerId, savedTitle, savedCategories, savedPrice - 1, savedPrice + 1).then().assertThat().statusCode(200);
+		retrieveProductWithFilter(savedSellerId, savedTitle, savedCategories, savedPrice - 1, savedPrice + 1).then().assertThat().statusCode(200);
 	}
 
 	@Test
 	void givenFiltersWithMissingTitle_whenRetrieveProductWithFilter_thenStatus200() throws JsonProcessingException {
-		GetProductWithFilter(savedSellerId, null, savedCategories, savedPrice - 1, savedPrice + 1).then().assertThat().statusCode(200);
+		retrieveProductWithFilter(savedSellerId, null, savedCategories, savedPrice - 1, savedPrice + 1).then().assertThat().statusCode(200);
 	}
 
 	@Test
 	void givenFiltersWithMissingSellerId_whenRetrieveProductWithFilter_thenStatus200() throws JsonProcessingException {
-		GetProductWithFilter(null, savedTitle, savedCategories, savedPrice - 1, savedPrice + 1).then().assertThat().statusCode(200);
+		retrieveProductWithFilter(null, savedTitle, savedCategories, savedPrice - 1, savedPrice + 1).then().assertThat().statusCode(200);
 	}
 
 	@Test
 	void givenFiltersWithMissingCategories_whenRetrieveProductWithFilter_thenStatus200() throws JsonProcessingException {
-		GetProductWithFilter(savedSellerId, savedTitle, null, savedPrice - 1, savedPrice + 1).then().assertThat().statusCode(200);
+		retrieveProductWithFilter(savedSellerId, savedTitle, null, savedPrice - 1, savedPrice + 1).then().assertThat().statusCode(200);
 	}
 
 	@Test
 	void givenFiltersWithMissingMinPrice_whenRetrieveProductWithFilter_thenStatus200() throws JsonProcessingException {
-		GetProductWithFilter(savedSellerId, savedTitle, savedCategories, null, savedPrice + 1).then().assertThat().statusCode(200);
+		retrieveProductWithFilter(savedSellerId, savedTitle, savedCategories, null, savedPrice + 1).then().assertThat().statusCode(200);
 	}
 
 	@Test
 	void givenFiltersWithMissingMaxPrice_whenRetrieveProductWithFilter_thenStatus200() throws JsonProcessingException {
-		GetProductWithFilter(savedSellerId, savedTitle, savedCategories, savedPrice - 1, null).then().assertThat().statusCode(200);
+		retrieveProductWithFilter(savedSellerId, savedTitle, savedCategories, savedPrice - 1, null).then().assertThat().statusCode(200);
 	}
 
-//	@Test
-//	void givenFiltersWithMissingMaxPrice_whenRetrieveProductWithFilter_thenStatus200() throws JsonProcessingException {
-//		GetProductWithFilter(savedSellerId, savedTitle, savedCategories, savedPrice - 1, null).then().assertThat().statusCode(200);
-//	}
+	@Test
+	void givenNoFilters_whenRetrieveProductWithFilter_thenStatus200() throws JsonProcessingException {
+		retrieveProductWithFilter(null, null, null, null, null).then().assertThat().statusCode(200);
+	}
+
+	@Test
+	void givenFilters_whenRetrieveProductWithFilter_thenListProductDtoResponse() throws JsonProcessingException {
+		ProductDtoResponse[] productDtoResponses = retrieveProductWithFilter(null, null, null, null, null).as(ProductDtoResponse[].class);
+		//TODO faire le code pour check si les champs sont valide.
+	}
 
 
-	public static io.restassured.response.Response GetProductWithFilter(String sellerId, String title, List<String> categories, Double minPrice, Double maxPrice) throws JsonProcessingException {
+	public static io.restassured.response.Response retrieveProductWithFilter(String sellerId, String title, List<String> categories, Double minPrice, Double maxPrice) throws JsonProcessingException {
 		Map<String, Object> queryParams = new HashMap<>();
 		Optional.ofNullable(sellerId).ifPresent(val-> queryParams.put("sellerId", sellerId));
 		Optional.ofNullable(title).ifPresent(val -> queryParams.put("title", title));
