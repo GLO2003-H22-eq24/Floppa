@@ -31,7 +31,8 @@ public class Seller {
         this.bio = bio;
         this.createdDate = now();
         this.products = new ArrayList<>();
-        this.id = UUID.randomUUID().toString();
+        this.id = "111";
+        //this.id = UUID.randomUUID().toString();
     }
 
 	public String getId() {

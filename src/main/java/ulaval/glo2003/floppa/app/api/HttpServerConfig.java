@@ -28,7 +28,6 @@ public class HttpServerConfig extends ResourceConfig {
 		//voir https://riptutorial.com/jersey/example/23632/basic-dependency-injection-using-jersey-s-hk2
 		bindRepository();
 		bindAssembler();
-
 	}
 
 	private void bindRepository() {
