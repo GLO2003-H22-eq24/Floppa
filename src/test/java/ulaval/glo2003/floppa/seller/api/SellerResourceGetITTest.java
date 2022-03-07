@@ -11,7 +11,7 @@ import ulaval.glo2003.floppa.seller.api.message.SellerDtoResponse;
 
 public class SellerResourceGetITTest extends ServerTestIT {
 
-	private String currentId;
+	private String currentSellerId;
 	private String anyName = "name";
 	private String anyBio = "bio";
 	private String validBirthDate = "2000-12-25";
@@ -19,29 +19,28 @@ public class SellerResourceGetITTest extends ServerTestIT {
 
 	@BeforeEach
 	void givenSeller() throws JsonProcessingException {
-		currentId = SellerResourceCreateITTest.getSellerIdByLocation(SellerResourceCreateITTest.SaveSeller(anyName, anyBio, validBirthDate));
+		currentSellerId = SellerResourceCreateITTest.getSellerIdByLocation(SellerResourceCreateITTest.SaveSeller(anyName, anyBio, validBirthDate));
 	}
 
 	@Test
-	void givenSellerLocation_whenGetSeller_thenStatus200() {
-		retrieveSeller(currentId).then().assertThat().statusCode(200);
+	void givenSellerId_whenGetSeller_thenStatus200() {
+		retrieveSeller(currentSellerId).then().assertThat().statusCode(200);
 	}
 
 	@Test
-	void givenBadSellerLocation_whenGetSeller_thenStatus400() {
+	void givenBadSellerId_whenGetSeller_thenStatus404() {
 		String badSellerId = "badSellerId";
 
-		retrieveSeller(badSellerId).then().assertThat().statusCode(400);
+		retrieveSeller(badSellerId).then().assertThat().statusCode(404);
 	}
 
 	@Test
-	void givenSellerLocation_whenGetSeller_thenSellerDtoResponse() {
-		SellerDtoResponse sellerDtoResponse = retrieveSeller(currentId).as(SellerDtoResponse.class);
+	void givenSellerId_whenGetSeller_thenSellerDtoResponse() {
+		SellerDtoResponse sellerDtoResponse = retrieveSeller(currentSellerId).as(SellerDtoResponse.class);
 
-		//TODO: check si tout les champs sont good
 		Assertions.assertEquals(anyName, sellerDtoResponse.getName());
 		Assertions.assertEquals(anyBio, sellerDtoResponse.getBio());
-		Assertions.assertEquals(currentId, sellerDtoResponse.getId());
+		Assertions.assertEquals(currentSellerId, sellerDtoResponse.getId());
 	}
 
 	public static Response retrieveSeller(String id) {
@@ -50,6 +49,6 @@ public class SellerResourceGetITTest extends ServerTestIT {
 				.port(PORT)
 				.basePath(subPathSellerById)
 				.pathParam("id", id)
-				.get(id);
+				.get();
 	}
 }

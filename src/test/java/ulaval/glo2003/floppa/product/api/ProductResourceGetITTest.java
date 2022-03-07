@@ -19,7 +19,6 @@ import static ulaval.glo2003.floppa.seller.api.SellerResourceCreateITTest.getSel
 public class ProductResourceGetITTest extends ServerTestIT {
 
 	//Todo ajouter attribut classe ProductDto
-	private String sellerId;
 	private String id;
 	private String productLocation;
 	private String title;
@@ -33,8 +32,8 @@ public class ProductResourceGetITTest extends ServerTestIT {
 
 
 	@BeforeEach
-	void givenSellerId() throws JsonProcessingException {
-		sellerId = getSellerIdByLocation(SaveSeller("test", "test", "2000-12-25"));
+	void givenProduct() throws JsonProcessingException {
+		String sellerId = getSellerIdByLocation(SaveSeller("test", "test", "2000-12-25"));
 		productLocation = createProduct("title", "desc", 2.0, categories, sellerId).header("location");
 	}
 
@@ -43,6 +42,13 @@ public class ProductResourceGetITTest extends ServerTestIT {
 		retrieveProduct(productLocation)
 				.then()
 				.assertThat().statusCode(200);
+	}
+
+	@Test
+	void givenInvalidProduct_whenRetrieveProduct_thenStatus404() throws JsonProcessingException {
+		retrieveProduct(productLocation + "aa")
+				.then()
+				.assertThat().statusCode(404);
 	}
 
 	@Test
