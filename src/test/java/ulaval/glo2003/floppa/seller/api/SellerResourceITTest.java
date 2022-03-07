@@ -13,8 +13,8 @@ import java.util.Map;
 
 public class SellerResourceITTest extends ServerTestIT {
     @Test
-    void whenSaveSeller_withGoodParam_thenStatus200() throws JsonProcessingException {
-        SaveSeller("name", "bio", "2000-12-25").then().assertThat().statusCode(200);
+    void whenSaveSeller_withGoodParam_thenStatus201() throws JsonProcessingException {
+        SaveSeller("name", "bio", "2000-12-25").then().assertThat().statusCode(201);
     }
 
     @Test
