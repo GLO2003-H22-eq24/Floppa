@@ -1,5 +1,6 @@
 package ulaval.glo2003.floppa.seller.api.message;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.json.bind.annotation.JsonbNillable;
 import jakarta.json.bind.annotation.JsonbProperty;
 import ulaval.glo2003.floppa.product.api.message.ProductDtoResponse;
@@ -11,10 +12,13 @@ import java.util.List;
 public class SellerDtoResponse {
 	private String id;
 	private String name;
+	@JsonIgnoreProperties
 	@JsonbProperty(nillable = true)
 	private LocalTime createdAt;
+	@JsonIgnoreProperties
 	@JsonbProperty(nillable = true)
 	private String bio;
+	@JsonIgnoreProperties
 	@JsonbProperty(nillable = true)
 	private List<ProductDtoResponse> products;
 

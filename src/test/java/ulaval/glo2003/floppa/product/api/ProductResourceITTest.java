@@ -6,6 +6,7 @@ import io.restassured.RestAssured;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.floppa.ServerTestIT;
+import ulaval.glo2003.floppa.product.api.message.ProductDtoResponse;
 
 import java.util.*;
 
@@ -116,16 +117,7 @@ public class ProductResourceITTest extends ServerTestIT {
             String sellerId = getSellerId(SaveSeller("test", "test", "2000-12-25"));
             createProduct(title, "desc", 2.0, categories, sellerId);
             var response = GetProductWithFilter(sellerId, title, categories, 1.5, 5.0);
-            var responseBody = response.body().as(Map.class);
-
-            assert responseBody.containsKey("id");
-            assert responseBody.containsKey("createdAt");
-            assert responseBody.containsKey("title");
-            assert responseBody.containsKey("description");
-            assert responseBody.containsKey("suggestedPrice");
-            assert responseBody.containsKey("categories");
-            assert responseBody.containsKey("seller");
-            assert responseBody.containsKey("offers");
+            var responseBody = response.body().as(ProductDtoResponse.class);
 
             response.then().assertThat().statusCode(200);
         }

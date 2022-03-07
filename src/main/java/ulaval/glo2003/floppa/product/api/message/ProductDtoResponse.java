@@ -1,5 +1,6 @@
 package ulaval.glo2003.floppa.product.api.message;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.json.bind.annotation.JsonbNillable;
 import jakarta.json.bind.annotation.JsonbProperty;
 import ulaval.glo2003.floppa.offers.api.OffersDto;
@@ -17,8 +18,9 @@ public class ProductDtoResponse {
 	private Double suggestedPrice;
 	private OffersDto offers;
 	private List<String> categories;
-	@JsonbProperty(value = "seller",nillable = true)
-	private SellerDtoResponse sellerDtoResponse;
+	@JsonbProperty(nillable = true)
+	@JsonIgnoreProperties
+	private SellerDtoResponse seller;
 	public ProductDtoResponse() {
 	}
 
@@ -60,11 +62,11 @@ public class ProductDtoResponse {
 		return categories;
 	}
 
-	public SellerDtoResponse getSellerDtoResponse() {
-		return sellerDtoResponse;
+	public SellerDtoResponse getSeller() {
+		return seller;
 	}
 
-	public void setSellerDtoResponse(SellerDtoResponse sellerDtoResponse) {
-		this.sellerDtoResponse = sellerDtoResponse;
+	public void setSellerDtoResponse(SellerDtoResponse seller) {
+		this.seller = seller;
 	}
 }
