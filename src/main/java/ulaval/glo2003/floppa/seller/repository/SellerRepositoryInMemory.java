@@ -33,6 +33,7 @@ public class SellerRepositoryInMemory implements SellerRepository {
         return Optional.ofNullable(this.sellersById.get(sellerId))
                 .orElseThrow(()->new ErrorException(ErrorCode.ITEM_NOT_FOUND));
     }
+
     @Override
     public List<Product> findProducts(List<Function<Seller, Boolean>> sellerConditions, List<Function<Product, Boolean>> productConditions){
         List<Product> products = getProductsBySellerConditions(sellerConditions);
