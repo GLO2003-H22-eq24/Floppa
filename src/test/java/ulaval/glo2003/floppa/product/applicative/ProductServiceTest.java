@@ -76,15 +76,6 @@ class ProductServiceTest {
 	}
 
 	@Test
-	void givenSellerConditionsAndProductConditionsWithNoProducts_whenRetrieveProductByConditions_ThenITEM_NOT_FOUND() throws ErrorException {
-		List<Function<Seller, Boolean>> sellerConditions = new ArrayList<>();
-		List<Function<Product, Boolean>> productConditions = new ArrayList<>();
-		Mockito.lenient().when(sellerRepository.findProducts(sellerConditions, productConditions)).thenReturn(new ArrayList<>());
-
-		Assertions.assertThrows(ErrorException.class, () -> productService.retrieveProductByConditions(sellerConditions, productConditions));
-	}
-
-	@Test
 	void givenSellerProductWithNoProducts_whenRetrieveSellerByProduct_ThenITEM_NOT_FOUND() throws ErrorException {
 		Mockito.lenient().when(sellerRepository.retrieveSeller(Mockito.anyList())).thenReturn(new ArrayList<>());
 

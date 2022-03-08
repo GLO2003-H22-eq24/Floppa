@@ -41,6 +41,7 @@ public class SellerResourceGetITTest extends ServerTestIT {
 		Assertions.assertEquals(savedName, sellerDtoResponse.getName());
 		Assertions.assertEquals(savedBio, sellerDtoResponse.getBio());
 		Assertions.assertEquals(currentSellerId, sellerDtoResponse.getId());
+		Assertions.assertEquals(0, sellerDtoResponse.getProducts().size());
 	}
 
 	public static Response retrieveSeller(String id) {
