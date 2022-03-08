@@ -1,4 +1,4 @@
-package ulaval.glo2003.floppa.offers.api;
+package ulaval.glo2003.floppa.offers.api.message;
 
 import jakarta.json.bind.annotation.JsonbProperty;
 
@@ -7,16 +7,12 @@ public class OffersDto {
 	private Double mean;
 	private int count;
 
-	public OffersDto() {
+	public OffersDto() { //Used for serialization
 	}
 
 	public OffersDto(Double mean, int count) {
 		this.mean = mean;
 		this.count = count;
-	}
-
-	public Double getMean() {
-		return mean;
 	}
 
 	public int getCount() {

@@ -10,6 +10,7 @@ class HealthResourceITTest extends ServerTestIT {
 	void whenCheckHealth_thenStatus200() {
 		checkHealth().then().assertThat().statusCode(200);
 	}
+
 	public static io.restassured.response.Response checkHealth(){
 		return RestAssured.given().header("Content-Type", "application/json").port(PORT).basePath("/health").get();
 	}

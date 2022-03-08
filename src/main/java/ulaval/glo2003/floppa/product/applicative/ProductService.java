@@ -2,18 +2,13 @@ package ulaval.glo2003.floppa.product.applicative;
 
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
-import ulaval.glo2003.floppa.product.domain.FilterBuilderProduct;
-import ulaval.glo2003.floppa.product.domain.Product;
-import ulaval.glo2003.floppa.seller.domain.FilterBuilderSeller;
 import ulaval.glo2003.floppa.product.domain.Product;
 import ulaval.glo2003.floppa.seller.applicative.ConditionBuilderSeller;
 import ulaval.glo2003.floppa.seller.domain.Seller;
 import ulaval.glo2003.floppa.seller.domain.SellerRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class ProductService {
 	private final SellerRepository sellerRepository;
@@ -29,7 +24,7 @@ public class ProductService {
 		sellerRepository.saveSeller(seller);
 	}
 
-	public List<Product> retrieveProductByConditions(List<Function<Seller, Boolean>> sellerConditions, List<Function<Product, Boolean>> productConditions) throws ErrorException {
+	public List<Product> retrieveProductByConditions(List<Function<Seller, Boolean>> sellerConditions, List<Function<Product, Boolean>> productConditions) {
 		return this.sellerRepository.findProducts(sellerConditions, productConditions);
 	}
 

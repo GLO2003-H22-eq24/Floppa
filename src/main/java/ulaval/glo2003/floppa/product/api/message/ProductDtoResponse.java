@@ -3,7 +3,7 @@ package ulaval.glo2003.floppa.product.api.message;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.json.bind.annotation.JsonbNillable;
 import jakarta.json.bind.annotation.JsonbProperty;
-import ulaval.glo2003.floppa.offers.api.OffersDto;
+import ulaval.glo2003.floppa.offers.api.message.OffersDto;
 import ulaval.glo2003.floppa.seller.api.message.SellerDtoResponse;
 
 import java.time.LocalTime;
@@ -40,7 +40,7 @@ public class ProductDtoResponse {
 
 	public LocalTime getCreatedAt() {
 		return createdAt;
-	}
+	} //used for serialization
 
 	public String getTitle() {
 		return title;

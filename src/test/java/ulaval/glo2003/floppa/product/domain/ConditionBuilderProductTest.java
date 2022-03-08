@@ -67,9 +67,9 @@ class ConditionBuilderProductTest {
 
 	@Test
 	void givenTitleContained_whenAddProductTitleCondition_thenConditionEqualToOtherProductTitle() {
-		String title = "tit";
+		String titleContained = title.substring(2);
 
-		List<Function<Product, Boolean>> productConditions = new ConditionBuilderProduct().addProductTitleCondition(title).build();
+		List<Function<Product, Boolean>> productConditions = new ConditionBuilderProduct().addProductTitleCondition(titleContained).build();
 
 		Assertions.assertTrue(productConditions.stream().findFirst().map(condition -> condition.apply(product)).orElse(false));
 	}
@@ -78,7 +78,7 @@ class ConditionBuilderProductTest {
 	void givenNotTitle_whenAddProductTitleCondition_thenConditionNotEqualToOtherProductTitle() {
 		String title = "titfle";
 
-		List<Function<Product, Boolean>> productConditions = new ConditionBuilderProduct().addProductTitleCondition(title).build();
+		List<Function<Product, Boolean>> productConditions = new ConditionBuilderProduct().addProductTitleCondition(otherTitle).build();
 
 		Assertions.assertFalse(productConditions.stream().findFirst().map(condition -> condition.apply(product)).orElse(false));
 	}
