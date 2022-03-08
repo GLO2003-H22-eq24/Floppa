@@ -76,7 +76,7 @@ class ConditionBuilderProductTest {
 
 	@Test
 	void givenNotTitle_whenAddProductTitleCondition_thenConditionNotEqualToOtherProductTitle() {
-		String title = "titfle";
+		String otherTitle = "notTitle";
 
 		List<Function<Product, Boolean>> productConditions = new ConditionBuilderProduct().addProductTitleCondition(otherTitle).build();
 

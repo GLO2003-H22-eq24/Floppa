@@ -45,20 +45,26 @@ public class SellerResourceCreateITTest extends ServerTestIT {
 		SaveSeller(anyName, null, validBirthdate).then().assertThat().statusCode(400);
 	}
 
-    @Test
-    void givenSellerInfoWithNullBirthDate_whenSaveSeller_thenStatus400() throws JsonProcessingException {
-        SaveSeller(anyName, anyBio, null).then().assertThat().statusCode(400);
-    }
+	@Test
+	void givenSellerInfoWithNullBirthDate_whenSaveSeller_thenStatus400() throws JsonProcessingException {
+		String nullBirthDate = null;
 
-    @Test
-    void givenSellerInfoWithBlankName_whenSaveSeller_thenStatus400() throws JsonProcessingException {
-        SaveSeller("", anyBio, validBirthdate).then().assertThat().statusCode(400);
-    }
+		SaveSeller(anyName, anyBio, nullBirthDate).then().assertThat().statusCode(400);
+	}
 
-    @Test
-    void givenSellerInfoWithBlankBio_whenSaveSeller_thenStatus400() throws JsonProcessingException {
-        SaveSeller(anyName, "", validBirthdate).then().assertThat().statusCode(400);
-    }
+	@Test
+	void givenSellerInfoWithBlankName_whenSaveSeller_thenStatus400() throws JsonProcessingException {
+		String emptyName = "";
+
+		SaveSeller(emptyName, anyBio, validBirthdate).then().assertThat().statusCode(400);
+	}
+
+	@Test
+	void givenSellerInfoWithBlankBio_whenSaveSeller_thenStatus400() throws JsonProcessingException {
+		String emptyBio = "";
+
+		SaveSeller(anyName, emptyBio, validBirthdate).then().assertThat().statusCode(400);
+	}
 
 	@Test
 	void givenSellerInfoWithNotDateBirthDate_whenSaveSeller_thenStatus400() throws JsonProcessingException {

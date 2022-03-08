@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import ulaval.glo2003.floppa.ServerTestIT;
 import ulaval.glo2003.floppa.product.api.message.ProductDtoResponse;
 import ulaval.glo2003.floppa.seller.api.message.SellerDtoResponse;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,8 +25,6 @@ public class ProductResourceGetITTest extends ServerTestIT {
 	private String validBirthDate = "2000-12-25";
 	private String savedSellerId;
 
-
-
 	@BeforeEach
 	void givenProduct() throws JsonProcessingException {
 		savedSellerId = getSellerIdByLocation(SaveSeller(savedTitle, savedDescription, validBirthDate));
@@ -43,7 +40,8 @@ public class ProductResourceGetITTest extends ServerTestIT {
 
 	@Test
 	void givenInvalidProduct_whenRetrieveProduct_thenStatus404() throws JsonProcessingException {
-		retrieveProduct(productLocation + "aa")
+		String invalidTag = "aa";
+		retrieveProduct(productLocation + invalidTag)
 				.then()
 				.assertThat().statusCode(404);
 	}
