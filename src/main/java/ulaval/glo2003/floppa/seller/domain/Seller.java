@@ -4,15 +4,10 @@ import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.product.domain.Product;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.Period;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import static java.time.LocalTime.now;
 
 public class Seller {
     private final String name;
@@ -30,10 +25,11 @@ public class Seller {
         }
         this.name = name;
         this.bio = bio;
-        this.createdDate = now();
+        this.createdDate = LocalTime.now(Clock.system(ZoneId.of("-05:00")));
         this.products = new ArrayList<>();
         this.id = UUID.randomUUID().toString();
     }
+
 
 	public String getId() {
         return this.id;
@@ -49,10 +45,6 @@ public class Seller {
 
     public String getBio() {
         return bio;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
     }
 
     public LocalTime getCreatedDate() {

@@ -32,7 +32,7 @@ public class ProductCreationDtoRequest {
 
 	public void setSuggestedPrice(Double suggestedPrice) {
 		this.suggestedPrice = suggestedPrice;
-	}
+	} //used for serialization
 
 	public List<String> getCategories() {
 		return categories;

@@ -17,7 +17,7 @@ public class SellerDtoRequest {
         return bio;
     }
 
-    public void setBio(String bio) {
+    public void setBio(String bio) { //used for serialisation
         this.bio = bio;
     }
 
@@ -25,7 +25,7 @@ public class SellerDtoRequest {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(String birthDate) { //used for serialisation
         this.birthDate = birthDate;
     }
 }

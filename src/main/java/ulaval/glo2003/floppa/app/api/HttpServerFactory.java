@@ -1,8 +1,6 @@
 package ulaval.glo2003.floppa.app.api;
 
 import org.glassfish.grizzly.http.server.HttpServer;
-import org.glassfish.hk2.api.ServiceLocator;
-import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 

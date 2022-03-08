@@ -3,12 +3,11 @@ package ulaval.glo2003.floppa.product.api;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.offers.api.OffersAssembler;
-import ulaval.glo2003.floppa.offers.api.OffersDto;
+import ulaval.glo2003.floppa.offers.api.message.OffersDto;
 import ulaval.glo2003.floppa.product.api.message.ProductCreationDtoRequest;
 import ulaval.glo2003.floppa.product.api.message.ProductDtoResponse;
 import ulaval.glo2003.floppa.product.domain.Product;
 import ulaval.glo2003.floppa.product.domain.ProductCategory;
-import ulaval.glo2003.floppa.seller.api.SellerAssembler;
 import ulaval.glo2003.floppa.seller.api.message.SellerDtoResponse;
 import ulaval.glo2003.floppa.seller.domain.Seller;
 
