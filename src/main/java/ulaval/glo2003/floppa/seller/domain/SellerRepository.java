@@ -15,5 +15,4 @@ public interface SellerRepository {
 	List<Product> findProducts(List<Function<Seller, Boolean>> sellerConditions, List<Function<Product, Boolean>> productConditions);
 
 	List<Seller> retrieveSeller(List<Function<Seller, Boolean>> sellerConditions);
-	//List<Seller> retrieveSellers(List<Function<Seller, Boolean>> sellerConditions);
 }
