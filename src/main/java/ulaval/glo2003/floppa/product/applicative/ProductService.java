@@ -17,7 +17,6 @@ public class ProductService {
 		this.sellerRepository = sellerRepository;
 	}
 
-
 	public void createProductForSeller(String sellerId, Product product) throws ErrorException {
 		Seller seller = sellerRepository.retrieveSeller(sellerId);
 		seller.getProducts().add(product);
