@@ -7,10 +7,7 @@ import ulaval.glo2003.floppa.product.domain.Product;
 import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimeZone;
 import java.util.UUID;
-
-import static java.time.LocalTime.now;
 
 public class Seller {
     private final String name;
@@ -48,10 +45,6 @@ public class Seller {
 
     public String getBio() {
         return bio;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
     }
 
     public LocalTime getCreatedDate() {

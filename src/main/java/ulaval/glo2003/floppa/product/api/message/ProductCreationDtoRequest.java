@@ -1,5 +1,4 @@
 package ulaval.glo2003.floppa.product.api.message;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.json.bind.annotation.JsonbProperty;
 
 import java.util.List;
@@ -33,7 +32,7 @@ public class ProductCreationDtoRequest {
 
 	public void setSuggestedPrice(Double suggestedPrice) {
 		this.suggestedPrice = suggestedPrice;
-	}
+	} //used for serialization
 
 	public List<String> getCategories() {
 		return categories;

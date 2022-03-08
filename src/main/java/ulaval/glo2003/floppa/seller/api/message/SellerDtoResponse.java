@@ -46,7 +46,7 @@ public class SellerDtoResponse {
 		return name;
 	}
 
-	public LocalTime getCreatedAt() {
+	public LocalTime getCreatedAt() { //used for serialisation
 		return createdAt;
 	}
 

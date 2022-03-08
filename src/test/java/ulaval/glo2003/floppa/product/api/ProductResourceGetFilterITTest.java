@@ -82,7 +82,8 @@ public class ProductResourceGetFilterITTest extends ServerTestIT {
 
 	@Test
 	void givenFiltersSavedTitleWithOneProductWithSameTitle_whenRetrieveWithFilters_thenReturnOnlyOneProduct() throws JsonProcessingException {
-		createProduct("otherTitle", savedDescription, savedPrice, savedCategories, savedSellerId);
+		String otherTitle = "otherTile";
+		createProduct(otherTitle, savedDescription, savedPrice, savedCategories, savedSellerId);
 
 		ProductDtoResponse[] productDtoResponses = retrieveProductWithFilter(null, savedTitle, null, null, null).as(ProductDtoResponse[].class);
 

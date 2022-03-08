@@ -6,20 +6,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
-import ulaval.glo2003.floppa.product.applicative.ConditionBuilderProduct;
 import ulaval.glo2003.floppa.product.domain.Product;
-import ulaval.glo2003.floppa.product.domain.ProductCategory;
 import ulaval.glo2003.floppa.seller.domain.Seller;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.function.Function;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @ExtendWith(MockitoExtension.class)
 class ConditionBuilderSellerTest {
-	private final Seller seller = new Seller("name", "bio", LocalDate.of(1995, 12, 12));
+	private String sellerName = "name";
+	private String sellerBio = "bio";
+	private final Seller seller = new Seller(sellerName, sellerBio, LocalDate.of(1995, 12, 12));
 
 	ConditionBuilderSellerTest() throws ErrorException {
 	}
