@@ -72,6 +72,15 @@ public class ProductResourceGetITTest extends ServerTestIT {
 		Assertions.assertEquals(0, productDtoResponse.getOffers().getCount());
 	}
 
+	@Test
+	void givenManyProducts_whenRetrieveSeller_thenAsManyProductIsRetrieved() throws JsonProcessingException {
+		createProduct(savedTitle, savedDescription, savedSuggestedPrice, savedCategories, savedSellerId);
+
+		List<ProductDtoResponse> productDtoResponses = retrieveSeller(savedSellerId).as(SellerDtoResponse.class).getProducts();
+
+		Assertions.assertEquals(2, productDtoResponses.size());
+	}
+
 
 	public static io.restassured.response.Response retrieveProduct(String location) throws JsonProcessingException {
 		return RestAssured.given()

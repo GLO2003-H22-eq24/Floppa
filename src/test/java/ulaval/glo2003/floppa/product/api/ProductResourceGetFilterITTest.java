@@ -80,6 +80,33 @@ public class ProductResourceGetFilterITTest extends ServerTestIT {
 		}
 	}
 
+	@Test
+	void givenFiltersSavedTitleWithOneProductWithSameTitle_whenRetrieveWithFilters_thenReturnOnlyOneProduct() throws JsonProcessingException {
+		createProduct("otherTitle", savedDescription, savedPrice, savedCategories, savedSellerId);
+
+		ProductDtoResponse[] productDtoResponses = retrieveProductWithFilter(null, savedTitle, null, null, null).as(ProductDtoResponse[].class);
+
+		Assertions.assertEquals(1, productDtoResponses.length);
+	}
+
+	@Test
+	void givenFiltersSellerIdWithNoProductWithSameTitle_whenRetrieveWithFilters_thenReturnOnlyOneProduct() throws JsonProcessingException {
+		createProduct(savedTitle, savedDescription, savedPrice, savedCategories, savedSellerId);
+
+		ProductDtoResponse[] productDtoResponses = retrieveProductWithFilter("notSellerId", null, null, null, null).as(ProductDtoResponse[].class);
+
+		Assertions.assertEquals(0, productDtoResponses.length);
+	}
+
+	@Test
+	void givenTwoProductsInProductList_whenNoFilter_thenReturnTwoProduct() throws JsonProcessingException {
+		createProduct(savedTitle, savedDescription, savedPrice, savedCategories, savedSellerId);
+
+		ProductDtoResponse[] productDtoResponses = retrieveProductWithFilter(null, null, null, null, null).as(ProductDtoResponse[].class);
+
+		Assertions.assertEquals(2, productDtoResponses.length);
+	}
+
 
 	public static io.restassured.response.Response retrieveProductWithFilter(String sellerId, String title, List<String> categories, Double minPrice, Double maxPrice) throws JsonProcessingException {
 		Map<String, Object> queryParams = new HashMap<>();

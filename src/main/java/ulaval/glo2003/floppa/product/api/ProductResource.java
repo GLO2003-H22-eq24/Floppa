@@ -42,10 +42,6 @@ public class ProductResource {
 		return Response.status(Response.Status.CREATED).location(URI.create(uriInfo.getBaseUri() + "products/" + product.getId())).build();
 	}
 
-	private String getSellerId(HttpHeaders headers) throws ErrorException {
-		return Optional.ofNullable(headers.getRequestHeaders().getFirst("X-Seller-Id")).orElseThrow(() -> new ErrorException(ErrorCode.MISSING_PARAMETER));
-	}
-
 	@GET
 	@Path("/{productId}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -66,7 +62,13 @@ public class ProductResource {
 	                                          @QueryParam("categories") List<String> productCategories,
 	                                          @QueryParam("minPrice") Double minPrice,
 	                                          @QueryParam("maxPrice") Double maxPrice) throws ErrorException {
-		List<Product> products = this.productService.retrieveProductByConditions(new ConditionBuilderSeller()
+		List<Product> products = retrieveProductsWithQueryParam(sellerId, title, productCategories, minPrice, maxPrice);
+		List<ProductDtoResponse> productDtoResponses = products.stream().map(this::getProductDtoResponse).collect(Collectors.toList());
+		return Response.ok().entity(productDtoResponses).build();
+	}
+
+	private List<Product> retrieveProductsWithQueryParam(String sellerId, String title, List<String> productCategories, Double minPrice, Double maxPrice) throws ErrorException {
+		return this.productService.retrieveProductByConditions(new ConditionBuilderSeller()
 						.addSellerIdCondition(sellerId)
 						.build(),
 				new ConditionBuilderProduct()
@@ -75,8 +77,6 @@ public class ProductResource {
 						.addMinPriceCondition(minPrice)
 						.addMaxPriceCondition(maxPrice)
 						.build());
-		List<ProductDtoResponse> productDtoResponses = products.stream().map(this::getProductDtoResponse).collect(Collectors.toList());
-		return Response.ok().entity(productDtoResponses).build();
 	}
 
 	private ProductDtoResponse getProductDtoResponse(Product product) {
@@ -87,5 +87,9 @@ public class ProductResource {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	private String getSellerId(HttpHeaders headers) throws ErrorException {
+		return Optional.ofNullable(headers.getRequestHeaders().getFirst("X-Seller-Id")).orElseThrow(() -> new ErrorException(ErrorCode.MISSING_PARAMETER));
 	}
 }

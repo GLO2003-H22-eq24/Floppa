@@ -34,9 +34,6 @@ public class ProductService {
 	}
 
 	public Seller retrieveSellerByProduct(Product product) throws ErrorException {
-    
-		//List<Function<Product, Boolean>> productConditions = new FilterBuilderProduct().addProductIdCondition(product.getId()).build();
-		//List<Function<Seller, Boolean>> sellerConditions = new FilterBuilderSeller().addProductFilterCondition(productConditions).build();
 		List<Function<Product, Boolean>> productConditions = new ConditionBuilderProduct().addProductIdCondition(product.getId()).build();
 		List<Function<Seller, Boolean>> sellerConditions = new ConditionBuilderSeller().addProductFilterCondition(productConditions).build();
 
