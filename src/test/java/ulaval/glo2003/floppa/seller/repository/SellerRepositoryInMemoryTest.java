@@ -10,7 +10,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.product.domain.Product;
 import ulaval.glo2003.floppa.seller.domain.Seller;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +21,7 @@ class SellerRepositoryInMemoryTest {
 	@Mock
 	private Seller seller;
 	private String sellerId = "id";
+	private String anyId="anyId";
 	private SellerRepositoryInMemory sellerRepositoryInMemory;
 
 	@BeforeEach
@@ -33,7 +33,7 @@ class SellerRepositoryInMemoryTest {
 	@Test
 	void givenNewSeller_whenSaveSeller_thenSellerIsAdded() {
 		Seller newSeller = Mockito.mock(Seller.class);
-		Mockito.when(newSeller.getId()).thenReturn("anyId");
+		Mockito.when(newSeller.getId()).thenReturn(anyId);
 
 		this.sellerRepositoryInMemory.saveSeller(newSeller);
 
@@ -57,7 +57,7 @@ class SellerRepositoryInMemoryTest {
 
 	@Test
 	void givenConditions_whenRetrieveSeller_thenSeller() {
-		List<Function< Seller, Boolean >> sellerConditions = List.of(otherSeller -> true);
+		List<Function<Seller, Boolean>> sellerConditions = List.of(otherSeller -> true);
 
 		List<Seller> sellers = this.sellerRepositoryInMemory.retrieveSeller(sellerConditions);
 

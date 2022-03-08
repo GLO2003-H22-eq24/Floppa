@@ -10,12 +10,14 @@ import java.time.LocalDate;
 
 @ExtendWith(MockitoExtension.class)
 class SellerTest {
+	private String anyName="anyName";
+	private String anyDescription="anyDescription";
 
 	@Test
 	void givenLessThan18Age_whenCreateSeller_thenINVALID_PARAMETER() {
 		LocalDate birthDateLessThan18 = LocalDate.now();
 
-		Assertions.assertThrows(ErrorException.class, () -> new Seller("anyName", "anyDescription", birthDateLessThan18));
+		Assertions.assertThrows(ErrorException.class, () -> new Seller(anyName, anyDescription, birthDateLessThan18));
 	}
 
 }

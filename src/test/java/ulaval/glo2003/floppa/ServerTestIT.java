@@ -1,7 +1,5 @@
 package ulaval.glo2003.floppa;
 
-import io.restassured.RestAssured;
-import io.restassured.parsing.Parser;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

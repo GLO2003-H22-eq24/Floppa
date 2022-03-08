@@ -14,24 +14,36 @@ import java.util.Map;
 
 public class SellerResourceCreateITTest extends ServerTestIT {
 
-    private String anyName = "name";
-    private String anyBio= "bio";
-    private String validBirthdate ="2000-12-25";
+	private String anyName = "name";
+	private String anyBio = "bio";
+	private String validBirthdate = "2000-12-25";
 
-    @Test
-    void givenSellerInfo_whenSaveSeller_thenStatus201() throws JsonProcessingException {
-        SaveSeller(anyName, anyBio, validBirthdate).then().assertThat().statusCode(201);
-    }
+	@Test
+	void givenSellerInfo_whenSaveSeller_thenStatus201() throws JsonProcessingException {
+		SaveSeller(anyName, anyBio, validBirthdate).then().assertThat().statusCode(201);
+	}
 
-    @Test
-    void givenSellerInfoWithNullName_whenSaveSeller_thenStatus400() throws JsonProcessingException {
-        SaveSeller(null, anyBio, validBirthdate).then().assertThat().statusCode(400);
-    }
+	public static io.restassured.response.Response SaveSeller(String name, String bio, String birthDate) throws JsonProcessingException {
+		Map<String, String> body = new HashMap<>();
+		body.put("name", name);
+		body.put("bio", bio);
+		body.put("birthDate", birthDate);
+		return RestAssured.given()
+				.header("Content-Type", "application/json")
+				.port(PORT)
+				.body(new ObjectMapper().writeValueAsString(body))
+				.post("/sellers");
+	}
 
-    @Test
-    void givenSellerInfoWithNullBio_whenSaveSeller_thenStatus400() throws JsonProcessingException {
-        SaveSeller(anyName, null, validBirthdate).then().assertThat().statusCode(400);
-    }
+	@Test
+	void givenSellerInfoWithNullName_whenSaveSeller_thenStatus400() throws JsonProcessingException {
+		SaveSeller(null, anyBio, validBirthdate).then().assertThat().statusCode(400);
+	}
+
+	@Test
+	void givenSellerInfoWithNullBio_whenSaveSeller_thenStatus400() throws JsonProcessingException {
+		SaveSeller(anyName, null, validBirthdate).then().assertThat().statusCode(400);
+	}
 
     @Test
     void givenSellerInfoWithNullBirthDate_whenSaveSeller_thenStatus400() throws JsonProcessingException {
@@ -48,37 +60,29 @@ public class SellerResourceCreateITTest extends ServerTestIT {
         SaveSeller(anyName, "", validBirthdate).then().assertThat().statusCode(400);
     }
 
-    @Test
-    void givenSellerInfoWithNotDateBirthDate_whenSaveSeller_thenStatus400() throws JsonProcessingException {
-        SaveSeller(anyName, anyBio, "abcd").then().assertThat().statusCode(400);
-    }
+	@Test
+	void givenSellerInfoWithNotDateBirthDate_whenSaveSeller_thenStatus400() throws JsonProcessingException {
+        String invalidBirthDate = "abcd";
 
-    @Test
-    void givenSellerInfoWithNotFormattedAsYYYY_MM_DD_whenSaveSeller_thenStatus400() throws JsonProcessingException {
-        SaveSeller(anyName, anyBio, LocalDate.now().format(DateTimeFormatter.ISO_DATE)).then().assertThat().statusCode(400);
-    }
+		SaveSeller(anyName, anyBio, invalidBirthDate).then().assertThat().statusCode(400);
+	}
 
-    @Test
-    void givenSellerInfo_whenSaveSeller_thenNotNullLocationId() throws JsonProcessingException {
-        String sellerId = getSellerIdByLocation(SaveSeller(anyName, anyBio, validBirthdate));
+	@Test
+	void givenSellerInfoWithNotFormattedAsYYYY_MM_DD_whenSaveSeller_thenStatus400() throws JsonProcessingException {
+        String invalidBirthDate = LocalDate.now().format(DateTimeFormatter.ISO_DATE);
 
-        Assertions.assertNotNull(sellerId);
-    }
+		SaveSeller(anyName, anyBio, invalidBirthDate).then().assertThat().statusCode(400);
+	}
 
-    public static String getSellerIdByLocation(io.restassured.response.Response response) {
-        String location = response.headers().getValue("location");
-        return location.replace(RestAssured.baseURI + ":" + PORT + "/sellers/", "");
-    }
+	@Test
+	void givenSellerInfo_whenSaveSeller_thenNotNullLocationId() throws JsonProcessingException {
+		String sellerId = getSellerIdByLocation(SaveSeller(anyName, anyBio, validBirthdate));
 
-    public static io.restassured.response.Response SaveSeller(String name, String bio, String birthDate) throws JsonProcessingException {
-        Map<String, String> body = new HashMap<>();
-        body.put("name", name);
-        body.put("bio", bio);
-        body.put("birthDate", birthDate);
-        return RestAssured.given()
-                .header("Content-Type", "application/json")
-                .port(PORT)
-                .body(new ObjectMapper().writeValueAsString(body))
-                .post("/sellers");
-    }
+		Assertions.assertNotNull(sellerId);
+	}
+
+	public static String getSellerIdByLocation(io.restassured.response.Response response) {
+		String location = response.headers().getValue("location");
+		return location.replace(RestAssured.baseURI + ":" + PORT + "/sellers/", "");
+	}
 }
