@@ -2,6 +2,7 @@ package ulaval.glo2003.floppa.product.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.restassured.RestAssured;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.floppa.ServerTestIT;
@@ -16,13 +17,11 @@ import static ulaval.glo2003.floppa.seller.api.SellerResourceCreateITTest.getSel
 
 public class ProductResourceGetFilterITTest extends ServerTestIT {
 
-	private List<String> savedCategories = List.of("SPORTS", "HOUSING");
+	private List<String> savedCategories = List.of("sports", "housing");
 	private String savedTitle = "title";
 	private String savedDescription = "desc";
 	private Double savedPrice = 12.2;
 	private String savedSellerId;
-	private String productLocation;
-
 	private String savedName = "test";
 	private String savedBio = "test";
 	private String savedBirthDate = "2000-12-25";
@@ -31,7 +30,7 @@ public class ProductResourceGetFilterITTest extends ServerTestIT {
 	@BeforeEach
 	void givenProduct() throws JsonProcessingException {
 		savedSellerId = getSellerIdByLocation(SaveSeller(savedName, savedBio, savedBirthDate));
-		productLocation = createProduct(savedTitle, savedDescription, savedPrice, savedCategories, savedSellerId).header("location");
+		createProduct(savedTitle, savedDescription, savedPrice, savedCategories, savedSellerId);
 	}
 
 	@Test
@@ -72,7 +71,13 @@ public class ProductResourceGetFilterITTest extends ServerTestIT {
 	@Test
 	void givenFilters_whenRetrieveProductWithFilter_thenListProductDtoResponse() throws JsonProcessingException {
 		ProductDtoResponse[] productDtoResponses = retrieveProductWithFilter(null, null, null, null, null).as(ProductDtoResponse[].class);
-		//TODO faire le code pour check si les champs sont valide.
+		for (ProductDtoResponse product: productDtoResponses) {
+			Assertions.assertEquals(savedTitle, product.getTitle());
+			Assertions.assertEquals(savedDescription, product.getDescription());
+			Assertions.assertEquals(savedPrice, product.getSuggestedPrice());
+			Assertions.assertEquals(savedSellerId, product.getSeller().getId());
+			Assertions.assertEquals(savedCategories, product.getCategories());
+		}
 	}
 
 
