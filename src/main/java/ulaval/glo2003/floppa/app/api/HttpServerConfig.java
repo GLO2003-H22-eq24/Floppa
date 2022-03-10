@@ -7,9 +7,12 @@ import ulaval.glo2003.floppa.app.api.mapper.ErrorExceptionAssembler;
 import ulaval.glo2003.floppa.offers.api.OffersAssembler;
 import ulaval.glo2003.floppa.product.api.ProductAssembler;
 import ulaval.glo2003.floppa.product.applicative.ProductService;
+import ulaval.glo2003.floppa.product.repository.ConditionProductFactoryInMemory;
 import ulaval.glo2003.floppa.seller.api.SellerAssembler;
+import ulaval.glo2003.floppa.seller.domain.ConditionSellerAssembleur;
 import ulaval.glo2003.floppa.seller.domain.SellerRepository;
-import ulaval.glo2003.floppa.seller.repository.SellerRepositoryInMemory;
+import ulaval.glo2003.floppa.seller.repository.memory.ConditionSellerFactoryInMemory;
+import ulaval.glo2003.floppa.seller.repository.memory.SellerRepositoryInMemory;
 
 import java.util.HashMap;
 
@@ -25,7 +28,8 @@ public class HttpServerConfig extends ResourceConfig {
 	}
 
 	private void registerBinders() {
-		SellerRepository sellerRepository = new SellerRepositoryInMemory(new HashMap<>());
+		SellerRepository sellerRepository = new SellerRepositoryInMemory(new HashMap<>(),
+				new ConditionSellerFactoryInMemory(new ConditionProductFactoryInMemory()), new ConditionProductFactoryInMemory());
 		bindRepository(sellerRepository);
 		bindService(sellerRepository);
 		bindAssembler();
@@ -44,7 +48,7 @@ public class HttpServerConfig extends ResourceConfig {
 		register(new AbstractBinder() {
 			@Override
 			protected void configure() {
-				bind(new ProductService(sellerRepository)).to(ProductService.class);
+				bind(new ProductService(sellerRepository, new ConditionSellerAssembleur())).to(ProductService.class);
 			}
 		});
 	}
@@ -71,6 +75,13 @@ public class HttpServerConfig extends ResourceConfig {
 			@Override
 			protected void configure() {
 				bind(new ErrorExceptionAssembler()).to(ErrorExceptionAssembler.class);
+			}
+		});
+
+		register(new AbstractBinder() {
+			@Override
+			protected void configure() {
+				bind(new ConditionSellerAssembleur()).to(ConditionSellerAssembleur.class);
 			}
 		});
 	}
