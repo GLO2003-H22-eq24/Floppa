@@ -1,5 +1,7 @@
 package ulaval.glo2003.floppa.product.domain;
 
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Id;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.offers.domain.Offers;
@@ -10,14 +12,16 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
+@Embedded
 public class Product {
+	@Id
 	private final String id;
 	private final LocalTime createdDate;
 	private String title;
 	private String description;
 	private Double suggestedPrice;
 	private List<ProductCategory> categories;
+	@Embedded
 	private List<Offers> offers;
 
 	public Product(String title, String description, Double suggestedPrice, List<ProductCategory> categories) throws ErrorException {
