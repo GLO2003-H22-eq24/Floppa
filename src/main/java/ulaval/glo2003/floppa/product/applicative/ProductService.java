@@ -3,6 +3,7 @@ package ulaval.glo2003.floppa.product.applicative;
 import org.javatuples.Pair;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
+import ulaval.glo2003.floppa.offers.domain.Offers;
 import ulaval.glo2003.floppa.product.domain.ConditionProductDto;
 import ulaval.glo2003.floppa.product.domain.ConditionProductDtoBuilder;
 import ulaval.glo2003.floppa.product.domain.Product;
@@ -48,5 +49,13 @@ public class ProductService {
 			pairsSellerProduct.add(new Pair<>(this.retrieveSellerByProduct(product), product));
 		}
 		return pairsSellerProduct;
+	}
+
+	public void addOfferToProduct(String productId, Offers offers) throws ErrorException {
+		ConditionProductDto conditionProductDto = new ConditionProductDtoBuilder().addProductId(productId).build();
+		ConditionSellerDto conditionSellerDto = conditionSellerAssembleur.toDto(conditionProductDto);
+		Product product = sellerRepository.findProducts(conditionSellerDto).stream().findFirst().orElseThrow(()-> new ErrorException(ErrorCode.ITEM_NOT_FOUND));
+		product.addOffer(offers);
+		sellerRepository.updateProduct(product);
 	}
 }

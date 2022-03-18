@@ -6,6 +6,9 @@ import jakarta.ws.rs.core.*;
 import org.javatuples.Pair;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
+import ulaval.glo2003.floppa.offers.api.OffersAssembler;
+import ulaval.glo2003.floppa.offers.api.message.OffersDtoRequest;
+import ulaval.glo2003.floppa.offers.domain.Offers;
 import ulaval.glo2003.floppa.product.api.message.ProductCreationDtoRequest;
 import ulaval.glo2003.floppa.product.api.message.ProductDtoResponse;
 import ulaval.glo2003.floppa.product.applicative.ProductService;
@@ -24,12 +27,25 @@ public class ProductResource {
 	private ProductService productService;
 	private ProductAssembler productAssembler;
 	private ConditionSellerAssembleur conditionSellerAssembleur;
+	private OffersAssembler offersAssembler;
 
 	@Inject
-	public ProductResource(ProductService productService, ProductAssembler productAssembler, ConditionSellerAssembleur conditionSellerAssembleur) {
+	public ProductResource(ProductService productService, ProductAssembler productAssembler, ConditionSellerAssembleur conditionSellerAssembleur, OffersAssembler offersAssembler) {
 		this.productService = productService;
 		this.productAssembler = productAssembler;
 		this.conditionSellerAssembleur = conditionSellerAssembleur;
+		this.offersAssembler = offersAssembler;
+	}
+
+
+	@POST
+	@Path("/{productId}/offers")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response createOffer(OffersDtoRequest offersDtoRequest, @PathParam("productId") String productId) throws ErrorException {
+		Offers offers = offersAssembler.fromDto(offersDtoRequest);
+		productService.addOfferToProduct(productId, offers);
+		return Response.ok().build();
 	}
 
 	@POST

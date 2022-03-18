@@ -54,8 +54,16 @@ public class HttpServerConfig extends ResourceConfig {
 	}
 
 	private void bindAssembler() {
-		ProductAssembler productAssembler = new ProductAssembler(new OffersAssembler());
+		OffersAssembler offersAssembler = new OffersAssembler();
+		ProductAssembler productAssembler = new ProductAssembler(offersAssembler);
 		SellerAssembler sellerAssembler = new SellerAssembler(productAssembler);
+
+		register(new AbstractBinder() {
+			@Override
+			protected void configure() {
+				bind(offersAssembler).to(OffersAssembler.class);
+			}
+		});
 
 		register(new AbstractBinder() {
 			@Override

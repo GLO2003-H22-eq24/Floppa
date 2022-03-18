@@ -72,4 +72,11 @@ public class Product {
 	public List<ProductCategory> getCategories() {
 		return categories;
 	}
+
+	public void addOffer(Offers offers) throws ErrorException {
+		if (offers.getOfferAmount() < this.suggestedPrice){
+			throw new ErrorException(ErrorCode.INVALID_PARAMETER);
+		}
+		this.offers.add(offers);
+	}
 }
