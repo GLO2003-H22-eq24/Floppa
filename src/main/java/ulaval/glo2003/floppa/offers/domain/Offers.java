@@ -1,8 +1,10 @@
 package ulaval.glo2003.floppa.offers.domain;
 
+import org.mongodb.morphia.annotations.Embedded;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 
+@Embedded
 public class Offers {
 	private String name;
 	private Email email;
