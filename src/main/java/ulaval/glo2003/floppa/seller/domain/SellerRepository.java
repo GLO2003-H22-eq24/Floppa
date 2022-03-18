@@ -14,4 +14,6 @@ public interface SellerRepository {
 	List<Seller> retrieveSeller(ConditionSellerDto sellerConditions);
 
 	List<Product> findProducts(ConditionSellerDto productConditions);
+
+	void updateProduct(Product product);
 }

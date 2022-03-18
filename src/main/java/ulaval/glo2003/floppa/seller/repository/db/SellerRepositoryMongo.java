@@ -9,24 +9,28 @@ import ulaval.glo2003.floppa.seller.domain.SellerRepository;
 import java.util.List;
 
 public class SellerRepositoryMongo implements SellerRepository {
-	//TODO
 	@Override
 	public void saveSeller(Seller seller) {
-
+//TODO
 	}
 
 	@Override
 	public Seller retrieveSeller(String sellerId) throws ErrorException {
-		return null;
+		return null; //TODO
 	}
 
 	@Override
 	public List<Seller> retrieveSeller(ConditionSellerDto sellerConditions) {
-		return null;
+		return null;//TODO
 	}
 
 	@Override
 	public List<Product> findProducts(ConditionSellerDto productConditions) {
-		return null;
+		return null;//TODO
+	}
+
+	@Override
+	public void updateProduct(Product product) {
+		//TODO
 	}
 }

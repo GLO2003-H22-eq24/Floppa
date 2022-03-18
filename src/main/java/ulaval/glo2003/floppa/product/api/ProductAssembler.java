@@ -4,7 +4,7 @@ import org.javatuples.Pair;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.offers.api.OffersAssembler;
-import ulaval.glo2003.floppa.offers.api.message.OffersDto;
+import ulaval.glo2003.floppa.offers.api.message.OffersDtoResponse;
 import ulaval.glo2003.floppa.product.api.message.ProductCreationDtoRequest;
 import ulaval.glo2003.floppa.product.api.message.ProductDtoResponse;
 import ulaval.glo2003.floppa.product.domain.Product;
@@ -28,11 +28,11 @@ public class ProductAssembler {
 	}
 
 	public ProductDtoResponse toDto(Product product){
-		OffersDto offersDto = offersAssembler.toDto(product);
+		OffersDtoResponse offersDtoResponse = offersAssembler.toDto(product);
 		Double amount = BigDecimal.valueOf(product.getSuggestedPrice()).setScale(2, RoundingMode.HALF_UP).doubleValue();
 		List<String> productCategories = product.getCategories().stream().map(ProductCategory::toValueLowerCase).collect(Collectors.toList());
 		return new ProductDtoResponse(product.getId(), product.getCreatedDate(),
-				product.getTitle(), product.getDescription(), amount,offersDto, productCategories);
+				product.getTitle(), product.getDescription(), amount, offersDtoResponse, productCategories);
 	}
 
 	public ProductDtoResponse toDto(Product product, Seller seller) {

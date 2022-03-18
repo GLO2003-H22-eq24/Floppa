@@ -57,6 +57,12 @@ public class SellerRepositoryInMemory implements SellerRepository {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void updateProduct(Product product) {
+        //no need to implement, because in memory.
+        LOGGER.log(Level.INFO, "Updated product with: {0} offers ", product.getOffers().size());
+    }
+
     private List<Product> retrieveProductsBySellerConditions(List<Function<Seller, Boolean>> sellerConditions) {
         return this.retrieveSellerBySellerConditions(sellerConditions).stream()
                 .map(Seller::getProducts)
