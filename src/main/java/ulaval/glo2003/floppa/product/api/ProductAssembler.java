@@ -1,5 +1,6 @@
 package ulaval.glo2003.floppa.product.api;
 
+import org.javatuples.Pair;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.offers.api.OffersAssembler;
@@ -41,6 +42,10 @@ public class ProductAssembler {
 		return productDtoResponse;
 	}
 
+	public List<ProductDtoResponse> toDto(List<Pair<Seller, Product>> pairsSellerProduct) {
+		return pairsSellerProduct.stream().map(pairSellerProduct -> this.toDto(pairSellerProduct.getValue1(), pairSellerProduct.getValue0())).collect(Collectors.toList());
+	}
+
 	public Product fromDto(ProductCreationDtoRequest productCreationDtoRequest) throws ErrorException {
 
 		// Vérifie que les paramètres nécessaires sont présent
@@ -66,5 +71,4 @@ public class ProductAssembler {
 			}
 		}
 	}
-
 }
