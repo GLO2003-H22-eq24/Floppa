@@ -7,6 +7,8 @@ import ulaval.glo2003.floppa.app.api.HttpServerFactory;
 import java.io.IOException;
 
 public class FloppaRunnable implements Runnable {
+    //TODO: Probablement pas comme ca que tu recupere le port
+    //#4 https://devcenter.heroku.com/articles/preparing-a-codebase-for-heroku-deployment
     private static final String DEFAULT_PORT_AS_STRING = System.getenv("$PORT");
     private static final int DEFAULT_PORT = DEFAULT_PORT_AS_STRING == null || DEFAULT_PORT_AS_STRING.isEmpty() ? 8080
             : Integer.parseInt(DEFAULT_PORT_AS_STRING);
