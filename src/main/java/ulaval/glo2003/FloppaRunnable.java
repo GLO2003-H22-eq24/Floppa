@@ -7,7 +7,9 @@ import ulaval.glo2003.floppa.app.api.HttpServerFactory;
 import java.io.IOException;
 
 public class FloppaRunnable implements Runnable {
-    private static final int DEFAULT_PORT = 8080;
+    private static final String DEFAULT_PORT_AS_STRING = System.getenv("$PORT");
+    private static final int DEFAULT_PORT = DEFAULT_PORT_AS_STRING == null || DEFAULT_PORT_AS_STRING.isEmpty() ? 8080
+            : Integer.parseInt(DEFAULT_PORT_AS_STRING);
     private final int port;
     private HttpServer httpServer;
 
@@ -19,7 +21,7 @@ public class FloppaRunnable implements Runnable {
         FloppaRunnable floppaRunnable;
         if (args.length > 0) {
             floppaRunnable = new FloppaRunnable(Integer.parseInt(args[0]));
-        } else{
+        } else {
             floppaRunnable = new FloppaRunnable(DEFAULT_PORT);
         }
         floppaRunnable.run();
