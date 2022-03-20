@@ -28,5 +28,5 @@ jobs:
           justlogin: true
 #          branch: ${{ github.event.inputs.branch }}
       - name: Push to Heroku
-        run: git push heroku heroku:main
+        run: git push heroku-staging heroku:main
 
