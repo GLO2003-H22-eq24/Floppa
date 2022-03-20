@@ -1,6 +1,5 @@
 name: Manual Deploy
 on:
-  push: #TODO: remove
   workflow_dispatch:
     inputs:
       branch:
@@ -14,12 +13,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
       - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "floppa-glo-2003"
           heroku_email: "jeremy.faucher.1@ulaval.ca"
-          branch: heroku #${{ github.event.inputs.branch }} #TODO: uncomment
+          branch: ${{ github.event.inputs.branch }}
           healthcheck: "https://floppa-glo-2003.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
 
