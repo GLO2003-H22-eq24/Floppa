@@ -27,8 +27,10 @@ jobs:
           heroku_email: "jeremy.faucher.1@ulaval.ca"
           justlogin: true
 #          branch: ${{ github.event.inputs.branch }}
-      - name: Get remote
-        run: heroku git:remote -a floppa-glo-2003
+#      - name: Get remote
+#        run: heroku git:remote -a floppa-glo-2003
+      - name: Fetch
+        run: git fetch
       - name: Push to Heroku
         run: git push heroku-staging heroku:main
 
