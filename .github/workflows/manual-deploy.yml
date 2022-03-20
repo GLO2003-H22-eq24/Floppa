@@ -1,0 +1,21 @@
+name: Manual Deploy
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Branch, tag or commit to deploy
+        default: dev
+        required: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "floppa-glo-2003"
+          heroku_email: "jeremy.faucher.1@ulaval.ca"
+          branch: ${{ github.event.inputs.branch }}
+
