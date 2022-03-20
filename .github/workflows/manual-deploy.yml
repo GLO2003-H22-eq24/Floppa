@@ -13,24 +13,13 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-#      - name: Login to Heroku
-#        env:
-#          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-#        run: heroku login
-#      - name: Push to Heroku
-#        run: git push heroku-staging ${{ github.event.inputs.branch }}:main
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "floppa-glo-2003"
           heroku_email: "jeremy.faucher.1@ulaval.ca"
-#          justlogin: true
           branch: heroku #${{ github.event.inputs.branch }} #TODO: uncomment
-#      - name: Get remote
-#        run: heroku git:remote -a floppa-glo-2003
-#      - name: Fetch
-#        run: git fetch
-#      - name: Push to Heroku
-#        run: git push heroku-staging heroku:main
+          healthcheck: "https://floppa-glo-2003.herokuapp.com/health"
+          rollbackonhealthcheckfailed: true
 
