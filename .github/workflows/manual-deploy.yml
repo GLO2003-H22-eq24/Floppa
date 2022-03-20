@@ -26,7 +26,7 @@ jobs:
           heroku_app_name: "floppa-glo-2003"
           heroku_email: "jeremy.faucher.1@ulaval.ca"
 #          justlogin: true
-          branch: ${{ github.event.inputs.branch }}
+          branch: heroku #${{ github.event.inputs.branch }}
 #      - name: Get remote
 #        run: heroku git:remote -a floppa-glo-2003
 #      - name: Fetch
