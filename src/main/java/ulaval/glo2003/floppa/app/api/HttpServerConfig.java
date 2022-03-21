@@ -4,6 +4,8 @@ import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
 import ulaval.glo2003.floppa.app.api.mapper.ErrorExceptionAssembler;
+import ulaval.glo2003.floppa.offers.api.BuyerAssembler;
+import ulaval.glo2003.floppa.offers.api.OfferItemAssembler;
 import ulaval.glo2003.floppa.offers.api.OffersAssembler;
 import ulaval.glo2003.floppa.product.api.ProductAssembler;
 import ulaval.glo2003.floppa.product.applicative.ProductService;
@@ -54,7 +56,7 @@ public class HttpServerConfig extends ResourceConfig {
 	}
 
 	private void bindAssembler() {
-		OffersAssembler offersAssembler = new OffersAssembler();
+		OffersAssembler offersAssembler = new OffersAssembler(new OfferItemAssembler(new BuyerAssembler()));
 		ProductAssembler productAssembler = new ProductAssembler(offersAssembler);
 		SellerAssembler sellerAssembler = new SellerAssembler(productAssembler);
 

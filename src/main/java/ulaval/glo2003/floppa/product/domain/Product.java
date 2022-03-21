@@ -9,9 +9,8 @@ import ulaval.glo2003.floppa.offers.domain.Offers;
 import java.time.Clock;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 @Embedded
 public class Product {
 	@Id
@@ -82,5 +81,19 @@ public class Product {
 			throw new ErrorException(ErrorCode.INVALID_PARAMETER);
 		}
 		this.offers.add(offers);
+	}
+
+	public Double computeMaxOffers() {
+		return offers.stream()
+				.max(Comparator.comparing(Offers::getOfferAmount))
+				.map(Offers::getOfferAmount)
+				.orElse(null);
+	}
+
+	public Double computeMinOffers() {
+		return offers.stream()
+				.min(Comparator.comparing(Offers::getOfferAmount))
+				.map(Offers::getOfferAmount)
+				.orElse(null);
 	}
 }
