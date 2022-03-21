@@ -2,6 +2,7 @@ package ulaval.glo2003.floppa.offers.api;
 
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
+import ulaval.glo2003.floppa.offers.api.message.OfferItemResponse;
 import ulaval.glo2003.floppa.offers.api.message.OffersDtoRequest;
 import ulaval.glo2003.floppa.offers.api.message.OffersDtoResponse;
 import ulaval.glo2003.floppa.offers.domain.Email;
@@ -11,12 +12,22 @@ import ulaval.glo2003.floppa.product.domain.Product;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 import java.util.Optional;
 
 public class OffersAssembler {
+	private final OfferItemAssembler offerItemAssembler;
+
+	public OffersAssembler(OfferItemAssembler offerItemAssembler) {
+		this.offerItemAssembler = offerItemAssembler;
+	}
+
 	public OffersDtoResponse toDto(Product product){
-		Double amount = Optional.ofNullable(product.computeMeanOffers()).map(this::computeAs2DecimalPoint).orElse(null);
-		return new OffersDtoResponse(amount, product.computeNumberOfOffers());
+		Double mean = Optional.ofNullable(product.computeMeanOffers()).map(this::computeAs2DecimalPoint).orElse(null);
+		Double min = Optional.ofNullable(product.computeMinOffers()).map(this::computeAs2DecimalPoint).orElse(null);
+		Double max = Optional.ofNullable(product.computeMaxOffers()).map(this::computeAs2DecimalPoint).orElse(null);
+		List<OfferItemResponse> items = Optional.ofNullable(product.getOffers()).filter(offers -> !offers.isEmpty()).map(offerItemAssembler::toDto).orElse(null);
+		return new OffersDtoResponse(mean, product.computeNumberOfOffers(), min, max, items);
 	}
 
 	private double computeAs2DecimalPoint(Double mean) {

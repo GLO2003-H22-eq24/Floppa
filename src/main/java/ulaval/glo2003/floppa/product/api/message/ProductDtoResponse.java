@@ -1,15 +1,13 @@
 package ulaval.glo2003.floppa.product.api.message;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.json.bind.annotation.JsonbNillable;
-import jakarta.json.bind.annotation.JsonbProperty;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import ulaval.glo2003.floppa.offers.api.message.OffersDtoResponse;
 import ulaval.glo2003.floppa.seller.api.message.SellerDtoResponse;
 
 import java.time.LocalTime;
 import java.util.List;
 
-@JsonbNillable
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductDtoResponse {
 	private String id;
 	private LocalTime createdAt;
@@ -18,8 +16,6 @@ public class ProductDtoResponse {
 	private Double suggestedPrice;
 	private OffersDtoResponse offers;
 	private List<String> categories;
-	@JsonbProperty(nillable = true)
-	@JsonIgnoreProperties
 	private SellerDtoResponse seller;
 	public ProductDtoResponse() {
 	}

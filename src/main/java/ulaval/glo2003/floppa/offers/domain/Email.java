@@ -6,12 +6,17 @@ import ulaval.glo2003.floppa.app.domain.ErrorException;
 
 public class Email {
 	private static final EmailValidator emailValidator = EmailValidator.getInstance();
-	private final String email;
+	private final String emailString;
 
-	public Email(String email) throws ErrorException {
-		if (!emailValidator.isValid(email)){
+	public Email(String emailString) throws ErrorException {
+		if (!emailValidator.isValid(emailString)){
 			throw new ErrorException(ErrorCode.INVALID_PARAMETER);
 		}
-		this.email = email;
+		this.emailString = emailString;
+	}
+
+	@Override
+	public String toString() {
+		return emailString;
 	}
 }
