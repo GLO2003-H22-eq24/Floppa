@@ -4,17 +4,17 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class OffersDtoResponse {
+public class OffersResponse {
 	private Double mean;
 	private int count;
 	private Double min;
 	private Double max;
 	private List<OfferItemResponse> items;
 
-	public OffersDtoResponse() { //Used for serialization
+	public OffersResponse() { //Used for serialization
 	}
 
-	public OffersDtoResponse(Double mean, int count, Double min, Double max, List<OfferItemResponse> items) {
+	public OffersResponse(Double mean, int count, Double min, Double max, List<OfferItemResponse> items) {
 		this.mean = mean;
 		this.count = count;
 		this.min = min;
@@ -22,7 +22,7 @@ public class OffersDtoResponse {
 		this.items = items;
 	}
 
-	public OffersDtoResponse(Double mean, int count) {
+	public OffersResponse(Double mean, int count) {
 		this.mean = mean;
 		this.count = count;
 	}

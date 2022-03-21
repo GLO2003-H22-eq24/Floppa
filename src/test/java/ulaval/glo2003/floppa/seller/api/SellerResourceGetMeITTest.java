@@ -2,16 +2,14 @@ package ulaval.glo2003.floppa.seller.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.restassured.RestAssured;
-import io.restassured.http.Headers;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.floppa.ServerTestIT;
-import ulaval.glo2003.floppa.seller.api.message.SellerDtoResponse;
+import ulaval.glo2003.floppa.seller.api.message.SellerResponse;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static ulaval.glo2003.floppa.offers.api.OffersResourceCreateITTest.createOfferForProduct;
 import static ulaval.glo2003.floppa.product.api.ProductResourceCreateITTest.createProduct;
@@ -44,12 +42,12 @@ public class SellerResourceGetMeITTest extends ServerTestIT {
 
 	@Test
 	void givenSellerId_whenGetSeller_thenSellerDtoResponse() {
-		SellerDtoResponse sellerDtoResponse = retrieveSellerMe(currentSellerId).as(SellerDtoResponse.class);
+		SellerResponse sellerResponse = retrieveSellerMe(currentSellerId).as(SellerResponse.class);
 
-		Assertions.assertEquals(savedName, sellerDtoResponse.getName());
-		Assertions.assertEquals(savedBio, sellerDtoResponse.getBio());
-		Assertions.assertEquals(currentSellerId, sellerDtoResponse.getId());
-		Assertions.assertEquals(0, sellerDtoResponse.getProducts().size());
+		Assertions.assertEquals(savedName, sellerResponse.getName());
+		Assertions.assertEquals(savedBio, sellerResponse.getBio());
+		Assertions.assertEquals(currentSellerId, sellerResponse.getId());
+		Assertions.assertEquals(0, sellerResponse.getProducts().size());
 	}
 
 	@Test
@@ -58,12 +56,12 @@ public class SellerResourceGetMeITTest extends ServerTestIT {
 		String otherProductId = getProductIdByLocation(createProduct("otherTitle", "otherDescription", 13.5, Arrays.asList("SPORTS", "HOUSING"), currentSellerId));
 		createOfferForProduct(productId, "name", "asdb@asd.com", "18191234567", 48.23, "Donec porttitor interdum lacus sed finibus. Nam pulvinar facilisis posuere. Maecenas vel lorem amet.");
 		createOfferForProduct(productId, "name", "asdb@asd.com", "18191234567", 48.23, "Donec porttitor interdum lacus sed finibus. Nam pulvinar facilisis posuere. Maecenas vel lorem amet.");
-		SellerDtoResponse sellerDtoResponse = retrieveSellerMe(currentSellerId).as(SellerDtoResponse.class);
+		SellerResponse sellerResponse = retrieveSellerMe(currentSellerId).as(SellerResponse.class);
 
-		Assertions.assertEquals(savedName, sellerDtoResponse.getName());
-		Assertions.assertEquals(savedBio, sellerDtoResponse.getBio());
-		Assertions.assertEquals(currentSellerId, sellerDtoResponse.getId());
-		Assertions.assertEquals(2, sellerDtoResponse.getProducts().size());
+		Assertions.assertEquals(savedName, sellerResponse.getName());
+		Assertions.assertEquals(savedBio, sellerResponse.getBio());
+		Assertions.assertEquals(currentSellerId, sellerResponse.getId());
+		Assertions.assertEquals(2, sellerResponse.getProducts().size());
 	}
 
 	public static Response retrieveSellerMe(String id) {

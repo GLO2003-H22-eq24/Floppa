@@ -18,6 +18,6 @@ class ErrorExceptionMapperTest {
 
 		Response response = errorExceptionMapper.toResponse(errorException);
 
-		Assertions.assertEquals(ErrorExceptionDto.class, response.getEntity().getClass());
+		Assertions.assertEquals(ErrorExceptionResponse.class, response.getEntity().getClass());
 	}
 }

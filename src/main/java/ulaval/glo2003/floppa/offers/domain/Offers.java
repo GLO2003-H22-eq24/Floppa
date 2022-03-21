@@ -3,11 +3,7 @@ package ulaval.glo2003.floppa.offers.domain;
 import org.mongodb.morphia.annotations.Embedded;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
-
-import java.time.Clock;
 import java.time.LocalTime;
-import java.time.ZoneId;
-import java.util.UUID;
 
 @Embedded
 public class Offers {
@@ -19,7 +15,7 @@ public class Offers {
 	private String message;
 	private Double offerAmount;
 
-	public Offers(String name, Email email, PhoneNumber phoneNumber, String message, Double offerAmount) throws ErrorException {
+	public Offers(String name, Email email, PhoneNumber phoneNumber, String message, Double offerAmount, String id, LocalTime createdDate) throws ErrorException {
 		if (message.length() < 100){
 			throw new ErrorException(ErrorCode.INVALID_PARAMETER);
 		}
@@ -28,8 +24,8 @@ public class Offers {
 		this.phoneNumber = phoneNumber;
 		this.message = message;
 		this.offerAmount = offerAmount;
-		this.id = UUID.randomUUID().toString();
-		this.createdDate = LocalTime.now(Clock.system(ZoneId.of("-05:00")));
+		this.id = id;
+		this.createdDate = createdDate;
 	}
 
 	public Offers(Double offerAmount) {

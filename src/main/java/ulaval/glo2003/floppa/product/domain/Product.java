@@ -6,9 +6,7 @@ import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.offers.domain.Offers;
 
-import java.time.Clock;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.*;
 
 @Embedded
@@ -23,15 +21,15 @@ public class Product {
 	@Embedded
 	private List<Offers> offers;
 
-	public Product(String title, String description, Double suggestedPrice, List<ProductCategory> categories) throws ErrorException {
+	public Product(String title, String description, Double suggestedPrice, List<ProductCategory> categories, String id, LocalTime createdDate) throws ErrorException {
 		this.validatePrice(suggestedPrice);
 		this.title = title;
 		this.description = description;
 		this.suggestedPrice = suggestedPrice;
 		this.categories = categories;
 		this.offers = new ArrayList<>();
-		this.id = UUID.randomUUID().toString();
-		this.createdDate = LocalTime.now(Clock.system(ZoneId.of("-05:00")));
+		this.id = id;
+		this.createdDate = createdDate;
 	}
 
 	private void validatePrice(Double suggestedPrice) throws ErrorException {

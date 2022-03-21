@@ -1,28 +1,28 @@
 package ulaval.glo2003.floppa.seller.api.message;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ulaval.glo2003.floppa.product.api.message.ProductDtoResponse;
+import ulaval.glo2003.floppa.product.api.message.ProductResponse;
 
 import java.time.LocalTime;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SellerDtoResponse {
+public class SellerResponse {
 	private String id;
 	private String name;
 	private LocalTime createdAt;
 	private String bio;
-	private List<ProductDtoResponse> products;
+	private List<ProductResponse> products;
 
-	public SellerDtoResponse() {
+	public SellerResponse() {
 	}
 
-	public SellerDtoResponse(String id, String name) {
+	public SellerResponse(String id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
-	public SellerDtoResponse(String id, String name, LocalTime createdAt, String bio, List<ProductDtoResponse> products) {
+	public SellerResponse(String id, String name, LocalTime createdAt, String bio, List<ProductResponse> products) {
 		this.id = id;
 		this.name = name;
 		this.createdAt = createdAt;
@@ -46,7 +46,7 @@ public class SellerDtoResponse {
 		return bio;
 	}
 
-	public List<ProductDtoResponse> getProducts() {
+	public List<ProductResponse> getProducts() {
 		return products;
 	}
 

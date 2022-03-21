@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.floppa.ServerTestIT;
-import ulaval.glo2003.floppa.product.api.message.ProductDtoResponse;
-import ulaval.glo2003.floppa.seller.api.message.SellerDtoResponse;
+import ulaval.glo2003.floppa.product.api.message.ProductResponse;
+import ulaval.glo2003.floppa.seller.api.message.SellerResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,35 +48,35 @@ public class ProductResourceGetITTest extends ServerTestIT {
 
 	@Test
 	void givenProduct_whenRetrieveProduct_thenProductDtoResponse() throws JsonProcessingException {
-		ProductDtoResponse productDtoResponse =retrieveProduct(productLocation).as(ProductDtoResponse.class);
+		ProductResponse productResponse =retrieveProduct(productLocation).as(ProductResponse.class);
 
-		Assertions.assertEquals(savedTitle, productDtoResponse.getTitle());
-		Assertions.assertEquals(savedDescription, productDtoResponse.getDescription());
-		Assertions.assertEquals(savedSuggestedPrice, productDtoResponse.getSuggestedPrice());
-		Assertions.assertEquals(savedCategories.stream().map(String::toLowerCase).collect(Collectors.toList()), productDtoResponse.getCategories());
-		Assertions.assertEquals(savedSellerId, productDtoResponse.getSeller().getId());
-		Assertions.assertEquals(0, productDtoResponse.getOffers().getCount());
+		Assertions.assertEquals(savedTitle, productResponse.getTitle());
+		Assertions.assertEquals(savedDescription, productResponse.getDescription());
+		Assertions.assertEquals(savedSuggestedPrice, productResponse.getSuggestedPrice());
+		Assertions.assertEquals(savedCategories.stream().map(String::toLowerCase).collect(Collectors.toList()), productResponse.getCategories());
+		Assertions.assertEquals(savedSellerId, productResponse.getSeller().getId());
+		Assertions.assertEquals(0, productResponse.getOffers().getCount());
 	}
 
 	@Test
 	void givenProduct_whenRetrieveSeller_thenListProductDtoResponse() throws JsonProcessingException {
-		List<ProductDtoResponse> productDtoResponses = retrieveSeller(savedSellerId).as(SellerDtoResponse.class).getProducts();
+		List<ProductResponse> productRespons = retrieveSeller(savedSellerId).as(SellerResponse.class).getProducts();
 
-		ProductDtoResponse productDtoResponse = productDtoResponses.stream().findFirst().orElse(new ProductDtoResponse());
-		Assertions.assertEquals(savedTitle, productDtoResponse.getTitle());
-		Assertions.assertEquals(savedDescription, productDtoResponse.getDescription());
-		Assertions.assertEquals(savedSuggestedPrice, productDtoResponse.getSuggestedPrice());
-		Assertions.assertEquals(savedCategories.stream().map(String::toLowerCase).collect(Collectors.toList()), productDtoResponse.getCategories());
-		Assertions.assertEquals(0, productDtoResponse.getOffers().getCount());
+		ProductResponse productResponse = productRespons.stream().findFirst().orElse(new ProductResponse());
+		Assertions.assertEquals(savedTitle, productResponse.getTitle());
+		Assertions.assertEquals(savedDescription, productResponse.getDescription());
+		Assertions.assertEquals(savedSuggestedPrice, productResponse.getSuggestedPrice());
+		Assertions.assertEquals(savedCategories.stream().map(String::toLowerCase).collect(Collectors.toList()), productResponse.getCategories());
+		Assertions.assertEquals(0, productResponse.getOffers().getCount());
 	}
 
 	@Test
 	void givenManyProducts_whenRetrieveSeller_thenAsManyProductIsRetrieved() throws JsonProcessingException {
 		createProduct(savedTitle, savedDescription, savedSuggestedPrice, savedCategories, savedSellerId);
 
-		List<ProductDtoResponse> productDtoResponses = retrieveSeller(savedSellerId).as(SellerDtoResponse.class).getProducts();
+		List<ProductResponse> productRespons = retrieveSeller(savedSellerId).as(SellerResponse.class).getProducts();
 
-		Assertions.assertEquals(2, productDtoResponses.size());
+		Assertions.assertEquals(2, productRespons.size());
 	}
 
 

@@ -10,7 +10,6 @@ import ulaval.glo2003.floppa.product.domain.Product;
 import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 @Entity
 public class Seller {
     private final String name;
@@ -22,7 +21,7 @@ public class Seller {
     @Embedded
     private final List<Product> products;
 
-    public Seller(String name, String bio, LocalDate birthDate) throws ErrorException{
+    public Seller(String name, String bio, LocalDate birthDate, String id, LocalTime createdDate) throws ErrorException{
         this.birthDate = birthDate;
         if (this.computeAge() < 18){
             throw new ErrorException(ErrorCode.INVALID_PARAMETER);
@@ -30,9 +29,9 @@ public class Seller {
         }
         this.name = name;
         this.bio = bio;
-        this.createdDate = LocalTime.now(Clock.system(ZoneId.of("-05:00")));
+        this.createdDate = createdDate;
         this.products = new ArrayList<>();
-        this.id = UUID.randomUUID().toString();
+        this.id = id;
     }
 
 
