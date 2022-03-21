@@ -37,10 +37,12 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         env:
           branch: ${{ github.ref_name }}
+        run: echo "Set up to ${{ env.branch }}"
       - name: Setup branch (manual)
         if: ${{ github.event_name != 'push' }}
         env:
           branch: ${{ github.event.inputs.branch }}
+        run: echo "Set up to ${{ env.branch }}"
       - name: Checkout Repository
         uses: actions/checkout@v3
       - name: Deploy to Heroku
