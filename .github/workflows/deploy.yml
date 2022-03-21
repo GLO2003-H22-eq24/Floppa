@@ -30,7 +30,7 @@ jobs:
       - name: Run tests
         run: mvn -B test checkstyle:checkstyle
   deploy:
-    if: ${{ always() && contains(join(needs.test.result, ','), 'success') }}
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     runs-on: ubuntu-latest
     steps:
       - name: Setup branch (main)
