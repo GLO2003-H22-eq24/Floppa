@@ -10,7 +10,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 public class MongoClientConnection {
 
     private MongoClient mongoClient;
-    private static final String connection = "mongodb+srv://floppa-api:XxIDt04RxHTps0YZ@floppa.3oieg.mongodb.net/Floppa?retryWrites=true&w=majority";
+    private static final String CONNECTION_URL= "mongodb+srv://floppa-api:XxIDt04RxHTps0YZ@floppa.3oieg.mongodb.net/Floppa?retryWrites=true&w=majority";
     private MongoDatabase database;
 
     public MongoClient MongoClientConnection() {
