@@ -3,7 +3,7 @@ import jakarta.json.bind.annotation.JsonbProperty;
 
 import java.util.List;
 
-public class ProductCreationDtoRequest {
+public class ProductCreationRequest {
 	private String title;
 	private String description;
 	private Double suggestedPrice;

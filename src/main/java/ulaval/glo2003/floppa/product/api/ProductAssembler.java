@@ -4,12 +4,13 @@ import org.javatuples.Pair;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.offers.api.OffersAssembler;
-import ulaval.glo2003.floppa.offers.api.message.OffersDtoResponse;
-import ulaval.glo2003.floppa.product.api.message.ProductCreationDtoRequest;
-import ulaval.glo2003.floppa.product.api.message.ProductDtoResponse;
+import ulaval.glo2003.floppa.offers.api.message.OffersResponse;
+import ulaval.glo2003.floppa.product.api.message.ProductCreationRequest;
+import ulaval.glo2003.floppa.product.api.message.ProductResponse;
+import ulaval.glo2003.floppa.product.applicative.ProductDto;
 import ulaval.glo2003.floppa.product.domain.Product;
 import ulaval.glo2003.floppa.product.domain.ProductCategory;
-import ulaval.glo2003.floppa.seller.api.message.SellerDtoResponse;
+import ulaval.glo2003.floppa.seller.api.message.SellerResponse;
 import ulaval.glo2003.floppa.seller.domain.Seller;
 
 import java.math.BigDecimal;
@@ -27,46 +28,48 @@ public class ProductAssembler {
 		this.offersAssembler = offersAssembler;
 	}
 
-	public ProductDtoResponse toDto(Product product){
-		OffersDtoResponse offersDtoResponse = offersAssembler.toDto(product);
+	public ProductResponse toResponse(Product product){
+		OffersResponse offersResponse = offersAssembler.toResponse(product);
 		Double amount = BigDecimal.valueOf(product.getSuggestedPrice()).setScale(2, RoundingMode.HALF_UP).doubleValue();
 		List<String> productCategories = product.getCategories().stream().map(ProductCategory::toValueLowerCase).collect(Collectors.toList());
-		return new ProductDtoResponse(product.getId(), product.getCreatedDate(),
-				product.getTitle(), product.getDescription(), amount, offersDtoResponse, productCategories);
+		return new ProductResponse(product.getId(), product.getCreatedDate(),
+				product.getTitle(), product.getDescription(), amount, offersResponse, productCategories);
 	}
 
-	public ProductDtoResponse toDto(Product product, Seller seller) {
-		ProductDtoResponse productDtoResponse = this.toDto(product);
-		SellerDtoResponse sellerDtoResponse = new SellerDtoResponse(seller.getId(), seller.getName());
-		productDtoResponse.setSellerDtoResponse(sellerDtoResponse);
-		return productDtoResponse;
+	public ProductResponse toResponse(Product product, Seller seller) {
+		ProductResponse productResponse = this.toResponse(product);
+		SellerResponse sellerResponse = new SellerResponse(seller.getId(), seller.getName());
+		productResponse.setSellerDtoResponse(sellerResponse);
+		return productResponse;
 	}
 
-	public List<ProductDtoResponse> toDto(List<Pair<Seller, Product>> pairsSellerProduct) {
-		return pairsSellerProduct.stream().map(pairSellerProduct -> this.toDto(pairSellerProduct.getValue1(), pairSellerProduct.getValue0())).collect(Collectors.toList());
+	public List<ProductResponse> toResponse(List<Pair<Seller, Product>> pairsSellerProduct) {
+		return pairsSellerProduct.stream().map(pairSellerProduct -> this.toResponse(pairSellerProduct.getValue1(), pairSellerProduct.getValue0())).collect(Collectors.toList());
 	}
 
-	public Product fromDto(ProductCreationDtoRequest productCreationDtoRequest) throws ErrorException {
+	public ProductDto toDto(ProductCreationRequest productCreationRequest) throws ErrorException {
+		assertNotNullParams(productCreationRequest);
+		assertNotBlankParams(productCreationRequest);
+		List<ProductCategory> productCategories = new ArrayList<>();
+		extractProductCategories(productCreationRequest, productCategories);
+		return new ProductDto(productCreationRequest.getTitle(), productCreationRequest.getDescription(), productCreationRequest.getSuggestedPrice(), productCategories);
+	}
 
-		// Vérifie que les paramètres nécessaires sont présent
-		if (isNull(productCreationDtoRequest.getTitle()) || isNull(productCreationDtoRequest.getDescription())  || isNull(productCreationDtoRequest.getSuggestedPrice()) ) {
-			throw new ErrorException(ErrorCode.MISSING_PARAMETER);
-		}
-		// Vérifie que les paramètres nécessaires contiennent une valeur
-		if (productCreationDtoRequest.getTitle().isBlank() || productCreationDtoRequest.getDescription().isBlank() ) {
+	private void assertNotBlankParams(ProductCreationRequest productCreationRequest) throws ErrorException {
+		if (productCreationRequest.getTitle().isBlank() || productCreationRequest.getDescription().isBlank() ) {
 			throw new ErrorException(ErrorCode.INVALID_PARAMETER);
 		}
-
-		List<ProductCategory> productCategories = new ArrayList<>();
-		extractProductCategories(productCreationDtoRequest, productCategories);
-
-
-		return new Product(productCreationDtoRequest.getTitle(), productCreationDtoRequest.getDescription(), productCreationDtoRequest.getSuggestedPrice(), productCategories);
 	}
 
-	private void extractProductCategories(ProductCreationDtoRequest productCreationDtoRequest, List<ProductCategory> productCategories) throws ErrorException {
-		if (!isNull(productCreationDtoRequest.getCategories())){
-			for (String categoryString : productCreationDtoRequest.getCategories()) {
+	private void assertNotNullParams(ProductCreationRequest productCreationRequest) throws ErrorException {
+		if (isNull(productCreationRequest.getTitle()) || isNull(productCreationRequest.getDescription())  || isNull(productCreationRequest.getSuggestedPrice()) ) {
+			throw new ErrorException(ErrorCode.MISSING_PARAMETER);
+		}
+	}
+
+	private void extractProductCategories(ProductCreationRequest productCreationRequest, List<ProductCategory> productCategories) throws ErrorException {
+		if (!isNull(productCreationRequest.getCategories())){
+			for (String categoryString : productCreationRequest.getCategories()) {
 				productCategories.add(ProductCategory.toEnum(categoryString));
 			}
 		}

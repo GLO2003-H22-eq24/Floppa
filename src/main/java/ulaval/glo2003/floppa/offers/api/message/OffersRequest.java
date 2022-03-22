@@ -1,6 +1,6 @@
 package ulaval.glo2003.floppa.offers.api.message;
 
-public class OffersDtoRequest {
+public class OffersRequest {
 	private String name;
 	private String email;
 	private String phoneNumber;

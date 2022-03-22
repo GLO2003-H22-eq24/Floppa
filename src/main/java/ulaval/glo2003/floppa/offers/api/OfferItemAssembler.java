@@ -14,12 +14,12 @@ public class OfferItemAssembler {
 		this.buyerAssembler = buyerAssembler;
 	}
 
-	public List<OfferItemResponse> toDto(List<Offers> offers) {
-		return offers.stream().map(this::toDto).collect(Collectors.toList());
+	public List<OfferItemResponse> toResponse(List<Offers> offers) {
+		return offers.stream().map(this::toResponse).collect(Collectors.toList());
 	}
 
-	public OfferItemResponse toDto(Offers offer) {
-		BuyerResponse buyer = buyerAssembler.toDto(offer);
+	public OfferItemResponse toResponse(Offers offer) {
+		BuyerResponse buyer = buyerAssembler.toResponse(offer);
 		return new OfferItemResponse(offer.getId(), offer.getCreatedDate(), offer.getOfferAmount(), offer.getMessage(), buyer);
 	}
 }
