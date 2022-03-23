@@ -1,8 +1,8 @@
 package ulaval.glo2003.floppa.seller.domain;
 
-import org.mongodb.morphia.annotations.Embedded;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
+import dev.morphia.annotations.Embedded;
+import dev.morphia.annotations.Entity;
+import dev.morphia.annotations.Id;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.product.domain.Product;
@@ -18,7 +18,6 @@ public class Seller {
     @Id
     private final String id;
     private final LocalTime createdDate;
-    @Embedded
     private final List<Product> products;
 
     public Seller(String name, String bio, LocalDate birthDate, String id, LocalTime createdDate) throws ErrorException{

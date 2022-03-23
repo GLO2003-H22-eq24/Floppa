@@ -1,7 +1,7 @@
 package ulaval.glo2003;
 
 import org.glassfish.grizzly.http.server.HttpServer;
-import ulaval.glo2003.floppa.app.api.Environnement;
+import ulaval.glo2003.floppa.app.repository.mongo.Environnement;
 import ulaval.glo2003.floppa.app.api.HttpServerConfig;
 import ulaval.glo2003.floppa.app.api.HttpServerFactory;
 

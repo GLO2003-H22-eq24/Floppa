@@ -1,9 +1,13 @@
 package ulaval.glo2003.floppa.app.api;
 
+import dev.morphia.Datastore;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
 import ulaval.glo2003.floppa.app.api.mapper.ErrorExceptionAssembler;
+import ulaval.glo2003.floppa.app.repository.RepositoryFactory;
+import ulaval.glo2003.floppa.app.repository.mongo.DataStoreFactory;
+import ulaval.glo2003.floppa.app.repository.mongo.Environnement;
 import ulaval.glo2003.floppa.offers.api.BuyerAssembler;
 import ulaval.glo2003.floppa.offers.api.OfferItemAssembler;
 import ulaval.glo2003.floppa.offers.api.OffersAssembler;
@@ -20,7 +24,9 @@ import ulaval.glo2003.floppa.seller.domain.SellerFactory;
 import ulaval.glo2003.floppa.seller.domain.SellerRepository;
 import ulaval.glo2003.floppa.seller.repository.memory.ConditionSellerFactoryInMemory;
 import ulaval.glo2003.floppa.seller.repository.memory.SellerRepositoryInMemory;
+import ulaval.glo2003.floppa.seller.repository.mongo.SellerRepositoryMongo;
 
+import java.net.ConnectException;
 import java.util.HashMap;
 
 public class HttpServerConfig extends ResourceConfig {
@@ -28,16 +34,15 @@ public class HttpServerConfig extends ResourceConfig {
 	private static final String APP_NAME = "FLOPPA";
 
 	public HttpServerConfig(Environnement environnement) {
-		//TODO utiliser la var enviornnement pour instancier la bonne conn BD
 		this.packages(SRC_PACKAGE);
 		this.property(ServerProperties.APPLICATION_NAME, APP_NAME);
-		this.registerBinders();
+		this.registerBinders(environnement);
 		this.getResources();
 	}
 
-	private void registerBinders() {
-		SellerRepository sellerRepository = new SellerRepositoryInMemory(new HashMap<>(),
-				new ConditionSellerFactoryInMemory(new ConditionProductFactoryInMemory()), new ConditionProductFactoryInMemory());
+	private void registerBinders(Environnement environnement) {
+		SellerRepository sellerRepository = new RepositoryFactory().createRepository(SRC_PACKAGE, environnement);
+
 		bindRepository(sellerRepository);
 		bindService(sellerRepository);
 		bindAssembler();
