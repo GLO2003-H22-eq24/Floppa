@@ -4,7 +4,7 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import ulaval.glo2003.FloppaRunnable;
-import ulaval.glo2003.floppa.app.api.Environnement;
+import ulaval.glo2003.floppa.app.repository.mongo.Environnement;
 
 public abstract class ServerTestIT {
 	private HttpServer server;
