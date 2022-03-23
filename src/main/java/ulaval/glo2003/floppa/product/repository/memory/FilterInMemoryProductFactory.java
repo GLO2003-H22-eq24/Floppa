@@ -1,4 +1,4 @@
-package ulaval.glo2003.floppa.product.repository;
+package ulaval.glo2003.floppa.product.repository.memory;
 
 import org.apache.commons.lang3.StringUtils;
 import ulaval.glo2003.floppa.product.domain.ConditionProductDto;
@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class ConditionProductFactoryInMemory {
+public class FilterInMemoryProductFactory {
 
 	public List<Function<Product, Boolean>> createConditionsProductFunction(ConditionProductDto conditionProductDto) {
 		List<Function<Product, Boolean>> productConditions = new ArrayList<>();

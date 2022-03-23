@@ -1,12 +1,10 @@
 package ulaval.glo2003.floppa.app.api;
 
-import dev.morphia.Datastore;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
 import ulaval.glo2003.floppa.app.api.mapper.ErrorExceptionAssembler;
 import ulaval.glo2003.floppa.app.repository.RepositoryFactory;
-import ulaval.glo2003.floppa.app.repository.mongo.DataStoreFactory;
 import ulaval.glo2003.floppa.app.repository.mongo.Environnement;
 import ulaval.glo2003.floppa.offers.api.BuyerAssembler;
 import ulaval.glo2003.floppa.offers.api.OfferItemAssembler;
@@ -16,18 +14,11 @@ import ulaval.glo2003.floppa.offers.domain.OffersFactory;
 import ulaval.glo2003.floppa.product.api.ProductAssembler;
 import ulaval.glo2003.floppa.product.applicative.ProductService;
 import ulaval.glo2003.floppa.product.domain.ProductFactory;
-import ulaval.glo2003.floppa.product.repository.ConditionProductFactoryInMemory;
 import ulaval.glo2003.floppa.seller.api.SellerAssembler;
 import ulaval.glo2003.floppa.seller.applicative.SellerService;
 import ulaval.glo2003.floppa.seller.domain.ConditionSellerAssembleur;
 import ulaval.glo2003.floppa.seller.domain.SellerFactory;
 import ulaval.glo2003.floppa.seller.domain.SellerRepository;
-import ulaval.glo2003.floppa.seller.repository.memory.ConditionSellerFactoryInMemory;
-import ulaval.glo2003.floppa.seller.repository.memory.SellerRepositoryInMemory;
-import ulaval.glo2003.floppa.seller.repository.mongo.SellerRepositoryMongo;
-
-import java.net.ConnectException;
-import java.util.HashMap;
 
 public class HttpServerConfig extends ResourceConfig {
 	private static final String SRC_PACKAGE = "ulaval.glo2003.floppa";

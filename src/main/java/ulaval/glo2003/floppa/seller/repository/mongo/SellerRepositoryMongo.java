@@ -1,6 +1,9 @@
 package ulaval.glo2003.floppa.seller.repository.mongo;
 
 import dev.morphia.Datastore;
+import dev.morphia.query.Query;
+import dev.morphia.query.experimental.filters.Filter;
+import dev.morphia.query.experimental.filters.Filters;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.product.domain.Product;
 import ulaval.glo2003.floppa.seller.domain.ConditionSellerDto;
@@ -23,12 +26,13 @@ public class SellerRepositoryMongo implements SellerRepository {
 
 	@Override
 	public Seller retrieveSeller(String sellerId) throws ErrorException {
-		return null; //TODO
+		return datastore.find(Seller.class)
+				.filter(Filters.eq("id", sellerId)).first();
 	}
 
 	@Override
 	public List<Seller> retrieveSeller(ConditionSellerDto sellerConditions) {
-		return null;//TODO
+		return null;
 	}
 
 	@Override

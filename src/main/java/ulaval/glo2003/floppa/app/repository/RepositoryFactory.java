@@ -4,9 +4,9 @@ import dev.morphia.Datastore;
 import org.jetbrains.annotations.NotNull;
 import ulaval.glo2003.floppa.app.repository.mongo.DataStoreFactory;
 import ulaval.glo2003.floppa.app.repository.mongo.Environnement;
-import ulaval.glo2003.floppa.product.repository.ConditionProductFactoryInMemory;
+import ulaval.glo2003.floppa.product.repository.memory.FilterInMemoryProductFactory;
 import ulaval.glo2003.floppa.seller.domain.SellerRepository;
-import ulaval.glo2003.floppa.seller.repository.memory.ConditionSellerFactoryInMemory;
+import ulaval.glo2003.floppa.seller.repository.memory.FilterInMemorySellerFactory;
 import ulaval.glo2003.floppa.seller.repository.memory.SellerRepositoryInMemory;
 import ulaval.glo2003.floppa.seller.repository.mongo.SellerRepositoryMongo;
 
@@ -22,7 +22,7 @@ public class RepositoryFactory {
 			throw new ConnectException("DELETE ME, IM ONLY HERE TO F UP. Le temps d'avoir fait le repo");
 		} catch (ConnectException e) {
 			sellerRepository = new SellerRepositoryInMemory(new HashMap<>(),
-					new ConditionSellerFactoryInMemory(new ConditionProductFactoryInMemory()), new ConditionProductFactoryInMemory());
+					new FilterInMemorySellerFactory(new FilterInMemoryProductFactory()), new FilterInMemoryProductFactory());
 		}
 		return sellerRepository;
 	}
