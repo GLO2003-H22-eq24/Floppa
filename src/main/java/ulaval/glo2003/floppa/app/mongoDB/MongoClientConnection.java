@@ -9,11 +9,11 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class MongoClientConnection {
 
-    private MongoClient mongoClient;
+   
     private static final String CONNECTION_URL= "mongodb+srv://floppa-api:XxIDt04RxHTps0YZ@floppa.3oieg.mongodb.net/Floppa?retryWrites=true&w=majority";
     private MongoDatabase database;
 
-    public MongoClient MongoClientConnection() {
+    private MongoClient MongoClientConnection() {
 
         ConnectionString connectionString = new ConnectionString(CONNECTION_URL);
         MongoClientSettings settings = MongoClientSettings.builder()
@@ -27,14 +27,14 @@ public class MongoClientConnection {
                         .version(ServerApiVersion.V1)
                         .build())
                 .build();
-        mongoClient = MongoClients.create(settings);
+        MongoClient mongoClient = MongoClients.create(settings);
         return mongoClient;
 
         //MongoClientURI mongoUrl = new MongoClientURI(connection);
 
     }
 
-    public MongoDatabase getDatabase() {
+    public MongoDatabase createDatabase() {
         return mongoClient.getDatabase("Floppa");
     }
 }
