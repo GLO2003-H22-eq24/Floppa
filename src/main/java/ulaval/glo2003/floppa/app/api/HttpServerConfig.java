@@ -5,6 +5,7 @@ import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
 import ulaval.glo2003.floppa.app.api.mapper.ErrorExceptionAssembler;
+import ulaval.glo2003.floppa.app.repository.RepositoryFactory;
 import ulaval.glo2003.floppa.app.repository.mongo.DataStoreFactory;
 import ulaval.glo2003.floppa.app.repository.mongo.Environnement;
 import ulaval.glo2003.floppa.offers.api.BuyerAssembler;
@@ -25,6 +26,7 @@ import ulaval.glo2003.floppa.seller.repository.memory.ConditionSellerFactoryInMe
 import ulaval.glo2003.floppa.seller.repository.memory.SellerRepositoryInMemory;
 import ulaval.glo2003.floppa.seller.repository.mongo.SellerRepositoryMongo;
 
+import java.net.ConnectException;
 import java.util.HashMap;
 
 public class HttpServerConfig extends ResourceConfig {
@@ -39,13 +41,8 @@ public class HttpServerConfig extends ResourceConfig {
 	}
 
 	private void registerBinders(Environnement environnement) {
-		Datastore datastore = new DataStoreFactory().createDataStore(environnement);
-		datastore.getMapper().mapPackage(SRC_PACKAGE);
-		datastore.ensureIndexes();
-		SellerRepository sellerRepositoryDB = new SellerRepositoryMongo(datastore);
-		//TODO: brancher la BD dans la vriable sellerRepository
-		SellerRepository sellerRepository = new SellerRepositoryInMemory(new HashMap<>(),
-				new ConditionSellerFactoryInMemory(new ConditionProductFactoryInMemory()), new ConditionProductFactoryInMemory());
+		SellerRepository sellerRepository = new RepositoryFactory().createRepository(SRC_PACKAGE, environnement);
+
 		bindRepository(sellerRepository);
 		bindService(sellerRepository);
 		bindAssembler();

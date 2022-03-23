@@ -1,11 +1,11 @@
 package ulaval.glo2003.floppa.offers.domain;
 
-import org.mongodb.morphia.annotations.Embedded;
+import dev.morphia.annotations.Entity;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import java.time.LocalTime;
 
-@Embedded
+@Entity
 public class Offers {
 	private LocalTime createdDate;
 	private String id;

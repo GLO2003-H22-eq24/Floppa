@@ -1,6 +1,5 @@
 package ulaval.glo2003.floppa.seller.repository.mongo;
 
-import com.mongodb.client.MongoDatabase;
 import dev.morphia.Datastore;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.product.domain.Product;
