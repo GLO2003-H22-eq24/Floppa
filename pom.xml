@@ -12,6 +12,8 @@
     <properties>
         <jersey.version>3.0.2</jersey.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <port>8080</port>
+        <env>dev</env>
     </properties>
     <profiles>
         <profile>
@@ -169,6 +171,10 @@
                 </executions>
                 <configuration>
                     <mainClass>ulaval.glo2003.FloppaRunnable</mainClass>
+                    <arguments>
+                        <argument>${port}</argument>
+                        <argument>${env}</argument>
+                    </arguments>
                 </configuration>
             </plugin>
         </plugins>

@@ -27,7 +27,8 @@ public class HttpServerConfig extends ResourceConfig {
 	private static final String SRC_PACKAGE = "ulaval.glo2003.floppa";
 	private static final String APP_NAME = "FLOPPA";
 
-	public HttpServerConfig() {
+	public HttpServerConfig(Environnement environnement) {
+		//TODO utiliser la var enviornnement pour instancier la bonne conn BD
 		this.packages(SRC_PACKAGE);
 		this.property(ServerProperties.APPLICATION_NAME, APP_NAME);
 		this.registerBinders();

@@ -1,11 +1,11 @@
 # Floppa
 
-Le meilleur site de vente anonyme au Québec!
+Le meilleur site de vente anonyme au Québec?
 
 ## Requis
 
-- Java 11
-- Maven
+- Java 11 dans le path de votre OS
+- Maven dans le path de votre OS
 
 ## Setup
 
@@ -16,23 +16,25 @@ mvn clean install
 ```
 
 ### Exécution
+#### Default
 ```
 mvn exec:java
 ```
+#### Args
+- Changer le port via -Dport. Default = 8080
+- Changer l'environnement de la BD via Denv (stg ou prod). Default = stg
+```
+mvn exec:java -Dport=8080 -Denv=stg
+```
 
 #### Comment utiliser
-- Aller sur l'adresse "http://localhost:8080/"
+- Aller sur l'adresse "http://localhost:{port}/" 
 
 ## Tests d'intégration (TestIT)
-
 ```
 mvn verify -PTestIT
 ```
 
-
-##Wiki
-
-- POJO -> json & json -> POJO ==> https://eclipse-ee4j.github.io/jsonb-api/docs/user-guide.html
-- injecter des dépendances au constructeur des resources https://riptutorial.com/jersey/example/23632/basic-dependency-injection-using-jersey-s-hk2
 ##Archi
-- separer par topic du domaine d'affaire -> chaque topic a son "api", son "domaine", sa "persistance" 
+- separer par topic du domaine d'affaire
+- chaque topic a son "api", son "domaine", sa "persistance"
