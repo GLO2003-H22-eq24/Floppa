@@ -10,6 +10,7 @@ import ulaval.glo2003.floppa.product.api.message.ProductResponse;
 
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static ulaval.glo2003.floppa.product.api.ProductResourceCreateITTest.createProduct;
 import static ulaval.glo2003.floppa.seller.api.SellerResourceCreateITTest.SaveSeller;
@@ -66,6 +67,25 @@ public class ProductResourceGetFilterITTest extends ServerTestIT {
 	@Test
 	void givenNoFilters_whenRetrieveProductWithFilter_thenStatus200() throws JsonProcessingException {
 		retrieveProductWithFilter(null, null, null, null, null).then().assertThat().statusCode(200);
+	}
+
+	@Test
+	void givenNonExistingCategory_whenRetrieveProductWithFilter_thenNoProduct() throws JsonProcessingException {
+		createProduct(savedTitle, savedDescription, savedPrice, List.of("BEAUTY"), savedSellerId);
+		ProductResponse[] productResponse = retrieveProductWithFilter(null, null, List.of("ELECTRONICS"), null, null).as(ProductResponse[].class);
+
+		Assertions.assertEquals(0,Arrays.stream(productResponse).count());
+	}
+
+	@Test
+	void givenSavedCategory_whenRetrieveProductWithFilter_thenProductWithSavedCategory() throws JsonProcessingException {
+		List<String> savedNewCategories = List.of("beauty");
+		createProduct(savedTitle, savedDescription, savedPrice, savedNewCategories , savedSellerId);
+		ProductResponse[] productResponse = retrieveProductWithFilter(null, null, savedNewCategories, null, null).as(ProductResponse[].class);
+
+		for (ProductResponse product : productResponse) {
+			Assertions.assertTrue(product.getCategories().contains("beauty"));
+		}
 	}
 
 	@Test
