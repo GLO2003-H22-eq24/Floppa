@@ -15,7 +15,7 @@ public class MongoClientConnection {
 
     public MongoClient MongoClientConnection() {
 
-        ConnectionString connectionString = new ConnectionString(connection);
+        ConnectionString connectionString = new ConnectionString(CONNECTION_URL);
         MongoClientSettings settings = MongoClientSettings.builder()
                 .applyConnectionString(connectionString)
                 .applyToSocketSettings(builder -> {
