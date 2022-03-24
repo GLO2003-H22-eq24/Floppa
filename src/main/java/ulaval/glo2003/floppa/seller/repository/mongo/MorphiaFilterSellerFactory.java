@@ -26,15 +26,15 @@ public class MorphiaFilterSellerFactory {
 	public List<Filter> createConditionsSellerFunction(ConditionSellerDto conditionSellerDto){
 		List<Filter> sellerConditions = new ArrayList<>();
 		this.addSellerIdCondition(conditionSellerDto.getSellerId(), sellerConditions);
-		this.addProductFilterCondition(sellerConditions, conditionSellerDto.getConditionProductDto());
+		this.addProductFilterCondition(conditionSellerDto.getConditionProductDto(), sellerConditions);
 		return sellerConditions;
 	}
 
 	private void addSellerIdCondition(String sellerId, List<Filter> sellerConditions) {
-		Optional.ofNullable(sellerId).ifPresent(id -> sellerConditions.add(Filters.eq("id", sellerId)));
+		Optional.ofNullable(sellerId).ifPresent(id -> sellerConditions.add(Filters.eq("_id", sellerId)));
 	}
 
-	private void addProductFilterCondition(List<Filter> sellerConditions, ConditionProductDto conditionProductDto){
+	private void addProductFilterCondition(ConditionProductDto conditionProductDto, List<Filter> sellerConditions){
 		List<Filter> productConditions = morphiaFilterProductFactory.createConditionsProductFunction(conditionProductDto);
 		sellerConditions.add(Filters.elemMatch("products", productConditions.toArray(Filter[]::new)));
 	}

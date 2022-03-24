@@ -38,11 +38,11 @@ public class Product {
 	}
 
 	public Double computeMeanOffers(){
-		return this.computeNumberOfOffers() != 0 ? this.offers.stream().map(Offers::getOfferAmount).reduce(0.00, Double::sum) / this.computeNumberOfOffers(): null;
+		return this.computeNumberOfOffers() != 0 ? getOffers().stream().map(Offers::getOfferAmount).reduce(0.00, Double::sum) / this.computeNumberOfOffers(): null;
 	}
 
 	public int computeNumberOfOffers(){
-		return this.offers.size();
+		return getOffers().size();
 	}
 
 	public String getId() {
@@ -66,10 +66,12 @@ public class Product {
 	}
 
 	public List<Offers> getOffers() {
+		Optional.ofNullable(this.offers).orElseGet(() -> this.offers = new ArrayList<>());
 		return offers;
 	}
 
 	public List<ProductCategory> getCategories() {
+		Optional.ofNullable(this.categories).orElseGet(() -> this.categories = new ArrayList<>());
 		return categories;
 	}
 
@@ -77,18 +79,18 @@ public class Product {
 		if (offers.getOfferAmount() < this.suggestedPrice){
 			throw new ErrorException(ErrorCode.INVALID_PARAMETER);
 		}
-		this.offers.add(offers);
+		this.getOffers().add(offers);
 	}
 
 	public Double computeMaxOffers() {
-		return offers.stream()
+		return getOffers().stream()
 				.max(Comparator.comparing(Offers::getOfferAmount))
 				.map(Offers::getOfferAmount)
 				.orElse(null);
 	}
 
 	public Double computeMinOffers() {
-		return offers.stream()
+		return getOffers().stream()
 				.min(Comparator.comparing(Offers::getOfferAmount))
 				.map(Offers::getOfferAmount)
 				.orElse(null);

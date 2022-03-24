@@ -1,10 +1,12 @@
-package ulaval.glo2003.floppa.app.repository.mongo;
+package ulaval.glo2003.floppa.app.repository;
 
 import java.util.Arrays;
 
 public enum Environnement {
 	PRODUCTION("prod", "floppa"),
-	STAGING("stg", "floppa");
+	STAGING("stg", "floppa-staging"),
+	LOCAL("local", "floppa-dev"),
+	IN_MEMORY("mem", null);
 
 	private final String arg;
 	private final String databaseName;

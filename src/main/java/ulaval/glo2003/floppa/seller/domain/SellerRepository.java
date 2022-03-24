@@ -16,4 +16,6 @@ public interface SellerRepository {
 	List<Product> findProducts(ConditionSellerDto productConditions);
 
 	void updateProduct(Product product);
+
+	boolean checkPersistenceState();
 }

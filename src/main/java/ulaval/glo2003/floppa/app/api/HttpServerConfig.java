@@ -5,7 +5,9 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
 import ulaval.glo2003.floppa.app.api.mapper.ErrorExceptionAssembler;
 import ulaval.glo2003.floppa.app.repository.RepositoryFactory;
-import ulaval.glo2003.floppa.app.repository.mongo.Environnement;
+import ulaval.glo2003.floppa.app.repository.Environnement;
+import ulaval.glo2003.floppa.app.repository.mongo.DataStoreFactory;
+import ulaval.glo2003.floppa.app.repository.mongo.MongoClientFactory;
 import ulaval.glo2003.floppa.offers.api.BuyerAssembler;
 import ulaval.glo2003.floppa.offers.api.OfferItemAssembler;
 import ulaval.glo2003.floppa.offers.api.OffersAssembler;
@@ -32,7 +34,7 @@ public class HttpServerConfig extends ResourceConfig {
 	}
 
 	private void registerBinders(Environnement environnement) {
-		SellerRepository sellerRepository = new RepositoryFactory().createRepository(SRC_PACKAGE, environnement);
+		SellerRepository sellerRepository = new RepositoryFactory(new MongoClientFactory(), new DataStoreFactory()).createRepository(SRC_PACKAGE, environnement);
 		bindRepository(sellerRepository);
 		bindService(sellerRepository);
 		bindAssembler();

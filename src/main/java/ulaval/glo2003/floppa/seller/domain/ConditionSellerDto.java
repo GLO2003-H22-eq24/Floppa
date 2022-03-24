@@ -11,6 +11,11 @@ public class ConditionSellerDto {
 		this.sellerId = sellerId;
 	}
 
+	public ConditionSellerDto(ConditionProductDto conditionProductDto) {
+		this.conditionProductDto = conditionProductDto;
+		this.sellerId = null;
+	}
+
 	public ConditionProductDto getConditionProductDto() {
 		return conditionProductDto;
 	}

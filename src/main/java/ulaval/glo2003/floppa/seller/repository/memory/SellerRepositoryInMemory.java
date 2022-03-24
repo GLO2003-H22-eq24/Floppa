@@ -63,6 +63,11 @@ public class SellerRepositoryInMemory implements SellerRepository {
         LOGGER.log(Level.INFO, "Updated product with: {0} offers ", product.getOffers().size());
     }
 
+    @Override
+    public boolean checkPersistenceState() {
+        return false; //Never true for in memory (volatile)
+    }
+
     private List<Product> retrieveProductsBySellerConditions(List<Function<Seller, Boolean>> sellerConditions) {
         return this.retrieveSellerBySellerConditions(sellerConditions).stream()
                 .map(Seller::getProducts)

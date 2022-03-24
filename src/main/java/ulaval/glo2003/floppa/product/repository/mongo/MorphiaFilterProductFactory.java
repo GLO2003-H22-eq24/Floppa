@@ -2,18 +2,12 @@ package ulaval.glo2003.floppa.product.repository.mongo;
 
 import dev.morphia.query.experimental.filters.Filter;
 import dev.morphia.query.experimental.filters.Filters;
-import dev.morphia.query.experimental.filters.RegexFilter;
-import org.apache.commons.lang3.StringUtils;
 import ulaval.glo2003.floppa.product.domain.ConditionProductDto;
-import ulaval.glo2003.floppa.product.domain.Product;
 import ulaval.glo2003.floppa.product.domain.ProductCategory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class MorphiaFilterProductFactory {
 
@@ -28,7 +22,7 @@ public class MorphiaFilterProductFactory {
 	}
 
 	private void addProductIdCondition(String id, List<Filter> productConditions) {
-		Optional.ofNullable(id).ifPresent(productId -> productConditions.add(Filters.eq("id", productId)));
+		Optional.ofNullable(id).ifPresent(productId -> productConditions.add(Filters.eq("_id", productId)));
 	}
 
 	private void addProductTitleCondition(String title, List<Filter> productConditions){
