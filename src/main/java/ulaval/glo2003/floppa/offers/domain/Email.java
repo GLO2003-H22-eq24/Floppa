@@ -7,7 +7,7 @@ import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 @Entity
 public class Email {
-	//@Transient
+	@Transient
 	private static final EmailValidator emailValidator = EmailValidator.getInstance();
 	private final String emailString;
 
