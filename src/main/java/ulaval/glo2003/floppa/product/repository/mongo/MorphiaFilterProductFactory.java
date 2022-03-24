@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class MorphiaFilterProductFactory {
 
@@ -31,20 +32,21 @@ public class MorphiaFilterProductFactory {
 	}
 
 	private void addProductTitleCondition(String title, List<Filter> productConditions){
-		Optional.ofNullable(title).ifPresent(val -> productConditions.add(Filters.expr());
+		Optional.ofNullable(title).ifPresent(val -> productConditions.add(Filters.regex("title").pattern(title).caseInsensitive()));
 	}
 
 	private void addCategoriesCondition(List<ProductCategory> productCategories, List<Filter> productConditions) {
 		Optional.ofNullable(productCategories)
 				.filter(categories -> !categories.isEmpty())
-				.ifPresent(val -> productConditions.add(Filters.elemMatch("")));
+				.ifPresent(val -> productConditions
+						.add(Filters.in("offers", productCategories)));
 	}
 
 	private void addMinPriceCondition(Double minPrice, List<Filter> productConditions) {
-		Optional.ofNullable(minPrice).ifPresent(val ->productConditions.add( otherProduct -> minPrice <= otherProduct.getSuggestedPrice()));
+		Optional.ofNullable(minPrice).ifPresent(val ->productConditions.add(Filters.gte("suggestedPrice", minPrice)));
 	}
 
 	private void addMaxPriceCondition(Double maxPrice, List<Filter> productConditions) {
-		Optional.ofNullable(maxPrice).ifPresent(val ->productConditions.add( otherProduct -> maxPrice >= otherProduct.getSuggestedPrice()));
+		Optional.ofNullable(maxPrice).ifPresent(val ->productConditions.add(Filters.lte("suggestedPrice", maxPrice)));
 	}
 }
