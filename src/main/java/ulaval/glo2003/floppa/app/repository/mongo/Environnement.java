@@ -3,8 +3,8 @@ package ulaval.glo2003.floppa.app.repository.mongo;
 import java.util.Arrays;
 
 public enum Environnement {
-	PRODUCTION("prod", "floppa"),
-	STAGING("stg", "floppa");
+	PRODUCTION("prod", "floppa-production"),
+	STAGING("stg", "floppa-staging");
 
 	private final String arg;
 	private final String databaseName;
