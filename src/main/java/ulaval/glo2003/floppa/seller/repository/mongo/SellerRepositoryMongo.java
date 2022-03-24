@@ -6,11 +6,13 @@ import dev.morphia.query.experimental.filters.Filter;
 import dev.morphia.query.experimental.filters.Filters;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.product.domain.Product;
+import ulaval.glo2003.floppa.product.repository.mongo.MorphiaFilterProductFactory;
 import ulaval.glo2003.floppa.seller.domain.ConditionSellerDto;
 import ulaval.glo2003.floppa.seller.domain.Seller;
 import ulaval.glo2003.floppa.seller.domain.SellerRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SellerRepositoryMongo implements SellerRepository {
 
@@ -32,7 +34,8 @@ public class SellerRepositoryMongo implements SellerRepository {
 
 	@Override
 	public List<Seller> retrieveSeller(ConditionSellerDto sellerConditions) {
-		return null;
+		List<Filter> conditionsSellerFunction = new MorphiaFilterSellerFactory(new MorphiaFilterProductFactory()).createConditionsSellerFunction(sellerConditions);
+		return datastore.find(Seller.class).filter(conditionsSellerFunction.toArray(Filter[]::new)).stream().collect(Collectors.toList());
 	}
 
 	@Override

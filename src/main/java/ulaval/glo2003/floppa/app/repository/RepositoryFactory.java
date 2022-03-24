@@ -19,6 +19,7 @@ public class RepositoryFactory {
 		SellerRepository sellerRepository;
 		try {
 			sellerRepository = createMongoRepository(sourcePackage, environnement);
+			//TODO del la ligne
 			throw new ConnectException("DELETE ME, IM ONLY HERE TO F UP. Le temps d'avoir fait le repo");
 		} catch (ConnectException e) {
 			sellerRepository = new SellerRepositoryInMemory(new HashMap<>(),

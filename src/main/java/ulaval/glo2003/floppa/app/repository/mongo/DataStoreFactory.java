@@ -26,6 +26,7 @@ public class DataStoreFactory {
     }
 
     private com.mongodb.client.MongoClient createMongoClient() {
+        //TODO mettre un if pour faire un MongoClients.create() si on est env. TEST
         ConnectionString connectionString = new ConnectionString(CONNECTION_URL);
         MongoClientSettings settings = createMongoClientSettings(connectionString);
         return MongoClients.create(settings);

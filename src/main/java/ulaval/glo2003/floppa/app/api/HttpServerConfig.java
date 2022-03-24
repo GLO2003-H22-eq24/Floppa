@@ -33,7 +33,6 @@ public class HttpServerConfig extends ResourceConfig {
 
 	private void registerBinders(Environnement environnement) {
 		SellerRepository sellerRepository = new RepositoryFactory().createRepository(SRC_PACKAGE, environnement);
-
 		bindRepository(sellerRepository);
 		bindService(sellerRepository);
 		bindAssembler();
