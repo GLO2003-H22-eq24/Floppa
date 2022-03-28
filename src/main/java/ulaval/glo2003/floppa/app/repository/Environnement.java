@@ -5,7 +5,7 @@ import java.util.Arrays;
 public enum Environnement {
 	//TODO DEMANDER AU PROF SI C'EST CORRECT D'AVOIR UNE ENUM ICI avec les config
 	//dépendance avec la couche API + magic string dans le pom
-	PRODUCTION("prod", "floppa"),
+	PRODUCTION("prod", "floppa-production"),
 	STAGING("stg", "floppa-staging"),
 	LOCAL("local", "floppa-dev"),
 	IN_MEMORY("mem", null);
