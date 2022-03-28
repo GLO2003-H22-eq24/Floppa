@@ -12,6 +12,8 @@
     <properties>
         <jersey.version>3.0.2</jersey.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <port>8080</port>
+        <env>stg</env>
     </properties>
     <profiles>
         <profile>
@@ -109,6 +111,21 @@
             <version>3.11</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.javatuples</groupId>
+            <artifactId>javatuples</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.morphia.morphia</groupId>
+            <artifactId>morphia-core</artifactId>
+            <version>2.2.3</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -144,6 +161,10 @@
                 </executions>
                 <configuration>
                     <mainClass>ulaval.glo2003.FloppaRunnable</mainClass>
+                    <arguments>
+                        <argument>${port}</argument>
+                        <argument>${env}</argument>
+                    </arguments>
                 </configuration>
             </plugin>
         </plugins>

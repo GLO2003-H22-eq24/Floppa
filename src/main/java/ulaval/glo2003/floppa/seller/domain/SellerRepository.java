@@ -5,14 +5,17 @@ import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.product.domain.Product;
 
 import java.util.List;
-import java.util.function.Function;
 
 public interface SellerRepository {
 	void saveSeller(Seller seller);
 
 	Seller retrieveSeller(String sellerId) throws ErrorException;
 
-	List<Product> findProducts(List<Function<Seller, Boolean>> sellerConditions, List<Function<Product, Boolean>> productConditions);
+	List<Seller> retrieveSeller(ConditionSellerDto sellerConditions);
 
-	List<Seller> retrieveSeller(List<Function<Seller, Boolean>> sellerConditions);
+	List<Product> findProducts(ConditionSellerDto productConditions);
+
+	void updateProduct(Product product);
+
+	boolean checkPersistenceState();
 }
