@@ -23,12 +23,16 @@ public class MongoClientFactory {
 					new ConnectionString(ATLAS_CONNECTION_URL);
 			MongoClientSettings settings = createMongoClientSettings(connectionString);
 			MongoClient mongoClient = MongoClients.create(settings);
-			mongoClient.listDatabaseNames().first();
+			testConnection(mongoClient);
 			return mongoClient;
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Failed to connect to  DB: {0}", environnement.getDatabaseName());
 			throw new ConnectException("Failed to connect to DB");
 		}
+	}
+
+	private void testConnection(MongoClient mongoClient) {
+		mongoClient.listDatabaseNames().first();
 	}
 
 	private MongoClientSettings createMongoClientSettings(ConnectionString connectionString) {
