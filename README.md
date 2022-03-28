@@ -22,7 +22,11 @@ mvn exec:java
 ```
 #### Args
 - Changer le port via -Dport. Default = 8080
-- Changer l'environnement de la BD via Denv (stg ou prod). Default = stg
+- Changer l'environnement de la BD via Denv (stg ou prod ou mem ou local). Default = stg
+  - stg = mongo staging db
+  - prod = mongo production db
+  - mem = in memory repository
+  - local = mongo local db
 ```
 mvn exec:java -Dport=8080 -Denv=stg
 ```

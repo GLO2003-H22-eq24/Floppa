@@ -44,7 +44,7 @@ public class SellerResource {
     }
 
     @GET
-    @Path("/%40me")
+    @Path("/%40me") // "/@me"
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response retrieveMeSeller(@Context HttpHeaders httpheaders) throws ErrorException {

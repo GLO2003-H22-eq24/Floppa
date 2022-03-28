@@ -36,8 +36,8 @@ public class SellerAssembler {
     }
 
     public SellerResponse toResponse(Seller seller) {
-        List<ProductResponse> productRespons = seller.getProducts().stream().map(productAssembler::toResponse).collect(Collectors.toList());
-        return new SellerResponse(seller.getId(), seller.getName(), seller.getCreatedDate(), seller.getBio(), productRespons);
+        List<ProductResponse> productResponse = seller.getProducts().stream().map(productAssembler::toResponse).collect(Collectors.toList());
+        return new SellerResponse(seller.getId(), seller.getName(), seller.getCreatedDate(), seller.getBio(), productResponse);
     }
 
 

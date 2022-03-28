@@ -1,7 +1,7 @@
 package ulaval.glo2003;
 
 import org.glassfish.grizzly.http.server.HttpServer;
-import ulaval.glo2003.floppa.app.repository.mongo.Environnement;
+import ulaval.glo2003.floppa.app.repository.Environnement;
 import ulaval.glo2003.floppa.app.api.HttpServerConfig;
 import ulaval.glo2003.floppa.app.api.HttpServerFactory;
 
@@ -10,7 +10,7 @@ import java.security.InvalidParameterException;
 
 public class FloppaRunnable implements Runnable {
     private static final int DEFAULT_PORT = 8080;
-    private static final Environnement DEFAULT_ENV = Environnement.STAGING;
+    private static final Environnement DEFAULT_ENV = Environnement.LOCAL;
     private final int port;
     private final Environnement environnement;
     private HttpServer httpServer;

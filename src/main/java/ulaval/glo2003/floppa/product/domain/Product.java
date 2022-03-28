@@ -2,6 +2,7 @@ package ulaval.glo2003.floppa.product.domain;
 
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
+import dev.morphia.annotations.Property;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.offers.domain.Offers;
@@ -9,19 +10,26 @@ import ulaval.glo2003.floppa.offers.domain.Offers;
 import java.time.LocalTime;
 import java.util.*;
 
+import static ulaval.glo2003.floppa.product.repository.mongo.ProductMapping.*;
+
 @Entity
 public class Product {
 	@Id
 	private final String id;
+	@Property(value = CREATED_DATE)
 	private final LocalTime createdDate;
+	@Property(value = TITLE)
 	private String title;
+	@Property(value = DESCRIPTION)
 	private String description;
+	@Property(value = SUGGESTED_PRICE)
 	private Double suggestedPrice;
+	@Property(value = CATEGORIES)
 	private List<ProductCategory> categories;
+	@Property(value = OFFERS)
 	private List<Offers> offers;
 
-	public Product(String title, String description, Double suggestedPrice, List<ProductCategory> categories, String id, LocalTime createdDate) throws ErrorException {
-		this.validatePrice(suggestedPrice);
+	public Product(String title, String description, Double suggestedPrice, List<ProductCategory> categories, String id, LocalTime createdDate) {
 		this.title = title;
 		this.description = description;
 		this.suggestedPrice = suggestedPrice;
@@ -31,18 +39,12 @@ public class Product {
 		this.createdDate = createdDate;
 	}
 
-	private void validatePrice(Double suggestedPrice) throws ErrorException {
-		if (suggestedPrice < 1){
-			throw new ErrorException(ErrorCode.INVALID_PARAMETER);
-		}
-	}
-
 	public Double computeMeanOffers(){
-		return this.computeNumberOfOffers() != 0 ? this.offers.stream().map(Offers::getOfferAmount).reduce(0.00, Double::sum) / this.computeNumberOfOffers(): null;
+		return this.computeNumberOfOffers() != 0 ? getOffers().stream().map(Offers::getOfferAmount).reduce(0.00, Double::sum) / this.computeNumberOfOffers(): null;
 	}
 
 	public int computeNumberOfOffers(){
-		return this.offers.size();
+		return getOffers().size();
 	}
 
 	public String getId() {
@@ -66,10 +68,12 @@ public class Product {
 	}
 
 	public List<Offers> getOffers() {
+		Optional.ofNullable(this.offers).orElseGet(() -> this.offers = new ArrayList<>());
 		return offers;
 	}
 
 	public List<ProductCategory> getCategories() {
+		Optional.ofNullable(this.categories).orElseGet(() -> this.categories = new ArrayList<>());
 		return categories;
 	}
 
@@ -77,18 +81,18 @@ public class Product {
 		if (offers.getOfferAmount() < this.suggestedPrice){
 			throw new ErrorException(ErrorCode.INVALID_PARAMETER);
 		}
-		this.offers.add(offers);
+		this.getOffers().add(offers);
 	}
 
 	public Double computeMaxOffers() {
-		return offers.stream()
+		return getOffers().stream()
 				.max(Comparator.comparing(Offers::getOfferAmount))
 				.map(Offers::getOfferAmount)
 				.orElse(null);
 	}
 
 	public Double computeMinOffers() {
-		return offers.stream()
+		return getOffers().stream()
 				.min(Comparator.comparing(Offers::getOfferAmount))
 				.map(Offers::getOfferAmount)
 				.orElse(null);
