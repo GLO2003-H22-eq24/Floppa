@@ -3,6 +3,8 @@ package ulaval.glo2003.floppa.app.repository;
 import java.util.Arrays;
 
 public enum Environnement {
+	//TODO DEMANDER AU PROF SI C'EST CORRECT D'AVOIR UNE ENUM ICI avec les config
+	//dépendance avec la couche API + magic string dans le pom
 	PRODUCTION("prod", "floppa"),
 	STAGING("stg", "floppa-staging"),
 	LOCAL("local", "floppa-dev"),

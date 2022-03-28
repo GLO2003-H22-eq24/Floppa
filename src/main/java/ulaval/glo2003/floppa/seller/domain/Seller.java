@@ -1,7 +1,6 @@
 package ulaval.glo2003.floppa.seller.domain;
 
 import dev.morphia.annotations.*;
-import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.product.domain.Product;
 
@@ -19,21 +18,17 @@ public class Seller {
     private final String name;
     @Property(value = BIO)
     private String bio;
-    @Property(value = "birthDate")
+    @Property(value = BIRTHDATE)
     private final LocalDate birthDate;
     @Id
     private final String id;
-    @Property(value = "createdDate")
+    @Property(value = CREATED_DATE)
     private final LocalTime createdDate;
-    @Property(value = "products")
+    @Property(value = PRODUCTS)
     private List<Product> products;
 
-    public Seller(String name, String bio, LocalDate birthDate, String id, LocalTime createdDate) throws ErrorException{
+    public Seller(String name, String bio, LocalDate birthDate, String id, LocalTime createdDate) {
         this.birthDate = birthDate;
-        if (this.computeAge() < 18){
-            throw new ErrorException(ErrorCode.INVALID_PARAMETER);
-
-        }
         this.name = name;
         this.bio = bio;
         this.createdDate = createdDate;
@@ -41,14 +36,9 @@ public class Seller {
         this.id = id;
     }
 
-
 	public String getId() {
         return this.id;
 	}
-
-    public int computeAge(){
-        return Period.between(this.birthDate, LocalDate.now()).getYears();
-    }
 
     public String getName() {
         return name;
