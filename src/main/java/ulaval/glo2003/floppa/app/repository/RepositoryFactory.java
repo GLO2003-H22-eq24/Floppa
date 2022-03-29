@@ -3,6 +3,8 @@ package ulaval.glo2003.floppa.app.repository;
 import com.mongodb.client.MongoClient;
 import dev.morphia.Datastore;
 import org.jetbrains.annotations.NotNull;
+import ulaval.glo2003.floppa.app.config.dto.AppConfigDto;
+import ulaval.glo2003.floppa.app.config.dto.DbConfigDto;
 import ulaval.glo2003.floppa.app.repository.mongo.DataStoreFactory;
 import ulaval.glo2003.floppa.app.repository.mongo.MongoClientFactory;
 import ulaval.glo2003.floppa.product.repository.memory.FilterInMemoryProductFactory;
@@ -28,12 +30,9 @@ public class RepositoryFactory {
 		this.dataStoreFactory = dataStoreFactory;
 	}
 
-	public SellerRepository createRepository(String sourcePackage, Environnement environnement) {
+	public SellerRepository createRepository(String sourcePackage, AppConfigDto appConfigDto) {
 		try {
-			if (environnement.equals(Environnement.IN_MEMORY)) {
-				throw new ConnectException("Using in memory");
-			}
-			return createMongoRepository(sourcePackage, environnement);
+			return createMongoRepository(sourcePackage, appConfigDto.getDbConfigDto());
 		} catch (ConnectException e) {
 			LOGGER.log(Level.SEVERE, "Using in memory repository");
 			return createInMemoryRepository();
@@ -47,9 +46,9 @@ public class RepositoryFactory {
 	}
 
 	@NotNull
-	private SellerRepository createMongoRepository(String sourcePackage, Environnement environnement) throws ConnectException {
-		MongoClient mongoClient = mongoClientFactory.createMongoClient(environnement);
-		Datastore datastore = dataStoreFactory.createDataStore(environnement, sourcePackage, mongoClient);
+	private SellerRepository createMongoRepository(String sourcePackage, DbConfigDto dbConfigDto) throws ConnectException {
+		MongoClient mongoClient = mongoClientFactory.createMongoClient(dbConfigDto.getDbUrl());
+		Datastore datastore = dataStoreFactory.createDataStore(dbConfigDto.getDbName(), sourcePackage, mongoClient);
 		return new SellerRepositoryMongo(datastore, new MorphiaFilterSellerFactory(new MorphiaFilterProductFactory()));
 	}
 }

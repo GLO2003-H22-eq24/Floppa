@@ -16,29 +16,49 @@ mvn clean install
 ```
 
 ### Exécution
+Favorise les **Variables système**. 
+Si échec de lectures d'une variable, alors utilisations des **Custom Args**. 
+Sinon, utilisation du **Default**.
 #### Default
 ```
 mvn exec:java
 ```
-#### Args
-- Changer le port via -Dport. Default = 8080
-- Changer l'environnement de la BD via Denv (stg ou prod ou mem ou local). Default = stg
-  - stg = mongo staging db
-  - prod = mongo production db
-  - mem = in memory repository
-  - local = mongo local db
+- Will run on port 8080
+- Use in memory persistence
+#### Variables système
 ```
-mvn exec:java -Dport=8080 -Denv=stg
+mvn exec:java
 ```
-
+- Changer le port via $PORT.
+- Changer le nom de la DB via $FLOPPA_DB_NAME.
+- Changer l'url de la DB via $FLOPPA_DB_URL.
+#### Custom Args
+```
+mvn exec:java -Dport={int} -DdbName={string} -DdbUrl={string}
+```
+- Changer le port via -Dport.
+- Changer le nom de la DB via -DdbName.
+- Changer l'url de la DB via -DdbUrl.
+#### Exemple
+```
+mvn exec:java "-DdbName=floppa-staging" "-Dport=8080" "-DdbUrl=mongodb+srv://floppa-api:XxIDt04RxHTps0YZ@floppa.3oieg.mongodb.net/Floppa?retryWrites=true&w=majority"
+```
 #### Comment utiliser
-- Aller sur l'adresse "http://localhost:{port}/" 
+- Aller sur l'adresse "http://localhost:8080/" 
+
+## Mongo
+### DB Urls
+- ATLAS_CONNECTION_URL = "mongodb+srv://floppa-api:
+  XxIDt04RxHTps0YZ@floppa.3oieg.mongodb.net/Floppa?retryWrites=true&w=majority";
+- LOCAL_CONNECTION_URL = "mongodb://localhost";
+
+### DB names
+
+- PRODUCTION; **floppa-production**
+- STAGING; **floppa-staging**
+- LOCAL; **floppa-dev**
 
 ## Tests d'intégration (TestIT)
 ```
 mvn verify -PTestIT
 ```
-
-##Archi
-- separer par topic du domaine d'affaire
-- chaque topic a son "api", son "domaine", sa "persistance"

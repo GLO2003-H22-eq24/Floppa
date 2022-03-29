@@ -4,8 +4,8 @@ import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
 import ulaval.glo2003.floppa.app.api.mapper.ErrorExceptionAssembler;
+import ulaval.glo2003.floppa.app.config.dto.AppConfigDto;
 import ulaval.glo2003.floppa.app.repository.RepositoryFactory;
-import ulaval.glo2003.floppa.app.repository.Environnement;
 import ulaval.glo2003.floppa.app.repository.mongo.DataStoreFactory;
 import ulaval.glo2003.floppa.app.repository.mongo.MongoClientFactory;
 import ulaval.glo2003.floppa.offers.api.BuyerAssembler;
@@ -26,15 +26,15 @@ public class HttpServerConfig extends ResourceConfig {
 	private static final String SRC_PACKAGE = "ulaval.glo2003.floppa";
 	private static final String APP_NAME = "FLOPPA";
 
-	public HttpServerConfig(Environnement environnement) {
+	public HttpServerConfig(AppConfigDto appConfigDto) {
 		this.packages(SRC_PACKAGE);
 		this.property(ServerProperties.APPLICATION_NAME, APP_NAME);
-		this.registerBinders(environnement);
+		this.registerBinders(appConfigDto);
 		this.getResources();
 	}
 
-	private void registerBinders(Environnement environnement) {
-		SellerRepository sellerRepository = new RepositoryFactory(new MongoClientFactory(), new DataStoreFactory()).createRepository(SRC_PACKAGE, environnement);
+	private void registerBinders(AppConfigDto appConfigDto) {
+		SellerRepository sellerRepository = new RepositoryFactory(new MongoClientFactory(), new DataStoreFactory()).createRepository(SRC_PACKAGE, appConfigDto);
 		bindRepository(sellerRepository);
 		bindService(sellerRepository);
 		bindAssembler();

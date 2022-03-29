@@ -4,7 +4,8 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import ulaval.glo2003.FloppaRunnable;
-import ulaval.glo2003.floppa.app.repository.Environnement;
+import ulaval.glo2003.floppa.app.config.dto.AppConfigDto;
+import ulaval.glo2003.floppa.app.config.dto.HttpConfigDto;
 
 public abstract class ServerTestIT {
 	private HttpServer server;
@@ -12,7 +13,7 @@ public abstract class ServerTestIT {
 
 	@BeforeEach
 	void startServer() {
-		FloppaRunnable floppaRunnable = new FloppaRunnable(PORT, Environnement.STAGING);
+		FloppaRunnable floppaRunnable = new FloppaRunnable(new AppConfigDto(new HttpConfigDto(PORT)));
 		floppaRunnable.run();
 		this.server = floppaRunnable.getHttpServer();
 	}

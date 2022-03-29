@@ -12,8 +12,9 @@
     <properties>
         <jersey.version>3.0.2</jersey.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <port>8080</port>
-        <env>stg</env>
+        <port/>
+        <dbName/>
+        <dbUrl/>
     </properties>
     <profiles>
         <profile>
@@ -195,7 +196,8 @@
                     <mainClass>ulaval.glo2003.FloppaRunnable</mainClass>
                     <arguments>
                         <argument>${port}</argument>
-                        <argument>${env}</argument>
+                        <argument>${dbName}</argument>
+                        <argument>${dbUrl}</argument>
                     </arguments>
                 </configuration>
             </plugin>
