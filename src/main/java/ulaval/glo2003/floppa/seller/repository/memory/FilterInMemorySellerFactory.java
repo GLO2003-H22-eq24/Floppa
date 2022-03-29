@@ -2,7 +2,7 @@ package ulaval.glo2003.floppa.seller.repository.memory;
 
 import ulaval.glo2003.floppa.product.domain.ConditionProductDto;
 import ulaval.glo2003.floppa.product.domain.Product;
-import ulaval.glo2003.floppa.product.repository.ConditionProductFactoryInMemory;
+import ulaval.glo2003.floppa.product.repository.memory.FilterInMemoryProductFactory;
 import ulaval.glo2003.floppa.seller.domain.ConditionSellerDto;
 import ulaval.glo2003.floppa.seller.domain.Seller;
 
@@ -12,11 +12,11 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class ConditionSellerFactoryInMemory {
-	private ConditionProductFactoryInMemory conditionProductFactoryInMemory;
+public class FilterInMemorySellerFactory {
+	private FilterInMemoryProductFactory filterInMemoryProductFactory;
 
-	public ConditionSellerFactoryInMemory(ConditionProductFactoryInMemory conditionProductFactoryInMemory) {
-		this.conditionProductFactoryInMemory = conditionProductFactoryInMemory;
+	public FilterInMemorySellerFactory(FilterInMemoryProductFactory filterInMemoryProductFactory) {
+		this.filterInMemoryProductFactory = filterInMemoryProductFactory;
 	}
 
 	public List<Function<Seller, Boolean>> createConditionsSellerFunction(ConditionSellerDto conditionSellerDto){
@@ -32,7 +32,7 @@ public class ConditionSellerFactoryInMemory {
 	}
 
 	private void addProductFilterCondition(List<Function<Seller, Boolean>> sellerConditions, ConditionProductDto conditionProductDto){
-		List<Function<Product, Boolean>> productConditions = conditionProductFactoryInMemory.createConditionsProductFunction(conditionProductDto);
+		List<Function<Product, Boolean>> productConditions = filterInMemoryProductFactory.createConditionsProductFunction(conditionProductDto);
 		sellerConditions.add(otherSeller -> otherSeller
 				.getProducts().stream()
 				.anyMatch(product -> productConditions.stream()

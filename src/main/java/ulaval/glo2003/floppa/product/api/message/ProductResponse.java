@@ -1,30 +1,26 @@
 package ulaval.glo2003.floppa.product.api.message;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.json.bind.annotation.JsonbNillable;
-import jakarta.json.bind.annotation.JsonbProperty;
-import ulaval.glo2003.floppa.offers.api.message.OffersDtoResponse;
-import ulaval.glo2003.floppa.seller.api.message.SellerDtoResponse;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import ulaval.glo2003.floppa.offers.api.message.OffersResponse;
+import ulaval.glo2003.floppa.seller.api.message.SellerResponse;
 
 import java.time.LocalTime;
 import java.util.List;
 
-@JsonbNillable
-public class ProductDtoResponse {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ProductResponse {
 	private String id;
 	private LocalTime createdAt;
 	private String title;
 	private String description;
 	private Double suggestedPrice;
-	private OffersDtoResponse offers;
+	private OffersResponse offers;
 	private List<String> categories;
-	@JsonbProperty(nillable = true)
-	@JsonIgnoreProperties
-	private SellerDtoResponse seller;
-	public ProductDtoResponse() {
+	private SellerResponse seller;
+	public ProductResponse() {
 	}
 
-	public ProductDtoResponse(String id, LocalTime createdAt, String title, String description, Double suggestedPrice, OffersDtoResponse offers, List<String> categories) {
+	public ProductResponse(String id, LocalTime createdAt, String title, String description, Double suggestedPrice, OffersResponse offers, List<String> categories) {
 		this.id = id;
 		this.createdAt = createdAt;
 		this.title = title;
@@ -54,7 +50,7 @@ public class ProductDtoResponse {
 		return suggestedPrice;
 	}
 
-	public OffersDtoResponse getOffers() {
+	public OffersResponse getOffers() {
 		return offers;
 	}
 
@@ -62,11 +58,11 @@ public class ProductDtoResponse {
 		return categories;
 	}
 
-	public SellerDtoResponse getSeller() {
+	public SellerResponse getSeller() {
 		return seller;
 	}
 
-	public void setSellerDtoResponse(SellerDtoResponse seller) {
+	public void setSellerDtoResponse(SellerResponse seller) {
 		this.seller = seller;
 	}
 }

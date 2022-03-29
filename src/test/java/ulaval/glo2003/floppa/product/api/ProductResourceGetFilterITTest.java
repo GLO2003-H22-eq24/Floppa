@@ -4,12 +4,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.floppa.ServerTestIT;
-import ulaval.glo2003.floppa.product.api.message.ProductDtoResponse;
+import ulaval.glo2003.floppa.product.api.message.ProductResponse;
 
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static ulaval.glo2003.floppa.product.api.ProductResourceCreateITTest.createProduct;
 import static ulaval.glo2003.floppa.seller.api.SellerResourceCreateITTest.SaveSeller;
@@ -69,9 +71,28 @@ public class ProductResourceGetFilterITTest extends ServerTestIT {
 	}
 
 	@Test
+	void givenNonExistingCategory_whenRetrieveProductWithFilter_thenNoProduct() throws JsonProcessingException {
+		createProduct(savedTitle, savedDescription, savedPrice, List.of("BEAUTY"), savedSellerId);
+		ProductResponse[] productResponse = retrieveProductWithFilter(null, null, List.of("ELECTRONICS"), null, null).as(ProductResponse[].class);
+
+		Assertions.assertEquals(0,Arrays.stream(productResponse).count());
+	}
+
+	@Test
+	void givenSavedCategory_whenRetrieveProductWithFilter_thenProductWithSavedCategory() throws JsonProcessingException {
+		List<String> savedNewCategories = List.of("beauty");
+		createProduct(savedTitle, savedDescription, savedPrice, savedNewCategories , savedSellerId);
+		ProductResponse[] productResponse = retrieveProductWithFilter(null, null, savedNewCategories, null, null).as(ProductResponse[].class);
+
+		for (ProductResponse product : productResponse) {
+			Assertions.assertTrue(product.getCategories().contains("beauty"));
+		}
+	}
+
+	@Test
 	void givenFilters_whenRetrieveProductWithFilter_thenListProductDtoResponse() throws JsonProcessingException {
-		ProductDtoResponse[] productDtoResponses = retrieveProductWithFilter(null, null, null, null, null).as(ProductDtoResponse[].class);
-		for (ProductDtoResponse product: productDtoResponses) {
+		ProductResponse[] productRespons = retrieveProductWithFilter(null, null, null, null, null).as(ProductResponse[].class);
+		for (ProductResponse product: productRespons) {
 			Assertions.assertEquals(savedTitle, product.getTitle());
 			Assertions.assertEquals(savedDescription, product.getDescription());
 			Assertions.assertEquals(savedPrice, product.getSuggestedPrice());
@@ -81,31 +102,33 @@ public class ProductResourceGetFilterITTest extends ServerTestIT {
 	}
 
 	@Test
+	@Disabled //la db contient beaucoup plus que 1 product ayant ces conditions (à cause des autres tests)
 	void givenFiltersSavedTitleWithOneProductWithSameTitle_whenRetrieveWithFilters_thenReturnOnlyOneProduct() throws JsonProcessingException {
 		String otherTitle = "otherTile";
 		createProduct(otherTitle, savedDescription, savedPrice, savedCategories, savedSellerId);
 
-		ProductDtoResponse[] productDtoResponses = retrieveProductWithFilter(null, savedTitle, null, null, null).as(ProductDtoResponse[].class);
+		ProductResponse[] productRespons = retrieveProductWithFilter(null, savedTitle, null, null, null).as(ProductResponse[].class);
 
-		Assertions.assertEquals(1, productDtoResponses.length);
+		Assertions.assertEquals(1, productRespons.length);
 	}
 
 	@Test
 	void givenFiltersSellerIdWithNoProductWithSameTitle_whenRetrieveWithFilters_thenReturnOnlyOneProduct() throws JsonProcessingException {
 		createProduct(savedTitle, savedDescription, savedPrice, savedCategories, savedSellerId);
 
-		ProductDtoResponse[] productDtoResponses = retrieveProductWithFilter("notSellerId", null, null, null, null).as(ProductDtoResponse[].class);
+		ProductResponse[] productRespons = retrieveProductWithFilter("notSellerId", null, null, null, null).as(ProductResponse[].class);
 
-		Assertions.assertEquals(0, productDtoResponses.length);
+		Assertions.assertEquals(0, productRespons.length);
 	}
 
 	@Test
+	@Disabled //la db contient beaucoup plus que 1 product ayant ces conditions (à cause des autres tests)
 	void givenTwoProductsInProductList_whenNoFilter_thenReturnTwoProduct() throws JsonProcessingException {
 		createProduct(savedTitle, savedDescription, savedPrice, savedCategories, savedSellerId);
 
-		ProductDtoResponse[] productDtoResponses = retrieveProductWithFilter(null, null, null, null, null).as(ProductDtoResponse[].class);
+		ProductResponse[] productRespons = retrieveProductWithFilter(null, null, null, null, null).as(ProductResponse[].class);
 
-		Assertions.assertEquals(2, productDtoResponses.length);
+		Assertions.assertEquals(2, productRespons.length);
 	}
 
 

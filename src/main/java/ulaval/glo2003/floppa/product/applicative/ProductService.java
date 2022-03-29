@@ -3,10 +3,10 @@ package ulaval.glo2003.floppa.product.applicative;
 import org.javatuples.Pair;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
-import ulaval.glo2003.floppa.offers.domain.Offers;
 import ulaval.glo2003.floppa.product.domain.ConditionProductDto;
 import ulaval.glo2003.floppa.product.domain.ConditionProductDtoBuilder;
 import ulaval.glo2003.floppa.product.domain.Product;
+import ulaval.glo2003.floppa.product.domain.ProductFactory;
 import ulaval.glo2003.floppa.seller.domain.ConditionSellerAssembleur;
 import ulaval.glo2003.floppa.seller.domain.ConditionSellerDto;
 import ulaval.glo2003.floppa.seller.domain.Seller;
@@ -14,20 +14,25 @@ import ulaval.glo2003.floppa.seller.domain.SellerRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ProductService {
 	private final SellerRepository sellerRepository;
 	private final ConditionSellerAssembleur conditionSellerAssembleur;
+	private final ProductFactory productFactory;
 
-	public ProductService(SellerRepository sellerRepository, ConditionSellerAssembleur conditionSellerAssembleur) {
+	public ProductService(SellerRepository sellerRepository, ConditionSellerAssembleur conditionSellerAssembleur, ProductFactory productFactory) {
 		this.sellerRepository = sellerRepository;
 		this.conditionSellerAssembleur = conditionSellerAssembleur;
+		this.productFactory = productFactory;
 	}
 
-	public void createProductForSeller(String sellerId, Product product) throws ErrorException {
+	public Product createProductForSeller(String sellerId, ProductDto productDto) throws ErrorException {
+		Product product = productFactory.createProduct(productDto);
 		Seller seller = sellerRepository.retrieveSeller(sellerId);
 		seller.getProducts().add(product);
 		sellerRepository.saveSeller(seller);
+		return product;
 	}
 
 	public Product retrieveOneProductWithConditions(ConditionProductDto conditionProductDto) throws ErrorException {
@@ -49,13 +54,5 @@ public class ProductService {
 			pairsSellerProduct.add(new Pair<>(this.retrieveSellerByProduct(product), product));
 		}
 		return pairsSellerProduct;
-	}
-
-	public void addOfferToProduct(String productId, Offers offers) throws ErrorException {
-		ConditionProductDto conditionProductDto = new ConditionProductDtoBuilder().addProductId(productId).build();
-		ConditionSellerDto conditionSellerDto = conditionSellerAssembleur.toDto(conditionProductDto);
-		Product product = sellerRepository.findProducts(conditionSellerDto).stream().findFirst().orElseThrow(()-> new ErrorException(ErrorCode.ITEM_NOT_FOUND));
-		product.addOffer(offers);
-		sellerRepository.updateProduct(product);
 	}
 }

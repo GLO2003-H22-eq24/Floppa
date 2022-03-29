@@ -3,7 +3,7 @@ package ulaval.glo2003.floppa.seller.repository.memory;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.product.domain.Product;
-import ulaval.glo2003.floppa.product.repository.ConditionProductFactoryInMemory;
+import ulaval.glo2003.floppa.product.repository.memory.FilterInMemoryProductFactory;
 import ulaval.glo2003.floppa.seller.domain.ConditionSellerDto;
 import ulaval.glo2003.floppa.seller.domain.Seller;
 import ulaval.glo2003.floppa.seller.domain.SellerRepository;
@@ -19,10 +19,10 @@ import java.util.stream.Collectors;
 public class SellerRepositoryInMemory implements SellerRepository {
     private static final Logger LOGGER = Logger.getLogger(SellerRepositoryInMemory.class.getName());
     private final Map<String, Seller> sellersById;
-    private final ConditionSellerFactoryInMemory conditionSellerFactory;
-    private final ConditionProductFactoryInMemory conditionProductFactory;
+    private final FilterInMemorySellerFactory conditionSellerFactory;
+    private final FilterInMemoryProductFactory conditionProductFactory;
 
-    public SellerRepositoryInMemory(Map<String, Seller> sellersById, ConditionSellerFactoryInMemory conditionSellerFactory, ConditionProductFactoryInMemory conditionProductFactory) {
+    public SellerRepositoryInMemory(Map<String, Seller> sellersById, FilterInMemorySellerFactory conditionSellerFactory, FilterInMemoryProductFactory conditionProductFactory) {
         this.sellersById = sellersById;
         this.conditionSellerFactory = conditionSellerFactory;
         this.conditionProductFactory = conditionProductFactory;
@@ -61,6 +61,11 @@ public class SellerRepositoryInMemory implements SellerRepository {
     public void updateProduct(Product product) {
         //no need to implement, because in memory.
         LOGGER.log(Level.INFO, "Updated product with: {0} offers ", product.getOffers().size());
+    }
+
+    @Override
+    public boolean checkPersistenceState() {
+        return false; //Never true for in memory (volatile)
     }
 
     private List<Product> retrieveProductsBySellerConditions(List<Function<Seller, Boolean>> sellerConditions) {

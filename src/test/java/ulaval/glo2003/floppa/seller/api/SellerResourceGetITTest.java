@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.floppa.ServerTestIT;
-import ulaval.glo2003.floppa.seller.api.message.SellerDtoResponse;
+import ulaval.glo2003.floppa.seller.api.message.SellerResponse;
 
 public class SellerResourceGetITTest extends ServerTestIT {
 
@@ -36,12 +36,12 @@ public class SellerResourceGetITTest extends ServerTestIT {
 
 	@Test
 	void givenSellerId_whenGetSeller_thenSellerDtoResponse() {
-		SellerDtoResponse sellerDtoResponse = retrieveSeller(currentSellerId).as(SellerDtoResponse.class);
+		SellerResponse sellerResponse = retrieveSeller(currentSellerId).as(SellerResponse.class);
 
-		Assertions.assertEquals(savedName, sellerDtoResponse.getName());
-		Assertions.assertEquals(savedBio, sellerDtoResponse.getBio());
-		Assertions.assertEquals(currentSellerId, sellerDtoResponse.getId());
-		Assertions.assertEquals(0, sellerDtoResponse.getProducts().size());
+		Assertions.assertEquals(savedName, sellerResponse.getName());
+		Assertions.assertEquals(savedBio, sellerResponse.getBio());
+		Assertions.assertEquals(currentSellerId, sellerResponse.getId());
+		Assertions.assertEquals(0, sellerResponse.getProducts().size());
 	}
 
 	public static Response retrieveSeller(String id) {
