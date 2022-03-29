@@ -22,8 +22,8 @@ public class AppConfigFactory {
 	public AppConfigDto createAppConfig(String[] args) {
 		Supplier<AppConfigDto> supplierSystemConfig = systemConfigResolver::resolveEnvVariables;
 		Supplier<AppConfigDto> supplierArgConfig = () -> argConfigResolver.resolveArgs(args);
-		AppConfigDto computedConfigDto = Optional.ofNullable(tryCreateConfig(supplierSystemConfig))
-				.orElseGet(()->tryCreateConfig(supplierArgConfig));
+		AppConfigDto computedConfigDto = Optional.ofNullable(tryCreateConfig(supplierArgConfig))
+				.orElseGet(()->tryCreateConfig(supplierSystemConfig));
 		return Optional.ofNullable(computedConfigDto).orElseGet(defaultConfigResolver::resolveEnvVariables);
 	}
 

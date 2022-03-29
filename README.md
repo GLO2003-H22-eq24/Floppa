@@ -16,8 +16,8 @@ mvn clean install
 ```
 
 ### Exécution
-Favorise les **Variables système**. 
-Si échec de lectures d'une variable, alors utilisations des **Custom Args**. 
+Favorise les **Custom Args**. 
+Si échec de lectures d'un arg, alors utilisations des **Variables système**. 
 Sinon, utilisation du **Default**.
 #### Default
 ```
