@@ -8,6 +8,8 @@ import ulaval.glo2003.floppa.app.repository.RepositoryFactory;
 import ulaval.glo2003.floppa.app.repository.Environnement;
 import ulaval.glo2003.floppa.app.repository.mongo.DataStoreFactory;
 import ulaval.glo2003.floppa.app.repository.mongo.MongoClientFactory;
+import ulaval.glo2003.floppa.health.api.HealthAssembler;
+import ulaval.glo2003.floppa.health.applicative.HealthService;
 import ulaval.glo2003.floppa.offers.api.BuyerAssembler;
 import ulaval.glo2003.floppa.offers.api.OfferItemAssembler;
 import ulaval.glo2003.floppa.offers.api.OffersAssembler;
@@ -68,6 +70,13 @@ public class HttpServerConfig extends ResourceConfig {
 				bind(new OffersService(sellerRepository, new ConditionSellerAssembleur(), new OffersFactory())).to(OffersService.class);
 			}
 		});
+
+		register(new AbstractBinder() {
+			@Override
+			protected void configure() {
+				bind(new HealthService(sellerRepository)).to(HealthService.class);
+			}
+		});
 	}
 
 	private void bindAssembler() {
@@ -107,6 +116,13 @@ public class HttpServerConfig extends ResourceConfig {
 			@Override
 			protected void configure() {
 				bind(new ConditionSellerAssembleur()).to(ConditionSellerAssembleur.class);
+			}
+		});
+
+		register(new AbstractBinder() {
+			@Override
+			protected void configure() {
+				bind(new HealthAssembler()).to(HealthAssembler.class);
 			}
 		});
 	}
