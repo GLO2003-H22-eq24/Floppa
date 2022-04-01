@@ -22,14 +22,14 @@ public class BuyerResponseTest {
     }
     @Test
     void givenValidBuyerResponse_whenEmailValid_thenGetEmailIsValid() {
-        String validEmail = "Name";
+        String validEmail = "EmailTest@test.ca";
         String testedEmail = buyerResponse.getEmail();
 
         assertEquals(validEmail, testedEmail);
     }
     @Test
     void givenValidBuyerResponse_whenPhoneNumberValid_thenGetPhoneNumberIsValid() {
-        String validPhoneNumber = "Name";
+        String validPhoneNumber = "418-000-0000";
         String testedPhoneNumber = buyerResponse.getPhoneNumber();
 
         assertEquals(validPhoneNumber, testedPhoneNumber);
@@ -48,7 +48,7 @@ public class BuyerResponseTest {
     void givenValidEmail_whenSettingEmail_thenSetEmailIsEqualToValidEmail() {
         String newValidEmail = "newEmailTest@test.ca";
 
-        buyerResponse.setName(newValidEmail);
+        buyerResponse.setEmail(newValidEmail);
 
         assertEquals(newValidEmail, buyerResponse.getEmail());
     }
@@ -57,7 +57,7 @@ public class BuyerResponseTest {
     void givenValidPhoneNumber_whenSettingPhoneNumber_thenSetPhoneNumberIsEqualToValidPhoneNumber() {
         String newValidPhoneNumber = "418-999-9999";
 
-        buyerResponse.setName(newValidPhoneNumber);
+        buyerResponse.setPhoneNumber(newValidPhoneNumber);
 
         assertEquals(newValidPhoneNumber, buyerResponse.getPhoneNumber());
     }
