@@ -26,7 +26,10 @@ public class HttpServerFactory {
 		//}
 		URI uri;
 		try {
-			uri = new URI(null,null,null, null, null);
+
+			uri = new URI(null,
+					null, null, port,
+					null, null, null);
 		} catch (URISyntaxException e) {
 			uri = URI.create(String.format(LOCAL_HOST, port));
 		}
