@@ -19,21 +19,7 @@ public class HttpServerFactory {
 	}
 
 	public HttpServer createLocalServer(int port){
-		//String uri = System.getenv().get("FLOPPA_URI");
-		//if (uri == null){
-		//	uri = String.format(LOCAL_HOST, port);
-		//	LOGGER.log(Level.INFO, "using localhost");
-		//}
-		URI uri;
-//		try {
-//
-//			uri = new URI(null,
-//					null, null, port,
-//					null, null, null);
-//		} catch (URISyntaxException e) {
-			uri = URI.create(String.format(LOCAL_HOST, port));
-//		}
-//		LOGGER.log(Level.INFO, "port is" + String.valueOf(port));
+		URI uri = URI.create(String.format(LOCAL_HOST, port));
 		return GrizzlyHttpServerFactory.createHttpServer(uri, resourceConfig);
 	}
 }
