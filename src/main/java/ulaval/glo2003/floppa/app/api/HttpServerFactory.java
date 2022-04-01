@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class HttpServerFactory {
 	private final ResourceConfig resourceConfig;
-	private static final String LOCAL_HOST = "http://localhost:%s/";
+	private static final String LOCAL_HOST = "http://0.0.0.0:%s/";
 	private static final Logger LOGGER = Logger.getLogger(HttpServerFactory.class.getName());
 	public HttpServerFactory(ResourceConfig resourceConfig) {
 		this.resourceConfig = resourceConfig;
@@ -25,15 +25,15 @@ public class HttpServerFactory {
 		//	LOGGER.log(Level.INFO, "using localhost");
 		//}
 		URI uri;
-		try {
-
-			uri = new URI(null,
-					null, null, port,
-					null, null, null);
-		} catch (URISyntaxException e) {
+//		try {
+//
+//			uri = new URI(null,
+//					null, null, port,
+//					null, null, null);
+//		} catch (URISyntaxException e) {
 			uri = URI.create(String.format(LOCAL_HOST, port));
-		}
-		LOGGER.log(Level.INFO, "port is" + String.valueOf(port));
+//		}
+//		LOGGER.log(Level.INFO, "port is" + String.valueOf(port));
 		return GrizzlyHttpServerFactory.createHttpServer(uri, resourceConfig);
 	}
 }
