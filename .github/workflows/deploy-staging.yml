@@ -66,6 +66,6 @@ jobs:
           heroku_app_name: "floppa-glo-2003-staging"
           heroku_email: "jeremy.faucher.1@ulaval.ca"
           branch: ${{ steps.setValues.outputs.VALUES }}
-          healthcheck: "https://floppa-glo-2003.herokuapp.com/health"
+          healthcheck: "https://floppa-glo-2003-staging.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
 
