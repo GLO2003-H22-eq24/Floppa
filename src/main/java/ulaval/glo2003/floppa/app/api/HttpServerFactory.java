@@ -6,6 +6,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import ulaval.glo2003.floppa.app.config.ArgConfigResolver;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,11 +19,17 @@ public class HttpServerFactory {
 	}
 
 	public HttpServer createLocalServer(int port){
-		String uri = System.getenv().get("FLOPPA_URI");
-		if (uri == null){
-			uri = String.format(LOCAL_HOST, port);
-			LOGGER.log(Level.INFO, "using localhost");
+		//String uri = System.getenv().get("FLOPPA_URI");
+		//if (uri == null){
+		//	uri = String.format(LOCAL_HOST, port);
+		//	LOGGER.log(Level.INFO, "using localhost");
+		//}
+		URI uri;
+		try {
+			uri = new URI(null,null,null, null, null);
+		} catch (URISyntaxException e) {
+			uri = URI.create(String.format(LOCAL_HOST, port));
 		}
-		return GrizzlyHttpServerFactory.createHttpServer(null, resourceConfig);
+		return GrizzlyHttpServerFactory.createHttpServer(uri, resourceConfig);
 	}
 }
