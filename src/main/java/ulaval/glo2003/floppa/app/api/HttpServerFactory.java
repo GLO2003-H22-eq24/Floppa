@@ -14,7 +14,10 @@ public class HttpServerFactory {
 	}
 
 	public HttpServer createLocalServer(int port){
-		URI uri = URI.create(String.format(LOCAL_HOST, port));
-		return GrizzlyHttpServerFactory.createHttpServer(uri, resourceConfig);
+		String uri = System.getenv().get("FLOPPA_URI");
+		if (uri == null){
+			uri = String.format(LOCAL_HOST, port);
+		}
+		return GrizzlyHttpServerFactory.createHttpServer(URI.create(uri), resourceConfig);
 	}
 }
