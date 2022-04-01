@@ -23,7 +23,6 @@ public class HttpServerFactory {
 			uri = String.format(LOCAL_HOST, port);
 			LOGGER.log(Level.INFO, "using localhost");
 		}
-
-		return GrizzlyHttpServerFactory.createHttpServer(URI.create(uri), resourceConfig);
+		return GrizzlyHttpServerFactory.createHttpServer(null, resourceConfig);
 	}
 }
