@@ -34,17 +34,17 @@ jobs:
     if: ${{ always() && (needs.test.result=='success') }}
     runs-on: ubuntu-latest
     steps:
-      - name: Set Values
-        id: setValues
+      - name: Set Value
+        id: setValue
         env:
           AUTO_VALUES: ${{ github.ref_name }}
           MANUAL_VALUE: ${{ github.event.inputs.branch }}
         run: |
           if [[ ! -z "AUTO_VALUES" ]]
           then
-            echo "::set-output name=VALUES::$AUTO_VALUES"
+            echo "::set-output name=VALUE::$AUTO_VALUES"
           else
-            echo "::set-output name=VALUES::$MANUAL_VALUE"
+            echo "::set-output name=VALUE::$MANUAL_VALUE"
           fi
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -54,7 +54,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "floppa-glo-2003-staging"
           heroku_email: "jeremy.faucher.1@ulaval.ca"
-          branch: ${{ steps.setValues.outputs.VALUES }}
+          branch: ${{ steps.setValue.outputs.VALUE }}
           healthcheck: "https://floppa-glo-2003-staging.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
 
