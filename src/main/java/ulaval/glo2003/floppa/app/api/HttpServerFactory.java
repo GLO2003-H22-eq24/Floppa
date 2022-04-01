@@ -33,6 +33,7 @@ public class HttpServerFactory {
 		} catch (URISyntaxException e) {
 			uri = URI.create(String.format(LOCAL_HOST, port));
 		}
+		LOGGER.log(Level.INFO, "port is" + String.valueOf(port));
 		return GrizzlyHttpServerFactory.createHttpServer(uri, resourceConfig);
 	}
 }
