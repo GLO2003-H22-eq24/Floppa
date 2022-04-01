@@ -1,9 +1,12 @@
+# Remove this file???
+# Deploy does same thing
+
 name: tests
 on:
   pull_request:
   push:
     branches:
-      - master
+      - main
       - dev
 jobs:
   run_tests:

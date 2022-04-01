@@ -1,0 +1,44 @@
+name: Deploy Production
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Branch, tag or commit to deploy
+        default: dev
+        required: true
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Run tests
+        run: mvn -B test checkstyle:checkstyle
+  deploy:
+    needs:
+      - test
+    if: ${{ always() && (needs.test.result=='success') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "floppa-glo-2003-production"
+          heroku_email: "jeremy.faucher.1@ulaval.ca"
+          branch: ${{ github.event.inputs.branch }}
+          healthcheck: "https://floppa-glo-2003.herokuapp.com/health"
+          rollbackonhealthcheckfailed: true
+
