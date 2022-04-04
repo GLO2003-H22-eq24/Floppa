@@ -21,6 +21,8 @@ public class OffersServiceTest {
 	private SellerRepository sellerRepository;
 	@Mock
 	private OffersFactory offersFactory;
+	@Mock
+	private ConditionSellerAssembleur conditionSellerAssembleur;
 	@InjectMocks
 	private OffersService offersService;
 	@Mock
