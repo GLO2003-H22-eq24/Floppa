@@ -1,5 +1,6 @@
 package ulaval.glo2003.floppa.seller.domain;
 
+import ulaval.glo2003.floppa.app.domain.DateUtil;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.seller.applicative.SellerDto;
@@ -11,7 +12,7 @@ public class SellerFactory {
 	public Seller createSeller(SellerDto sellerDto) throws ErrorException {
 		validateAge(sellerDto.getBirthDate());
 		return new Seller(sellerDto.getName(), sellerDto.getBio(), sellerDto.getBirthDate(),
-				UUID.randomUUID().toString(), LocalTime.now(Clock.system(ZoneOffset.UTC)));
+				UUID.randomUUID().toString(), DateUtil.getUtcNow());
 	}
 
 	private void validateAge(LocalDate birthDate) throws ErrorException {
@@ -21,6 +22,6 @@ public class SellerFactory {
 	}
 
 	private int computeAge(LocalDate birthDate) {
-		return Period.between(birthDate, LocalDate.now()).getYears();
+		return Period.between(birthDate, DateUtil.getUtcNow().toLocalDate()).getYears();
 	}
 }

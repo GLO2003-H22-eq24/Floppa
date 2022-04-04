@@ -1,5 +1,6 @@
 package ulaval.glo2003.floppa.offers.api;
 
+import ulaval.glo2003.floppa.app.domain.DateUtil;
 import ulaval.glo2003.floppa.offers.api.message.BuyerResponse;
 import ulaval.glo2003.floppa.offers.api.message.OfferItemResponse;
 import ulaval.glo2003.floppa.offers.domain.Offers;
@@ -20,6 +21,6 @@ public class OfferItemAssembler {
 
 	public OfferItemResponse toResponse(Offers offer) {
 		BuyerResponse buyer = buyerAssembler.toResponse(offer);
-		return new OfferItemResponse(offer.getId(), offer.getCreatedDate(), offer.getOfferAmount(), offer.getMessage(), buyer);
+		return new OfferItemResponse(offer.getId(), DateUtil.toISO8601WithHours(offer.getCreatedDate()), offer.getOfferAmount(), offer.getMessage(), buyer);
 	}
 }

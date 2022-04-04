@@ -26,6 +26,12 @@ public class OffersResourceCreateITTest extends ServerTestIT {
 	private static String amountField = "amount";
 	private static String messageField = "message";
 
+	private static String offersValidName = "name";
+	private static String offersValidEmail = "asd@asd.com";
+	private static String offersValidPhoneNumber = "18198900989";
+	private static Double offersValidAmount = 48.23;
+	private static String offersValidMessage = "Donec porttitor interdum lacus sed finibus. Nam pulvinar facilisis posuere. Maecenas vel lorem amet.";
+
 	private Double savedSuggestedPrice = 22.32;
 	private String productId;
 
@@ -37,10 +43,91 @@ public class OffersResourceCreateITTest extends ServerTestIT {
 
 	@Test
 	void givenAllValidFields_whenCreateProduct_thenStatus200() throws JsonProcessingException {
-		createOfferForProduct(productId, "name", "asdb@asd.com", "18191234567", 48.23, "Donec porttitor interdum lacus sed finibus. Nam pulvinar facilisis posuere. Maecenas vel lorem amet.")
+		createOfferForProduct(productId, offersValidName, offersValidEmail, offersValidPhoneNumber, offersValidAmount, offersValidMessage)
 				.then()
 				.assertThat()
 				.statusCode(200);
+	}
+
+	@Test
+	void givenInvalidOfferAmount_whenCreatingOffer_thenThrowExceptionINVALID_PARAMETER() throws JsonProcessingException {
+		Double offersBadAmount = 10.0;
+
+		createOfferForProduct(productId, offersValidName, offersValidEmail, offersValidPhoneNumber, offersBadAmount, offersValidMessage)
+				.then()
+				.assertThat()
+				.statusCode(400);
+	}
+
+	@Test
+	void givenInvalidOfferMessage_whenCreatingOffer_thenThrowExceptionINVALID_PARAMETER() throws JsonProcessingException {
+		String offersBadMessage = "Message trop court";
+
+		createOfferForProduct(productId, offersValidName, offersValidEmail, offersValidPhoneNumber, offersValidAmount, offersBadMessage)
+				.then()
+				.assertThat()
+				.statusCode(400);
+	}
+
+	@Test
+	void givenNullId_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
+		String productId = null;
+
+		createOfferForProduct(productId, offersValidName, offersValidEmail, offersValidPhoneNumber, offersValidAmount, offersValidMessage)
+				.then()
+				.assertThat()
+				.statusCode(404);
+
+	}
+
+	@Test
+	void givenNullAmount_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
+		Double offersNullAmount = null;
+
+		createOfferForProduct(productId, offersValidName, offersValidEmail, offersValidPhoneNumber, offersNullAmount, offersValidMessage)
+				.then()
+				.assertThat()
+				.statusCode(400);
+	}
+
+	@Test
+	void givenNullMessage_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
+		String offersNullMessage = null;
+
+		createOfferForProduct(productId, offersValidName, offersValidEmail, offersValidPhoneNumber, offersValidAmount, offersNullMessage)
+				.then()
+				.assertThat()
+				.statusCode(400);
+	}
+
+	@Test
+	void givenNullName_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
+		String offersNullName = null;
+
+		createOfferForProduct(productId, offersNullName, offersValidEmail, offersValidPhoneNumber, offersValidAmount, offersValidMessage)
+				.then()
+				.assertThat()
+				.statusCode(400);
+	}
+
+	@Test
+	void givenNullEmail_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
+		String offersNullEmail = null;
+
+		createOfferForProduct(productId, offersValidName, offersNullEmail, offersValidPhoneNumber, offersValidAmount, offersValidMessage)
+				.then()
+				.assertThat()
+				.statusCode(400);
+	}
+
+	@Test
+	void givenNullPhoneNumber_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
+		String offersNullPhoneNumber = null;
+
+		createOfferForProduct(productId, offersValidName, offersValidEmail, offersNullPhoneNumber, offersValidAmount, offersValidMessage)
+				.then()
+				.assertThat()
+				.statusCode(400);
 	}
 
 	public static io.restassured.response.Response createOfferForProduct(String productId, String name, String email, String phoneNumber, Double amount, String message) throws JsonProcessingException {

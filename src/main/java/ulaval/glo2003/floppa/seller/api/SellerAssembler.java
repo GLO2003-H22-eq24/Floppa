@@ -1,5 +1,6 @@
 package ulaval.glo2003.floppa.seller.api;
 
+import ulaval.glo2003.floppa.app.domain.DateUtil;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.product.api.ProductAssembler;
@@ -35,9 +36,13 @@ public class SellerAssembler {
         }
     }
 
-    public SellerResponse toResponse(Seller seller) {
-        List<ProductResponse> productResponse = seller.getProducts().stream().map(productAssembler::toResponse).collect(Collectors.toList());
-        return new SellerResponse(seller.getId(), seller.getName(), seller.getCreatedDate(), seller.getBio(), productResponse);
+    public SellerResponse toResponse(Seller seller, boolean detailledItems) {
+        List<ProductResponse> productResponse = seller.getProducts().stream().map(val -> productAssembler.toResponse(val, detailledItems)).collect(Collectors.toList());
+        SellerResponse sellerResponse = new SellerResponse(seller.getId(), seller.getName(), DateUtil.toISO8601WithHours(seller.getCreatedDate()), seller.getBio(), productResponse);
+        if (detailledItems) {
+            sellerResponse.setBirthDate(DateUtil.toISO8601WithNoHours(seller.getBirthDate()));
+        }
+        return sellerResponse;
     }
 
 

@@ -1,6 +1,7 @@
 package ulaval.glo2003.floppa.product.api;
 
 import org.javatuples.Pair;
+import ulaval.glo2003.floppa.app.domain.DateUtil;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.offers.api.OffersAssembler;
@@ -28,23 +29,23 @@ public class ProductAssembler {
 		this.offersAssembler = offersAssembler;
 	}
 
-	public ProductResponse toResponse(Product product){
-		OffersResponse offersResponse = offersAssembler.toResponse(product);
+	public ProductResponse toResponse(Product product, boolean detailledItems){
+		OffersResponse offersResponse = offersAssembler.toResponse(product, detailledItems);
 		Double amount = BigDecimal.valueOf(product.getSuggestedPrice()).setScale(2, RoundingMode.HALF_UP).doubleValue();
 		List<String> productCategories = product.getCategories().stream().map(ProductCategory::toValueLowerCase).collect(Collectors.toList());
-		return new ProductResponse(product.getId(), product.getCreatedDate(),
+		return new ProductResponse(product.getId(), DateUtil.toISO8601WithHours(product.getCreatedDate()),
 				product.getTitle(), product.getDescription(), amount, offersResponse, productCategories);
 	}
 
-	public ProductResponse toResponse(Product product, Seller seller) {
-		ProductResponse productResponse = this.toResponse(product);
+	public ProductResponse toResponse(Product product, Seller seller, boolean detailledItems) {
+		ProductResponse productResponse = this.toResponse(product, detailledItems);
 		SellerResponse sellerResponse = new SellerResponse(seller.getId(), seller.getName());
 		productResponse.setSellerDtoResponse(sellerResponse);
 		return productResponse;
 	}
 
-	public List<ProductResponse> toResponse(List<Pair<Seller, Product>> pairsSellerProduct) {
-		return pairsSellerProduct.stream().map(pairSellerProduct -> this.toResponse(pairSellerProduct.getValue1(), pairSellerProduct.getValue0())).collect(Collectors.toList());
+	public List<ProductResponse> toResponse(List<Pair<Seller, Product>> pairsSellerProduct,boolean detailledItems) {
+		return pairsSellerProduct.stream().map(pairSellerProduct -> this.toResponse(pairSellerProduct.getValue1(), pairSellerProduct.getValue0(),detailledItems)).collect(Collectors.toList());
 	}
 
 	public ProductDto toDto(ProductCreationRequest productCreationRequest) throws ErrorException {

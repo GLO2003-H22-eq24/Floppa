@@ -22,11 +22,17 @@ public class OffersAssembler {
 		this.offerItemAssembler = offerItemAssembler;
 	}
 
-	public OffersResponse toResponse(Product product){
+	public OffersResponse toResponse(Product product, boolean detailledItems){
 		Double mean = Optional.ofNullable(product.computeMeanOffers()).map(this::computeAs2DecimalPoint).orElse(null);
-		Double min = Optional.ofNullable(product.computeMinOffers()).map(this::computeAs2DecimalPoint).orElse(null);
-		Double max = Optional.ofNullable(product.computeMaxOffers()).map(this::computeAs2DecimalPoint).orElse(null);
-		List<OfferItemResponse> items = Optional.ofNullable(product.getOffers()).filter(offers -> !offers.isEmpty()).map(offerItemAssembler::toResponse).orElse(null);
+		Double min = null;
+		Double max = null;
+		List<OfferItemResponse> items = null;
+		if (detailledItems){
+			min = Optional.ofNullable(product.computeMinOffers()).map(this::computeAs2DecimalPoint).orElse(null);
+			max = Optional.ofNullable(product.computeMaxOffers()).map(this::computeAs2DecimalPoint).orElse(null);
+			items = Optional.ofNullable(product.getOffers()).filter(offers -> !offers.isEmpty()).map(offerItemAssembler::toResponse).orElse(null);
+		}
+
 		return new OffersResponse(mean, product.computeNumberOfOffers(), min, max, items);
 	}
 

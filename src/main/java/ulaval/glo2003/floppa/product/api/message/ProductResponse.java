@@ -4,13 +4,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import ulaval.glo2003.floppa.offers.api.message.OffersResponse;
 import ulaval.glo2003.floppa.seller.api.message.SellerResponse;
 
-import java.time.LocalTime;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductResponse {
 	private String id;
-	private LocalTime createdAt;
+	private String createdAt;
 	private String title;
 	private String description;
 	private Double suggestedPrice;
@@ -20,7 +19,7 @@ public class ProductResponse {
 	public ProductResponse() {
 	}
 
-	public ProductResponse(String id, LocalTime createdAt, String title, String description, Double suggestedPrice, OffersResponse offers, List<String> categories) {
+	public ProductResponse(String id, String createdAt, String title, String description, Double suggestedPrice, OffersResponse offers, List<String> categories) {
 		this.id = id;
 		this.createdAt = createdAt;
 		this.title = title;
@@ -34,7 +33,7 @@ public class ProductResponse {
 		return id;
 	}
 
-	public LocalTime getCreatedAt() {
+	public String getCreatedAt() {
 		return createdAt;
 	} //used for serialization
 
