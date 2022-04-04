@@ -43,6 +43,42 @@ public class OffersResourceCreateITTest extends ServerTestIT {
 				.statusCode(200);
 	}
 
+	@Test
+	void givenInvalidOfferAmount_whenCreatingOffer_thenThrowExceptionINVALID_PARAMETER() throws JsonProcessingException {
+		//TODO si montant de l'offre est inferieur au montant suggerer du produit, lancer INVALID_PARAMETER
+	}
+
+	@Test
+	void givenInvalidOfferMessage_whenCreatingOffer_thenThrowExceptionINVALID_PARAMETER() throws JsonProcessingException {
+		//TODO si le message est de moins de 100 characteres, lancer INVALID_PARAMETER
+	}
+
+	@Test
+	void givenNullId_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
+		//TODO si l'id est null, lancer MISSING_PARAMETER
+
+	}
+
+	@Test
+	void givenNullCreatedAt_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
+		//TODO si le created at est null, lancer MISSING_PARAMETER
+	}
+
+	@Test
+	void givenNullAmount_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
+		//TODO si le amount est null, lancer MISSING_PARAMETER
+	}
+
+	@Test
+	void givenNullMessage_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
+		//TODO si le message est null, lancer MISSING_PARAMETER
+	}
+
+	@Test
+	void givenNullBuyer_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
+		//TODO si le buyer est null, lancer MISSING_PARAMETER
+	}
+
 	public static io.restassured.response.Response createOfferForProduct(String productId, String name, String email, String phoneNumber, Double amount, String message) throws JsonProcessingException {
 		Map<String, Object> body = new HashMap<>();
 		body.put(nameField, name);
