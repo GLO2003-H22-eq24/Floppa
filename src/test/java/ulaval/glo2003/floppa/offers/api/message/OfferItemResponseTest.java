@@ -32,13 +32,7 @@ public class OfferItemResponseTest {
 
         assertEquals(validId, testedId);
     }
-    @Test
-    void givenValidOfferItemResponse_whenCreatedAtIsValid_thenGetCreatedAtIsValid() {
-        LocalTime validCreatedAt = LocalTime.now();
-        LocalTime testedCreatedAt = offerItemResponse.getCreatedAt();
 
-        assertEquals(validCreatedAt, testedCreatedAt);
-    }
     @Test
     void givenValidOfferItemResponse_whenAmountValid_thenGetAmountIsValid() {
         Double validAmount = 10.0;
@@ -64,7 +58,7 @@ public class OfferItemResponseTest {
 
         BuyerResponse testedBuyer = offerItemResponse.getBuyer();
 
-        assertEquals(validBuyer, testedBuyer);
+        assertEquals(validBuyer.getPhoneNumber(), testedBuyer.getPhoneNumber());
     }
 
     @Test

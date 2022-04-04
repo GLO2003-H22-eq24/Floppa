@@ -74,9 +74,9 @@ public class ProductResourceGetITTest extends ServerTestIT {
 	void givenManyProducts_whenRetrieveSeller_thenAsManyProductIsRetrieved() throws JsonProcessingException {
 		createProduct(savedTitle, savedDescription, savedSuggestedPrice, savedCategories, savedSellerId);
 
-		List<ProductResponse> productRespons = retrieveSeller(savedSellerId).as(SellerResponse.class).getProducts();
+		List<ProductResponse> productResponse = retrieveSeller(savedSellerId).as(SellerResponse.class).getProducts();
 
-		Assertions.assertEquals(2, productRespons.size());
+		Assertions.assertEquals(2, productResponse.size());
 	}
 
 
