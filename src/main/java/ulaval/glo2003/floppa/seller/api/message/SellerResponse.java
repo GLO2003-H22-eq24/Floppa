@@ -3,15 +3,15 @@ package ulaval.glo2003.floppa.seller.api.message;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ulaval.glo2003.floppa.product.api.message.ProductResponse;
 
-import java.time.LocalTime;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SellerResponse {
 	private String id;
 	private String name;
-	private LocalTime createdAt;
+	private String createdAt;
 	private String bio;
+	private String birthDate;
 	private List<ProductResponse> products;
 
 	public SellerResponse() {
@@ -22,7 +22,7 @@ public class SellerResponse {
 		this.name = name;
 	}
 
-	public SellerResponse(String id, String name, LocalTime createdAt, String bio, List<ProductResponse> products) {
+	public SellerResponse(String id, String name, String createdAt, String bio, List<ProductResponse> products) {
 		this.id = id;
 		this.name = name;
 		this.createdAt = createdAt;
@@ -38,7 +38,7 @@ public class SellerResponse {
 		return name;
 	}
 
-	public LocalTime getCreatedAt() { //used for serialisation
+	public String getCreatedAt() { //used for serialisation
 		return createdAt;
 	}
 
@@ -46,8 +46,15 @@ public class SellerResponse {
 		return bio;
 	}
 
+	public String getBirthDate() {
+		return birthDate;
+	}
+
 	public List<ProductResponse> getProducts() {
 		return products;
 	}
 
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
+	}
 }

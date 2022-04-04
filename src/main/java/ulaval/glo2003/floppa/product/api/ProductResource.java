@@ -69,7 +69,7 @@ public class ProductResource {
 	public Response retrieveProduct(@PathParam("productId") String id) throws ErrorException {
 		Product product = this.productService.retrieveOneProductWithConditions(new ConditionProductDtoBuilder().addProductId(id).build());
 		Seller seller = this.productService.retrieveSellerByProduct(product);
-		ProductResponse productWithSellerDtoResponse = productAssembler.toResponse(product, seller);
+		ProductResponse productWithSellerDtoResponse = productAssembler.toResponse(product, seller, false);
 		return Response.ok().entity(productWithSellerDtoResponse).build();
 	}
 
@@ -83,7 +83,7 @@ public class ProductResource {
 	                                          @QueryParam("maxPrice") Double productMaxPrice) throws ErrorException {
 		ConditionSellerDto conditionSellerDtos = conditionSellerAssembleur.toDto(sellerId, productTitle, productCategories, productMinPrice, productMaxPrice);
 		List<Pair<Seller, Product>> productsBySeller = this.productService.retrieveProductBySellerWithConditions(conditionSellerDtos);
-		List<ProductResponse> productResponse = productAssembler.toResponse(productsBySeller);
+		List<ProductResponse> productResponse = productAssembler.toResponse(productsBySeller, false);
 		return Response.ok().entity(productResponse).build();
 	}
 

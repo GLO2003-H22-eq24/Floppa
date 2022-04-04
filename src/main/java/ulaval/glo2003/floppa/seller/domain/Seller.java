@@ -22,11 +22,11 @@ public class Seller {
     @Id
     private final String id;
     @Property(value = CREATED_DATE)
-    private final LocalTime createdDate;
+    private final LocalDateTime createdDate;
     @Property(value = PRODUCTS)
     private List<Product> products;
 
-    public Seller(String name, String bio, LocalDate birthDate, String id, LocalTime createdDate) {
+    public Seller(String name, String bio, LocalDate birthDate, String id, LocalDateTime createdDate) {
         this.birthDate = birthDate;
         this.name = name;
         this.bio = bio;
@@ -47,8 +47,12 @@ public class Seller {
         return bio;
     }
 
-    public LocalTime getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
     public List<Product> getProducts() {

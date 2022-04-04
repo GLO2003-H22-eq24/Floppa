@@ -3,14 +3,14 @@ package ulaval.glo2003.floppa.offers.domain;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Property;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 import static ulaval.glo2003.floppa.offers.repository.mongo.OffersMapping.*;
 
 @Entity
 public class Offers {
 	@Property(value = CREATED_DATE)
-	private LocalTime createdDate;
+	private LocalDateTime createdDate;
 	private String id;
 	@Property(value = NAME)
 	private String name;
@@ -23,7 +23,7 @@ public class Offers {
 	@Property(value = OFFER_AMOUNT)
 	private Double offerAmount;
 
-	public Offers(String name, Email email, PhoneNumber phoneNumber, String message, Double offerAmount, String id, LocalTime createdDate) {
+	public Offers(String name, Email email, PhoneNumber phoneNumber, String message, Double offerAmount, String id, LocalDateTime createdDate) {
 		this.name = name;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
@@ -57,7 +57,7 @@ public class Offers {
 		return id;
 	}
 
-	public LocalTime getCreatedDate() {
+	public LocalDateTime getCreatedDate() {
 		return createdDate;
 	}
 }

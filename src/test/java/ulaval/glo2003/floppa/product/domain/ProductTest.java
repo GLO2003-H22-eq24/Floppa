@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.offers.domain.Offers;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -24,7 +25,7 @@ class ProductTest {
 		String name = "name";
 		String desc = "desc";
 		String id = "id";
-		anyProduct = new Product(name, desc, suggestedPrice, List.of(ProductCategory.APPAREL), id, LocalTime.now());
+		anyProduct = new Product(name, desc, suggestedPrice, List.of(ProductCategory.APPAREL), id, LocalDateTime.now());
 	}
 
 	@Test
@@ -46,7 +47,7 @@ class ProductTest {
 
 		Double meanOffers = anyProduct.computeMeanOffers();
 
-		Assertions.assertEquals(null, meanOffers);
+		assertNull(meanOffers);
 	}
 
 

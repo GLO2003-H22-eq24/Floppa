@@ -37,20 +37,20 @@ public class SellerResource {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response retrieveSeller(@PathParam("id") String id) throws ErrorException {
-        Seller seller = sellerService.retrieveSeller(id);
-        SellerResponse sellerResponse = sellerAssembler.toResponse(seller);
-        return Response.ok().entity(sellerResponse).build();
+    public Response retrieveSeller(@PathParam("id") String id, @Context HttpHeaders httpheaders) throws ErrorException {
+        if (id.equals("@me") || id.equals("%40me")){
+            return retrieveMeSeller(httpheaders);
+        }else {
+            Seller seller = sellerService.retrieveSeller(id);
+            SellerResponse sellerResponse = sellerAssembler.toResponse(seller, false);
+            return Response.ok().entity(sellerResponse).build();
+        }
     }
 
-    @GET
-    @Path("/%40me") // "/@me"
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response retrieveMeSeller(@Context HttpHeaders httpheaders) throws ErrorException {
+    private Response retrieveMeSeller(HttpHeaders httpheaders) throws ErrorException {
         String idSeller = httpheaders.getHeaderString(SELLER_ID_HEADER);
         Seller seller = sellerService.retrieveSeller(idSeller);
-        SellerResponse sellerResponse = sellerAssembler.toResponse(seller);
+        SellerResponse sellerResponse = sellerAssembler.toResponse(seller, true);
         return Response.ok().entity(sellerResponse).build();
     }
 }

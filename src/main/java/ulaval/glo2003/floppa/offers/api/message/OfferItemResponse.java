@@ -1,10 +1,9 @@
 package ulaval.glo2003.floppa.offers.api.message;
 
-import java.time.LocalTime;
 
 public class OfferItemResponse {
 	private String id;
-	private LocalTime createdAt;
+	private String createdAt;
 	private Double amount;
 	private String message;
 	private BuyerResponse buyer;
@@ -12,7 +11,7 @@ public class OfferItemResponse {
 	public OfferItemResponse() {
 	}
 
-	public OfferItemResponse(String id, LocalTime createdAt, Double amount, String message, BuyerResponse buyer) {
+	public OfferItemResponse(String id, String createdAt, Double amount, String message, BuyerResponse buyer) {
 		this.id = id;
 		this.createdAt = createdAt;
 		this.amount = amount;
@@ -28,11 +27,11 @@ public class OfferItemResponse {
 		this.id = id;
 	}
 
-	public LocalTime getCreatedAt() {
+	public String getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(LocalTime createdAt) {
+	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}
 

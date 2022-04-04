@@ -7,7 +7,7 @@ import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.offers.domain.Offers;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static ulaval.glo2003.floppa.product.repository.mongo.ProductMapping.*;
@@ -17,7 +17,7 @@ public class Product {
 	@Id
 	private final String id;
 	@Property(value = CREATED_DATE)
-	private final LocalTime createdDate;
+	private final LocalDateTime createdDate;
 	@Property(value = TITLE)
 	private String title;
 	@Property(value = DESCRIPTION)
@@ -29,7 +29,7 @@ public class Product {
 	@Property(value = OFFERS)
 	private List<Offers> offers;
 
-	public Product(String title, String description, Double suggestedPrice, List<ProductCategory> categories, String id, LocalTime createdDate) {
+	public Product(String title, String description, Double suggestedPrice, List<ProductCategory> categories, String id, LocalDateTime createdDate) {
 		this.title = title;
 		this.description = description;
 		this.suggestedPrice = suggestedPrice;
@@ -51,7 +51,7 @@ public class Product {
 		return id;
 	}
 
-	public LocalTime getCreatedDate() {
+	public LocalDateTime getCreatedDate() {
 		return createdDate;
 	}
 
