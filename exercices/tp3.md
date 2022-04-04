@@ -49,3 +49,11 @@
    1. Définir une stratégie de test. Cette stratégie définie la portée des tests, leurs objectifs, les standards. Avoir une portée définie pour les tests permettrait d'aller ajouter des tests qui aurait été écartée en premier lieu par l'équipe.Si l'équipe possède une liste détaillée des éléments qui doivent être certifié (testé) on ajoute une qualité supplémentaire à notre produit, car on respecte la portée des tests.
    2. Identifier les risques. En identidiant d'éventuel risque, on est capable d'adapter notre solution de test afin de prévenir la réalisation de ces risques
    3. Adopter le TDD plus rigoureusement.Faire le code fonctionnel de chaque test et non les tests du code fonctionnel. En suivant une approche TDD on s'assure de la robustesse de notre code.
+
+
+# Stories
+Maintenant que la majorité des features sont complétées, l'équipe de Floppa désire récolter des idées pour le développement futur de la plateforme. Elle vous demande donc de fournir **3 stories** originales qui permettront de surpasser la compétition.
+
+1. Un utilisateur peut filtrer les vendeurs en fonction des catégories de produits recherchés.
+2. Un vendeur peut obtenir les statistiques des produits vendu regroupé par catégorie.
+3. Un utilisateur peut comparer un produit vendu par un vendeur avec celui d'un second vendeur.
