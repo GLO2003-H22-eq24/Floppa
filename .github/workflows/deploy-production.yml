@@ -4,7 +4,7 @@ on:
     inputs:
       branch:
         description: Branch, tag or commit to deploy
-        default: dev
+        default: main
         required: true
 jobs:
   test:
@@ -39,6 +39,6 @@ jobs:
           heroku_app_name: "floppa-glo-2003-production"
           heroku_email: "jeremy.faucher.1@ulaval.ca"
           branch: ${{ github.event.inputs.branch }}
-          healthcheck: "https://floppa-glo-2003-production.herokuapp.com//health"
+          healthcheck: "https://floppa-glo-2003-production.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
 
