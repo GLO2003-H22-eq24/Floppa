@@ -11,11 +11,13 @@ import ulaval.glo2003.floppa.app.config.dto.HttpConfigDto;
 public abstract class ServerTestIT {
 	private HttpServer server;
 	protected static final int PORT = 8181;
+	protected static final String dbUrl = "mongodb+srv://floppa-api:XxIDt04RxHTps0YZ@floppa.3oieg.mongodb.net/Floppa?retryWrites=true&w=majority";
+	protected static final String dbName = "floppa-staging";
 
 	@BeforeEach
 	void startServer() {
-		//use db
-		//FloppaRunnable floppaRunnable = new FloppaRunnable(new AppConfigDto(new DbConfigDto("floppa-staging", "mongodb+srv://floppa-api:XxIDt04RxHTps0YZ@floppa.3oieg.mongodb.net/Floppa?retryWrites=true&w=majority"), new HttpConfigDto(PORT))); // add new DbConfigDto("floppa-staging", "mongodb+srv://floppa-api: XxIDt04RxHTps0YZ@floppa.3oieg.mongodb.net/Floppa?retryWrites=true&w=majority") to AppConfigDto for db tests
+		//uncomment to use db repository
+		//FloppaRunnable floppaRunnable = new FloppaRunnable(new AppConfigDto(new DbConfigDto(dbName, dbUrl), new HttpConfigDto(PORT)));
 		FloppaRunnable floppaRunnable = new FloppaRunnable(new AppConfigDto(new HttpConfigDto(PORT)));
 		floppaRunnable.run();
 		this.server = floppaRunnable.getHttpServer();
