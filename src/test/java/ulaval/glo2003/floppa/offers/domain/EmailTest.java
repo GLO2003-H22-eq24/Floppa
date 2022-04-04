@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class EmailTest {
 
 	@Test
-	void givenInvalidEmailFormat_whenNewEmail_thenErrorException() {
+	void givenEmailWithNoDomain_whenNewEmail_thenErrorException() {
 		String invalidEmail = "asdfre@@@";
 
 		Assertions.assertThrows(ErrorException.class, () -> new Email(invalidEmail));

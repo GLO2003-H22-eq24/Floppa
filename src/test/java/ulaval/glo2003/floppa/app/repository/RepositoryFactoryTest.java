@@ -14,6 +14,7 @@ import ulaval.glo2003.floppa.app.repository.mongo.DataStoreFactory;
 import ulaval.glo2003.floppa.app.repository.mongo.MongoClientFactory;
 import ulaval.glo2003.floppa.seller.domain.SellerRepository;
 import ulaval.glo2003.floppa.seller.repository.memory.SellerRepositoryInMemory;
+import ulaval.glo2003.floppa.seller.repository.mongo.SellerRepositoryMongo;
 
 import java.net.ConnectException;
 
@@ -22,6 +23,8 @@ import java.net.ConnectException;
 class RepositoryFactoryTest {
 	@Mock
 	private MongoClientFactory mongoClientFactory;
+	@Mock
+	private DataStoreFactory dataStoreFactory;
 	@InjectMocks
 	private RepositoryFactory repositoryFactory;
 	private final String anySrcPackage = "src package";
@@ -38,6 +41,18 @@ class RepositoryFactoryTest {
 		SellerRepository repository = repositoryFactory.createRepository(anySrcPackage, anyAppConfigDto);
 
 		Assertions.assertTrue(repository instanceof SellerRepositoryInMemory);
+	}
+
+	@Test
+	void givenMongoClient_whenCreateRepository_thenSellerRepositoryMongo() throws ConnectException {
+		String anyDbUrl = "url";
+		Mockito.when(anyAppConfigDto.getDbConfigDto()).thenReturn(dbConfigDto);
+		Mockito.when(dbConfigDto.getDbUrl()).thenReturn(anyDbUrl);
+		Mockito.when(mongoClientFactory.createMongoClient(anyDbUrl)).thenReturn(null);
+
+		SellerRepository repository = repositoryFactory.createRepository(anySrcPackage, anyAppConfigDto);
+
+		Assertions.assertTrue(repository instanceof SellerRepositoryMongo);
 	}
 
 }
