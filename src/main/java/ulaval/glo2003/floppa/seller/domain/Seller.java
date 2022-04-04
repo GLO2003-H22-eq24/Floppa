@@ -1,43 +1,43 @@
 package ulaval.glo2003.floppa.seller.domain;
 
-import ulaval.glo2003.floppa.app.domain.ErrorCode;
-import ulaval.glo2003.floppa.app.domain.ErrorException;
+import dev.morphia.annotations.*;
 import ulaval.glo2003.floppa.product.domain.Product;
 
 import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
+import static ulaval.glo2003.floppa.seller.repository.mongo.SellerMapping.*;
+
+@Entity
 public class Seller {
+    @Property(value = NAME)
     private final String name;
+    @Property(value = BIO)
     private String bio;
+    @Property(value = BIRTHDATE)
     private final LocalDate birthDate;
+    @Id
     private final String id;
-    private final LocalTime createdDate;
-    private final List<Product> products;
+    @Property(value = CREATED_DATE)
+    private final LocalDateTime createdDate;
+    @Property(value = PRODUCTS)
+    private List<Product> products;
 
-    public Seller(String name, String bio, LocalDate birthDate) throws ErrorException{
+    public Seller(String name, String bio, LocalDate birthDate, String id, LocalDateTime createdDate) {
         this.birthDate = birthDate;
-        if (this.computeAge() < 18){
-            throw new ErrorException(ErrorCode.INVALID_PARAMETER);
-
-        }
         this.name = name;
         this.bio = bio;
-        this.createdDate = LocalTime.now(Clock.system(ZoneId.of("-05:00")));
+        this.createdDate = createdDate;
         this.products = new ArrayList<>();
-        this.id = UUID.randomUUID().toString();
+        this.id = id;
     }
-
 
 	public String getId() {
         return this.id;
 	}
-
-    public int computeAge(){
-        return Period.between(this.birthDate, LocalDate.now()).getYears();
-    }
 
     public String getName() {
         return name;
@@ -47,11 +47,28 @@ public class Seller {
         return bio;
     }
 
-    public LocalTime getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
     public List<Product> getProducts() {
-        return products;
+        Optional.ofNullable(this.products).orElseGet(() -> this.products = new ArrayList<>());
+        return this.products;
+    }
+
+    public void updateProduct(Product product) {
+        List<Product> updatedProducts = this.getProducts().stream().map(otherProduct -> {
+            if (otherProduct.getId().equals(product.getId())) {
+                return product;
+            } else {
+                return otherProduct;
+            }
+        }).collect(Collectors.toList());
+        this.products.clear();
+        this.products.addAll(updatedProducts);
     }
 }

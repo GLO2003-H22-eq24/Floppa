@@ -1,11 +1,13 @@
 package ulaval.glo2003.floppa.seller.api;
 
+import ulaval.glo2003.floppa.app.domain.DateUtil;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.product.api.ProductAssembler;
-import ulaval.glo2003.floppa.product.api.message.ProductDtoResponse;
-import ulaval.glo2003.floppa.seller.api.message.SellerDtoRequest;
-import ulaval.glo2003.floppa.seller.api.message.SellerDtoResponse;
+import ulaval.glo2003.floppa.product.api.message.ProductResponse;
+import ulaval.glo2003.floppa.seller.api.message.SellerRequest;
+import ulaval.glo2003.floppa.seller.api.message.SellerResponse;
+import ulaval.glo2003.floppa.seller.applicative.SellerDto;
 import ulaval.glo2003.floppa.seller.domain.Seller;
 
 import java.time.LocalDate;
@@ -23,30 +25,36 @@ public class SellerAssembler {
         this.productAssembler = productAssembler;
     }
 
-    public Seller fromDto(SellerDtoRequest sellerDtoRequest) throws ErrorException {
-        // Vérifie que les paramètres nécessaires sont présent
-
-        if (isNull(sellerDtoRequest.getName()) || isNull(sellerDtoRequest.getBio()) || isNull(sellerDtoRequest.getBirthDate())){
-            throw new ErrorException(ErrorCode.MISSING_PARAMETER);
-        }
-
-        // Vérifie que les paramètres nécessaires contiennent une valeur
-        if (sellerDtoRequest.getBio().isBlank() || sellerDtoRequest.getName().isBlank()) {
-            throw new ErrorException(ErrorCode.INVALID_PARAMETER);
-
-        }
-
+    public SellerDto toDto(SellerRequest sellerRequest) throws ErrorException {
+        assertNotNullParams(sellerRequest);
+        assertNotBlankParams(sellerRequest);
         try {
-            // Vérifie que la date de naissance est dans le bon format
-            LocalDate birthDate = LocalDate.parse(sellerDtoRequest.getBirthDate(), DateTimeFormatter.ISO_LOCAL_DATE);
-            return new Seller(sellerDtoRequest.getName(), sellerDtoRequest.getBio(), birthDate);
+            LocalDate birthDate = LocalDate.parse(sellerRequest.getBirthDate(), DateTimeFormatter.ISO_LOCAL_DATE);
+            return new SellerDto(sellerRequest.getName(), sellerRequest.getBio(), birthDate);
         } catch (DateTimeParseException e) {
             throw new ErrorException(ErrorCode.INVALID_PARAMETER);
         }
     }
 
-    public SellerDtoResponse toDto(Seller seller) {
-        List<ProductDtoResponse> productDtoResponses = seller.getProducts().stream().map(productAssembler::toDto).collect(Collectors.toList());
-        return new SellerDtoResponse(seller.getId(), seller.getName(), seller.getCreatedDate(), seller.getBio(), productDtoResponses);
+    public SellerResponse toResponse(Seller seller, boolean detailledItems) {
+        List<ProductResponse> productResponse = seller.getProducts().stream().map(val -> productAssembler.toResponse(val, detailledItems)).collect(Collectors.toList());
+        SellerResponse sellerResponse = new SellerResponse(seller.getId(), seller.getName(), DateUtil.toISO8601WithHours(seller.getCreatedDate()), seller.getBio(), productResponse);
+        if (detailledItems) {
+            sellerResponse.setBirthDate(DateUtil.toISO8601WithNoHours(seller.getBirthDate()));
+        }
+        return sellerResponse;
+    }
+
+
+    private void assertNotBlankParams(SellerRequest sellerRequest) throws ErrorException {
+        if (sellerRequest.getBio().isBlank() || sellerRequest.getName().isBlank()) {
+            throw new ErrorException(ErrorCode.INVALID_PARAMETER);
+        }
+    }
+
+    private void assertNotNullParams(SellerRequest sellerRequest) throws ErrorException {
+        if (isNull(sellerRequest.getName()) || isNull(sellerRequest.getBio()) || isNull(sellerRequest.getBirthDate())) {
+            throw new ErrorException(ErrorCode.MISSING_PARAMETER);
+        }
     }
 }

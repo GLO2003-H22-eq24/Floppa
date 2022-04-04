@@ -1,95 +1,65 @@
 package ulaval.glo2003.floppa.product.applicative;
 
+import com.google.common.base.Supplier;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
+import ulaval.glo2003.floppa.product.domain.ConditionProductDto;
 import ulaval.glo2003.floppa.product.domain.Product;
+import ulaval.glo2003.floppa.product.domain.ProductFactory;
+import ulaval.glo2003.floppa.seller.domain.ConditionSellerAssembleur;
 import ulaval.glo2003.floppa.seller.domain.Seller;
 import ulaval.glo2003.floppa.seller.domain.SellerRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class ProductServiceTest {
 	@Mock
 	private SellerRepository sellerRepository;
+	@Mock
+	private ConditionSellerAssembleur conditionSellerAssembleur;
+	@Mock
+	private ProductFactory productFactory;
 	@InjectMocks
 	private ProductService productService;
 	@Mock
-	private Seller seller;
+	private ProductDto anyProductDto;
 	@Mock
-	private Product product;
-	private final String anyId = "anyId";
+	private Product anyProduct;
+	@Mock
+	private Seller anySeller;
+	@Mock
+	private ConditionProductDto anyConditionProductDto;
+	private final String anySellerId = "id";
 
-	@BeforeEach
-	void repositoryWithSellerAndProducts() throws ErrorException {
-		Mockito.lenient().when(sellerRepository.retrieveSeller(Mockito.anyString())).thenReturn(seller);
+	@Test
+	void givenSellerIdAndProductDto_whenCreateProductForSeller_thenProductInProducts() throws ErrorException {
 		List<Product> products = new ArrayList<>();
-		products.add(product);
-		Mockito.lenient().when(sellerRepository.findProducts(Mockito.any(), Mockito.any())).thenReturn(products);
+		Mockito.when(productFactory.createProduct(anyProductDto)).thenReturn(anyProduct);
+		Mockito.when(sellerRepository.retrieveSeller(anySellerId)).thenReturn(anySeller);
+		Mockito.when(anySeller.getProducts()).thenReturn(products);
+
+		productService.createProductForSeller(anySellerId, anyProductDto);
+
+		Assertions.assertTrue(products.contains(anyProduct));
 	}
 
 	@Test
-	void givenSeller_whenCreateProductForSeller_ThenRetrievedSellerIsSaved() throws ErrorException {
+	void givenSellerIdAndProductDto_whenRetrieveOneProductWithConditions_thenProductInProducts() {
+		Mockito.when(sellerRepository.findProducts(Mockito.any())).thenReturn(new ArrayList<>());
 
+		Executable productSupplier = () -> productService.retrieveOneProductWithConditions(anyConditionProductDto);
 
-		productService.createProductForSeller(anyId, product);
-
-		Mockito.verify(sellerRepository, Mockito.times(1)).saveSeller(seller);
-	}
-
-	@Test
-	void givenSellerId_whenCreateProductForSeller_ThenRetrievedSellerById() throws ErrorException {
-		String sellerId = "id";
-
-		productService.createProductForSeller(sellerId, product);
-
-		Mockito.verify(sellerRepository, Mockito.times(1)).retrieveSeller(sellerId);
-	}
-
-	@Test
-	void givenSellerWithProductsAndNewProduct_whenCreateProductForSeller_ThenNewProductIsAdded() throws ErrorException {
-		List<Product> productsList = new ArrayList<>();
-		Mockito.when(seller.getProducts()).thenReturn(productsList);
-
-		productService.createProductForSeller(anyId, product);
-
-		Assertions.assertTrue(productsList.contains(product));
-	}
-
-	@Test
-	void givenSellerConditionsAndProductConditionsWithProducts_whenRetrieveProductByConditions_ThenFindProducts() throws ErrorException {
-		List<Function<Seller, Boolean>> sellerConditions = new ArrayList<>();
-		List<Function<Product, Boolean>> productConditions = new ArrayList<>();
-
-		productService.retrieveProductByConditions(sellerConditions, productConditions);
-
-		Mockito.verify(sellerRepository, Mockito.times(1)).findProducts(sellerConditions, productConditions);
-	}
-
-	@Test
-	void givenSellerProductWithNoProducts_whenRetrieveSellerByProduct_ThenITEM_NOT_FOUND() throws ErrorException {
-		Mockito.lenient().when(sellerRepository.retrieveSeller(Mockito.anyList())).thenReturn(new ArrayList<>());
-
-		Assertions.assertThrows(ErrorException.class, () -> productService.retrieveSellerByProduct(product));
-	}
-
-	@Test
-	void givenSellerProductWithProducts_whenRetrieveSellerByProduct_ThenRetrieveSellerFromRepository() throws ErrorException {
-		List<Seller> sellers = new ArrayList<>();
-		sellers.add(seller);
-		Mockito.lenient().when(sellerRepository.retrieveSeller(Mockito.anyList())).thenReturn(sellers);
-
-		productService.retrieveSellerByProduct(product);
-
-		Mockito.verify(sellerRepository, Mockito.times(1)).retrieveSeller(Mockito.anyList());
+		Assertions.assertThrows(ErrorException.class, productSupplier);
 	}
 }

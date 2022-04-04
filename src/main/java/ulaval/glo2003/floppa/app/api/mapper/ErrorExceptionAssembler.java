@@ -4,7 +4,7 @@ import ulaval.glo2003.floppa.app.domain.ErrorException;
 
 public class ErrorExceptionAssembler {
 
-	public ErrorExceptionDto toDto(ErrorException errorException) {
-		return new ErrorExceptionDto(errorException.getCode(), errorException.getDescription());
+	public ErrorExceptionResponse toDto(ErrorException errorException) {
+		return new ErrorExceptionResponse(errorException.getCode(), errorException.getDescription());
 	}
 }
