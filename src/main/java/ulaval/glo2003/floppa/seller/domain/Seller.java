@@ -1,7 +1,6 @@
 package ulaval.glo2003.floppa.seller.domain;
 
 import dev.morphia.annotations.*;
-import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.product.domain.Product;
 
 import java.time.*;
