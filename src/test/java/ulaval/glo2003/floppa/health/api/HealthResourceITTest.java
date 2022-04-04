@@ -14,7 +14,7 @@ class HealthResourceITTest extends ServerTestIT {
 	}
 
 	@Test
-	void whenCheckHealth_thenHeathResponse() {
+	void whenCheckHealth_thenHealthResponse() {
 		HealthResponse healthResponse = checkHealth().as(HealthResponse.class);
 		Assertions.assertTrue(healthResponse.isApi());
 	}
