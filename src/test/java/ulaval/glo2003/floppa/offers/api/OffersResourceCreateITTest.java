@@ -26,6 +26,12 @@ public class OffersResourceCreateITTest extends ServerTestIT {
 	private static String amountField = "amount";
 	private static String messageField = "message";
 
+	private static String offersValidName = "name";
+	private static String offersValidEmail = "name";
+	private static String offersValidPhoneNumber = "18198900989";
+	private static Double offersValidAmount = 48.23;
+	private static String offersValidMessage = "Donec porttitor interdum lacus sed finibus. Nam pulvinar facilisis posuere. Maecenas vel lorem amet.";
+
 	private Double savedSuggestedPrice = 22.32;
 	private String productId;
 
@@ -37,7 +43,7 @@ public class OffersResourceCreateITTest extends ServerTestIT {
 
 	@Test
 	void givenAllValidFields_whenCreateProduct_thenStatus200() throws JsonProcessingException {
-		createOfferForProduct(productId, "name", "asdb@asd.com", "18191234567", 48.23, "Donec porttitor interdum lacus sed finibus. Nam pulvinar facilisis posuere. Maecenas vel lorem amet.")
+		createOfferForProduct(productId, offersValidName, offersValidEmail, offersValidPhoneNumber, offersValidAmount, offersValidMessage)
 				.then()
 				.assertThat()
 				.statusCode(200);
@@ -45,38 +51,91 @@ public class OffersResourceCreateITTest extends ServerTestIT {
 
 	@Test
 	void givenInvalidOfferAmount_whenCreatingOffer_thenThrowExceptionINVALID_PARAMETER() throws JsonProcessingException {
-		//TODO si montant de l'offre est inferieur au montant suggerer du produit, lancer INVALID_PARAMETER
+
+		Double offersBadAmount = 10.0;
+
+		createOfferForProduct(productId, offersValidName, offersValidEmail, offersValidPhoneNumber, offersBadAmount, offersValidMessage)
+				.then()
+				.assertThat()
+				.statusCode(400);
 	}
 
 	@Test
 	void givenInvalidOfferMessage_whenCreatingOffer_thenThrowExceptionINVALID_PARAMETER() throws JsonProcessingException {
-		//TODO si le message est de moins de 100 characteres, lancer INVALID_PARAMETER
+
+		String offersBadMessage = "Message trop court";
+
+		createOfferForProduct(productId, offersValidName, offersValidEmail, offersValidPhoneNumber, offersValidAmount, offersBadMessage)
+				.then()
+				.assertThat()
+				.statusCode(400);
 	}
 
 	@Test
 	void givenNullId_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
-		//TODO si l'id est null, lancer MISSING_PARAMETER
 
-	}
+		String offersNullId = null;
 
-	@Test
-	void givenNullCreatedAt_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
-		//TODO si le created at est null, lancer MISSING_PARAMETER
+		createOfferForProduct(offersNullId, offersValidName, offersValidEmail, offersValidPhoneNumber, offersValidAmount, offersValidMessage)
+				.then()
+				.assertThat()
+				.statusCode(400);
+
 	}
 
 	@Test
 	void givenNullAmount_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
-		//TODO si le amount est null, lancer MISSING_PARAMETER
+
+		Double offersNullAmount = null;
+
+		createOfferForProduct(productId, offersValidName, offersValidEmail, offersValidPhoneNumber, offersNullAmount, offersValidMessage)
+				.then()
+				.assertThat()
+				.statusCode(400);
 	}
 
 	@Test
 	void givenNullMessage_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
-		//TODO si le message est null, lancer MISSING_PARAMETER
+
+		String offersNullMessage = null;
+
+		createOfferForProduct(productId, offersValidName, offersValidEmail, offersValidPhoneNumber, offersValidAmount, offersNullMessage)
+				.then()
+				.assertThat()
+				.statusCode(400);
 	}
 
 	@Test
-	void givenNullBuyer_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
-		//TODO si le buyer est null, lancer MISSING_PARAMETER
+	void givenNullName_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
+
+		String offersNullName = null;
+
+		createOfferForProduct(productId, offersNullName, offersValidEmail, offersValidPhoneNumber, offersValidAmount, offersValidMessage)
+				.then()
+				.assertThat()
+				.statusCode(400);
+	}
+
+	@Test
+	void givenNullEmail_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
+
+		String offersNullEmail = null;
+
+		createOfferForProduct(productId, offersValidName, offersNullEmail, offersValidPhoneNumber, offersValidAmount, offersValidMessage)
+				.then()
+				.assertThat()
+				.statusCode(400);
+	}
+
+	@Test
+	void givenNullPhoneNumber_whenCreatingOffer_thenThrowExceptionMISSING_PARAMETER() throws JsonProcessingException {
+
+		String offersNullPhoneNumber = null;
+
+		createOfferForProduct(productId, offersValidName, offersValidEmail, offersNullPhoneNumber, offersValidAmount, offersValidMessage)
+				.then()
+				.assertThat()
+				.statusCode(400);
 	}
 
 	public static io.restassured.response.Response createOfferForProduct(String productId, String name, String email, String phoneNumber, Double amount, String message) throws JsonProcessingException {
