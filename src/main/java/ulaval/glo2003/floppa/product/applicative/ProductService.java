@@ -14,7 +14,6 @@ import ulaval.glo2003.floppa.seller.domain.SellerRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ProductService {
 	private final SellerRepository sellerRepository;

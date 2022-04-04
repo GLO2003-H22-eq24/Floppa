@@ -8,7 +8,7 @@ import java.net.URI;
 
 public class HttpServerFactory {
 	private final ResourceConfig resourceConfig;
-	private static final String LOCAL_HOST = "http://localhost:%s/";
+	private static final String LOCAL_HOST = "http://0.0.0.0:%s/";
 	public HttpServerFactory(ResourceConfig resourceConfig) {
 		this.resourceConfig = resourceConfig;
 	}
