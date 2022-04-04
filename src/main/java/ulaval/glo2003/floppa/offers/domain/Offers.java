@@ -11,6 +11,7 @@ import static ulaval.glo2003.floppa.offers.repository.mongo.OffersMapping.*;
 public class Offers {
 	@Property(value = CREATED_DATE)
 	private LocalDateTime createdDate;
+	@Property(value = ID)
 	private String id;
 	@Property(value = NAME)
 	private String name;
