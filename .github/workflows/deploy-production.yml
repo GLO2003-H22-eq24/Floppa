@@ -4,7 +4,7 @@ on:
     inputs:
       branch:
         description: Branch, tag or commit to deploy
-        default: dev
+        default: main
         required: true
 jobs:
   test:
