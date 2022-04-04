@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="FloppaRunnable" type="Application" factoryName="Application">
+  <configuration default="false" name="FloppaRunnableStg" type="Application" factoryName="Application">
     <envs>
       <env name="PORT" value="8080" />
       <env name="FLOPPA_DB_NAME" value="floppa-staging" />
