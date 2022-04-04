@@ -1,7 +1,6 @@
 package ulaval.glo2003.floppa.product.domain;
 
 import dev.morphia.annotations.Entity;
-import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
@@ -14,7 +13,7 @@ import static ulaval.glo2003.floppa.product.repository.mongo.ProductMapping.*;
 
 @Entity
 public class Product {
-	@Id
+	@Property(value = ID)
 	private final String id;
 	@Property(value = CREATED_DATE)
 	private final LocalDateTime createdDate;
