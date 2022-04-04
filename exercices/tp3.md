@@ -7,8 +7,8 @@
 ![img.png](Screenshots/TP3/milestone.png)
 ## Issues
 ![img.png](Screenshots/TP3/issues1.png)
-![img.png](Screenshots/TP3/issues2.png)
-![img.png](Screenshots/TP3/issues3.png)
+![img.png](Screenshots/TP3/imgIssue.png)
+![img_1.png](Screenshots/TP3/img_1.png)
 ## Pull Request
 ![img.png](Screenshots/TP3/PR3.png)
 ![img.png](Screenshots/TP3/PR1.png)
