@@ -102,7 +102,7 @@ public class ProductResourceGetFilterITTest extends ServerTestIT {
 	}
 
 	@Test
-	@Disabled //la db contient beaucoup plus que 1 product ayant ces conditions (à cause des autres tests)
+	//la db contient beaucoup plus que 1 product ayant ces conditions (à cause des autres tests)
 	void givenFiltersSavedTitleWithOneProductWithSameTitle_whenRetrieveWithFilters_thenReturnOnlyOneProduct() throws JsonProcessingException {
 		String otherTitle = "otherTile";
 		createProduct(otherTitle, savedDescription, savedPrice, savedCategories, savedSellerId);
@@ -122,7 +122,7 @@ public class ProductResourceGetFilterITTest extends ServerTestIT {
 	}
 
 	@Test
-	@Disabled //la db contient beaucoup plus que 1 product ayant ces conditions (à cause des autres tests)
+	//la db contient beaucoup plus que 1 product ayant ces conditions (à cause des autres tests)
 	void givenTwoProductsInProductList_whenNoFilter_thenReturnTwoProduct() throws JsonProcessingException {
 		createProduct(savedTitle, savedDescription, savedPrice, savedCategories, savedSellerId);
 
