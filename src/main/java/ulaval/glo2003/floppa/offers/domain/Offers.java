@@ -24,6 +24,9 @@ public class Offers {
 	@Property(value = OFFER_AMOUNT)
 	private Double offerAmount;
 
+	public Offers() { //for morphia serialisation
+	}
+
 	public Offers(String name, Email email, PhoneNumber phoneNumber, String message, Double offerAmount, String id, LocalDateTime createdDate) {
 		this.name = name;
 		this.email = email;
