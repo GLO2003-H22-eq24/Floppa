@@ -11,7 +11,10 @@ import java.util.regex.Pattern;
 public class PhoneNumber {
 	@Transient
 	private static final Pattern phoneValidator = Pattern.compile("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$");
-	private final String phoneNumberString;
+	private String phoneNumberString;
+
+	public PhoneNumber() { //for morphia serialisation
+	}
 
 	public PhoneNumber(String phoneNumberString) throws ErrorException {
 		if (!phoneValidator.matcher(phoneNumberString).matches()){

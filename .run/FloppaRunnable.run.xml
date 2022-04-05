@@ -1,0 +1,20 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="FloppaRunnableStg" type="Application" factoryName="Application">
+    <envs>
+      <env name="PORT" value="8080" />
+      <env name="FLOPPA_DB_NAME" value="floppa-staging" />
+      <env name="FLOPPA_DB_URL" value="mongodb+srv://floppa-api:XxIDt04RxHTps0YZ@floppa.3oieg.mongodb.net/Floppa?retryWrites=true&amp;w=majority&quot; " />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="ulaval.glo2003.FloppaRunnable" />
+    <module name="floppa" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="ulaval.glo2003.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

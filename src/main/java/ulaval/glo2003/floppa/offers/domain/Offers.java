@@ -11,6 +11,7 @@ import static ulaval.glo2003.floppa.offers.repository.mongo.OffersMapping.*;
 public class Offers {
 	@Property(value = CREATED_DATE)
 	private LocalDateTime createdDate;
+	@Property(value = ID)
 	private String id;
 	@Property(value = NAME)
 	private String name;
@@ -22,6 +23,9 @@ public class Offers {
 	private String message;
 	@Property(value = OFFER_AMOUNT)
 	private Double offerAmount;
+
+	public Offers() { //for morphia serialisation
+	}
 
 	public Offers(String name, Email email, PhoneNumber phoneNumber, String message, Double offerAmount, String id, LocalDateTime createdDate) {
 		this.name = name;
