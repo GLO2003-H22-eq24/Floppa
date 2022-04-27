@@ -17,8 +17,8 @@ public abstract class ServerTestIT {
 	@BeforeEach
 	void startServer() {
 		//uncomment to use db repository
-		//FloppaRunnable floppaRunnable = new FloppaRunnable(new AppConfigDto(new DbConfigDto(dbName, dbUrl), new HttpConfigDto(PORT)));
-		FloppaRunnable floppaRunnable = new FloppaRunnable(new AppConfigDto(new HttpConfigDto(PORT)));
+		FloppaRunnable floppaRunnable = new FloppaRunnable(new AppConfigDto(new DbConfigDto(dbName, dbUrl), new HttpConfigDto(PORT)));
+		//FloppaRunnable floppaRunnable = new FloppaRunnable(new AppConfigDto(new HttpConfigDto(PORT)));
 		floppaRunnable.run();
 		this.server = floppaRunnable.getHttpServer();
 	}
