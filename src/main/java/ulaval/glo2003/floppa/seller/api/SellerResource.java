@@ -3,14 +3,16 @@ package ulaval.glo2003.floppa.seller.api;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
+import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
-import ulaval.glo2003.floppa.seller.api.message.SellerRequest;
-import ulaval.glo2003.floppa.seller.api.message.SellerResponse;
+import ulaval.glo2003.floppa.seller.api.request.SellerRequest;
+import ulaval.glo2003.floppa.seller.api.response.SellerResponse;
 import ulaval.glo2003.floppa.seller.applicative.SellerDto;
 import ulaval.glo2003.floppa.seller.applicative.SellerService;
 import ulaval.glo2003.floppa.seller.domain.Seller;
 
 import java.net.URI;
+import java.util.Optional;
 
 @Path("/sellers")
 public class SellerResource {
@@ -48,7 +50,8 @@ public class SellerResource {
     }
 
     private Response retrieveMeSeller(HttpHeaders httpheaders) throws ErrorException {
-        String idSeller = httpheaders.getHeaderString(SELLER_ID_HEADER);
+        String idSeller = Optional.ofNullable(httpheaders.getHeaderString(SELLER_ID_HEADER))
+                .filter(val -> !val.isBlank()).orElseThrow(() -> new ErrorException(ErrorCode.MISSING_PARAMETER));
         Seller seller = sellerService.retrieveSeller(idSeller);
         SellerResponse sellerResponse = sellerAssembler.toResponse(seller, true);
         return Response.ok().entity(sellerResponse).build();

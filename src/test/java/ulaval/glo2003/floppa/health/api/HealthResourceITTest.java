@@ -4,7 +4,7 @@ import io.restassured.RestAssured;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.floppa.ServerTestIT;
-import ulaval.glo2003.floppa.health.api.message.HealthResponse;
+import ulaval.glo2003.floppa.health.api.response.HealthResponse;
 
 class HealthResourceITTest extends ServerTestIT {
 

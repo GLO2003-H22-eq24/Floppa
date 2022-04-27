@@ -33,4 +33,8 @@ public enum ProductCategory {
 	public String toValueLowerCase(){
 		return this.name().toLowerCase();
 	}
+
+	public String toValueUpperCase() {
+		return this.name().toUpperCase();
+	}
 }

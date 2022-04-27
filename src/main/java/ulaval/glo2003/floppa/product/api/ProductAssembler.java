@@ -5,13 +5,13 @@ import ulaval.glo2003.floppa.app.domain.DateUtil;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.offers.api.OffersAssembler;
-import ulaval.glo2003.floppa.offers.api.message.OffersResponse;
-import ulaval.glo2003.floppa.product.api.message.ProductCreationRequest;
-import ulaval.glo2003.floppa.product.api.message.ProductResponse;
+import ulaval.glo2003.floppa.offers.api.response.OffersResponse;
+import ulaval.glo2003.floppa.product.api.request.ProductCreationRequest;
+import ulaval.glo2003.floppa.product.api.response.ProductResponse;
 import ulaval.glo2003.floppa.product.applicative.ProductDto;
 import ulaval.glo2003.floppa.product.domain.Product;
 import ulaval.glo2003.floppa.product.domain.ProductCategory;
-import ulaval.glo2003.floppa.seller.api.message.SellerResponse;
+import ulaval.glo2003.floppa.seller.api.response.SellerResponse;
 import ulaval.glo2003.floppa.seller.domain.Seller;
 
 import java.math.BigDecimal;

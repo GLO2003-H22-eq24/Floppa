@@ -9,8 +9,6 @@ import ulaval.glo2003.floppa.app.config.dto.AppConfigDto;
 import ulaval.glo2003.floppa.app.api.HttpServerConfig;
 import ulaval.glo2003.floppa.app.api.HttpServerFactory;
 
-import java.io.IOException;
-
 public class FloppaRunnable implements Runnable {
     private final AppConfigDto appConfigDto;
     private HttpServer httpServer;
@@ -27,10 +25,10 @@ public class FloppaRunnable implements Runnable {
 
     @Override
     public void run() {
+        this.httpServer = new HttpServerFactory(new HttpServerConfig(appConfigDto)).createLocalServer(appConfigDto.getHttpConfigDto().getPort());
         try {
-            this.httpServer = new HttpServerFactory(new HttpServerConfig(appConfigDto)).createLocalServer(appConfigDto.getHttpConfigDto().getPort());
             this.httpServer.start();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

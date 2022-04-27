@@ -7,6 +7,7 @@ import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.product.domain.ConditionProductDtoBuilder;
 import ulaval.glo2003.floppa.product.domain.Product;
+import ulaval.glo2003.floppa.product.repository.memory.FilterInMemoryProductFactory;
 import ulaval.glo2003.floppa.seller.domain.ConditionSellerDto;
 import ulaval.glo2003.floppa.seller.domain.Seller;
 import ulaval.glo2003.floppa.seller.domain.SellerRepository;
@@ -19,10 +20,12 @@ public class SellerRepositoryMongo implements SellerRepository {
 
 	private final Datastore datastore;
 	private final MorphiaFilterSellerFactory morphiaFilterSellerFactory;
+	private final FilterInMemoryProductFactory filterInMemoryProductFactory;
 
-	public SellerRepositoryMongo(Datastore datastore, MorphiaFilterSellerFactory morphiaFilterSellerFactory) {
+	public SellerRepositoryMongo(Datastore datastore, MorphiaFilterSellerFactory morphiaFilterSellerFactory, FilterInMemoryProductFactory filterInMemoryProductFactory) {
 		this.datastore = datastore;
 		this.morphiaFilterSellerFactory = morphiaFilterSellerFactory;
+		this.filterInMemoryProductFactory = filterInMemoryProductFactory;
 	}
 
 	@Override
@@ -48,6 +51,8 @@ public class SellerRepositoryMongo implements SellerRepository {
 		return datastore.find(Seller.class)
 				.filter(conditionsSellerFunction.toArray(Filter[]::new)).iterator().toList()
 				.stream().map(Seller::getProducts).flatMap(List::stream)
+				.filter(product -> filterInMemoryProductFactory
+						.createConditionsProductFunction(conditionSellerDto.getConditionProductDto()).stream().allMatch(func -> func.apply(product)))
 				.collect(Collectors.toList());
 	}
 
@@ -65,10 +70,14 @@ public class SellerRepositoryMongo implements SellerRepository {
 	@Override
 	public boolean checkPersistenceState() {
 		try {
-			this.datastore.getDatabase().listCollections().first(); //random call to force conn check
+			callDb();
 			return true;
 		}catch (Exception e){
 			return false;
 		}
+	}
+
+	private void callDb() throws RuntimeException {
+		this.datastore.getDatabase().listCollections().first();
 	}
 }

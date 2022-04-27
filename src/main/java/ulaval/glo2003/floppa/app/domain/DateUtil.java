@@ -7,7 +7,7 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 public class DateUtil {
-	private static final DateTimeFormatter formatISO8601WithHours = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:'Z'");
+	private static final DateTimeFormatter formatISO8601WithHours = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
 	private static final DateTimeFormatter formatISO8601WithNoHours = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 	private DateUtil() { //only util func

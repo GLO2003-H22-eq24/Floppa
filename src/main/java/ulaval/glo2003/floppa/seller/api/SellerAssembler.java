@@ -4,9 +4,9 @@ import ulaval.glo2003.floppa.app.domain.DateUtil;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.product.api.ProductAssembler;
-import ulaval.glo2003.floppa.product.api.message.ProductResponse;
-import ulaval.glo2003.floppa.seller.api.message.SellerRequest;
-import ulaval.glo2003.floppa.seller.api.message.SellerResponse;
+import ulaval.glo2003.floppa.product.api.response.ProductResponse;
+import ulaval.glo2003.floppa.seller.api.request.SellerRequest;
+import ulaval.glo2003.floppa.seller.api.response.SellerResponse;
 import ulaval.glo2003.floppa.seller.applicative.SellerDto;
 import ulaval.glo2003.floppa.seller.domain.Seller;
 

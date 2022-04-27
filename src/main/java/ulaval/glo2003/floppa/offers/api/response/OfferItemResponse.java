@@ -1,4 +1,4 @@
-package ulaval.glo2003.floppa.offers.api.message;
+package ulaval.glo2003.floppa.offers.api.response;
 
 
 public class OfferItemResponse {
