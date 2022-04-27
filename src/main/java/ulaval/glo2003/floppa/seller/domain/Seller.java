@@ -14,17 +14,20 @@ import static ulaval.glo2003.floppa.seller.repository.mongo.SellerMapping.*;
 @Entity
 public class Seller {
     @Property(value = NAME)
-    private final String name;
+    private String name;
     @Property(value = BIO)
     private String bio;
     @Property(value = BIRTHDATE)
-    private final LocalDate birthDate;
+    private LocalDate birthDate;
     @Id
-    private final String id;
+    private String id;
     @Property(value = CREATED_DATE)
-    private final LocalDateTime createdDate;
+    private LocalDateTime createdDate;
     @Property(value = PRODUCTS)
     private List<Product> products;
+
+    public Seller() { //for morphia serialisation
+    }
 
     public Seller(String name, String bio, LocalDate birthDate, String id, LocalDateTime createdDate) {
         this.birthDate = birthDate;

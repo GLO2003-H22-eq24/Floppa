@@ -14,9 +14,9 @@ import static ulaval.glo2003.floppa.product.repository.mongo.ProductMapping.*;
 @Entity
 public class Product {
 	@Property(value = ID)
-	private final String id;
+	private String id;
 	@Property(value = CREATED_DATE)
-	private final LocalDateTime createdDate;
+	private LocalDateTime createdDate;
 	@Property(value = TITLE)
 	private String title;
 	@Property(value = DESCRIPTION)
@@ -27,6 +27,9 @@ public class Product {
 	private List<ProductCategory> categories;
 	@Property(value = OFFERS)
 	private List<Offers> offers;
+
+	public Product() { //for morphia serialisation
+	}
 
 	public Product(String title, String description, Double suggestedPrice, List<ProductCategory> categories, String id, LocalDateTime createdDate) {
 		this.title = title;

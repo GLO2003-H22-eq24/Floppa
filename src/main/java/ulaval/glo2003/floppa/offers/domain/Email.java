@@ -9,7 +9,10 @@ import ulaval.glo2003.floppa.app.domain.ErrorException;
 public class Email {
 	@Transient
 	private static final EmailValidator emailValidator = EmailValidator.getInstance();
-	private final String emailString;
+	private String emailString;
+
+	public Email() { //for morphia serialisation
+	}
 
 	public Email(String emailString) throws ErrorException {
 		if (!emailValidator.isValid(emailString)){
