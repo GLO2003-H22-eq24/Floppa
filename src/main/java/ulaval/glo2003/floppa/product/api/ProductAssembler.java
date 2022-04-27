@@ -8,6 +8,7 @@ import ulaval.glo2003.floppa.offers.api.OffersAssembler;
 import ulaval.glo2003.floppa.offers.api.response.OffersResponse;
 import ulaval.glo2003.floppa.product.api.request.ProductCreationRequest;
 import ulaval.glo2003.floppa.product.api.response.ProductResponse;
+import ulaval.glo2003.floppa.product.api.response.ProductViewResponse;
 import ulaval.glo2003.floppa.product.applicative.ProductDto;
 import ulaval.glo2003.floppa.product.domain.Product;
 import ulaval.glo2003.floppa.product.domain.ProductCategory;
@@ -74,5 +75,9 @@ public class ProductAssembler {
 				productCategories.add(ProductCategory.toEnum(categoryString));
 			}
 		}
+	}
+
+	public List<ProductViewResponse> toResponseViews(List<Product> products) {
+		return new ArrayList<>(); //TODO: mettre chaque product dans un ProductViewResponse
 	}
 }
