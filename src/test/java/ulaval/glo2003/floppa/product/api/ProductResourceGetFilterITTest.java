@@ -121,10 +121,11 @@ public class ProductResourceGetFilterITTest extends ServerTestIT {
 		createProduct(savedTitle, savedDescription, savedPrice, savedCategories, savedSellerId);
 		String otherTitle = "superSpecialTitle";
 		createProduct(otherTitle, savedDescription, savedPrice, savedCategories, savedSellerId);
+		createProduct(otherTitle, savedDescription, savedPrice, savedCategories, savedSellerId);
 
-		ProductResponse[] productRespons = retrieveProductWithFilter(null, otherTitle, null, null, null).as(ProductResponse[].class);
+		ProductResponse[] productRespons = retrieveProductWithFilter(savedSellerId, "Special", null, null, null).as(ProductResponse[].class);
 
-		Assertions.assertEquals(1, productRespons.length);
+		Assertions.assertEquals(2, productRespons.length);
 	}
 
 	@Test
