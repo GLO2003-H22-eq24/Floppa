@@ -14,6 +14,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static ulaval.glo2003.floppa.product.domain.ProductFactory.STARTING_VIEWS;
 
 @ExtendWith(MockitoExtension.class)
 class ProductTest {
@@ -25,7 +26,7 @@ class ProductTest {
 		String name = "name";
 		String desc = "desc";
 		String id = "id";
-		anyProduct = new Product(name, desc, suggestedPrice, List.of(ProductCategory.APPAREL), id, LocalDateTime.now());
+		anyProduct = new Product(name, desc, suggestedPrice, List.of(ProductCategory.APPAREL), id, LocalDateTime.now(), STARTING_VIEWS);
 	}
 
 	@Test

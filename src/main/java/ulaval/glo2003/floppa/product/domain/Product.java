@@ -17,6 +17,8 @@ public class Product {
 	private String id;
 	@Property(value = CREATED_DATE)
 	private LocalDateTime createdDate;
+	@Property(value = VIEWS)
+	private Integer views;
 	@Property(value = TITLE)
 	private String title;
 	@Property(value = DESCRIPTION)
@@ -31,7 +33,7 @@ public class Product {
 	public Product() { //for morphia serialisation
 	}
 
-	public Product(String title, String description, Double suggestedPrice, List<ProductCategory> categories, String id, LocalDateTime createdDate) {
+	public Product(String title, String description, Double suggestedPrice, List<ProductCategory> categories, String id, LocalDateTime createdDate, Integer views) {
 		this.title = title;
 		this.description = description;
 		this.suggestedPrice = suggestedPrice;
@@ -39,6 +41,7 @@ public class Product {
 		this.offers = new ArrayList<>();
 		this.id = id;
 		this.createdDate = createdDate;
+		this.views = views;
 	}
 
 	public Double computeMeanOffers(){
@@ -69,13 +72,17 @@ public class Product {
 		return suggestedPrice;
 	}
 
+	public Integer getViews() {
+		return views;
+	}
+
 	public List<Offers> getOffers() {
-		Optional.ofNullable(this.offers).orElseGet(() -> this.offers = new ArrayList<>());
+		this.offers = Optional.ofNullable(this.offers).orElseGet(ArrayList::new);
 		return offers;
 	}
 
 	public List<ProductCategory> getCategories() {
-		Optional.ofNullable(this.categories).orElseGet(() -> this.categories = new ArrayList<>());
+		this.categories = Optional.ofNullable(this.categories).orElseGet(ArrayList::new);
 		return categories;
 	}
 
@@ -98,5 +105,9 @@ public class Product {
 				.min(Comparator.comparing(Offers::getOfferAmount))
 				.map(Offers::getOfferAmount)
 				.orElse(null);
+	}
+
+	public void addView(){
+		this.views += 1;
 	}
 }
