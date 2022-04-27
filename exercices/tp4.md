@@ -39,22 +39,23 @@ Répondez aux questions suivantes dans le fichier `exercices/tp4.md`.
 
 ## Préparation
 
-L'Open Source est une pratique bien répendue dans la communauté informatique mais souvent mal comprise. Floppa désire contribuer au développement logiciel communautaire et aurait ainsi besoin de connaître les enjeux principaux de la pratique.
+1. Une compagnie qui contribue à des projet open source obtient plusieurs bénéfices. Tout d'abord, si le projet est créé par la compagnie, les utilisateurs du projet seront en mesure d'aider à régler un bug lorsqu'ils en trouvent un.
+Cela fait en sorte qu'il y aura moins d'effort nécessaires pour l'équipe de maintenance afin de garder le projet stable. Cela bénéficie à tous, car il y aura moins de problème avec le projet,
+donc les utilisateurs seront plus satisfait avec le projet. Également, rendre le projet open source permet une plus grande adoption, ce qui peut être bénéfique pour l'entreprise, car cela amène
+un nouvelle intérêt envers l'entreprise qui n'aurait pas été présent si le projet aurait été closed source. Dans le cas où le projet ne provient pas de l'entreprise, il est tout de même à son 
+avantage de contribuer à ce type de projet, car elle pourrait simplement engager quelqu'un afin de faire des modifications à un projet qui existe déjà afin que celui-ci réponde plus aux besoins 
+de l'entreprise au lieu de créer un nouveau projet closed source qui prendrait beaucoup plus de temps afin d'obtenir le même résultat.
 
-Pour ce faire, lisez d'abord les articles suivants et discuttez-en en équipe :
+2. Il est important de créer une bonne documentation afin que peu importe ce qu'une personne cherche, elle est en mesure de le trouver dans la documentation. Par exemple, il est important 
+d'avoir un README afin que de nouveaux utilisateurs soient en mesure de savoir comment utiliser le projet. Un projet open source peut devenir trop grand pour l'équipe en place, cela peut 
+causer plusieurs problèmes, car l'équipe ne serait pas en mesure de répondre à la quantité de demandes qui ne feraiewnt qu'augmenter au point de perdre le contrôle du projet. Il peut également
+être difficile de gérer la partie légale d'un projet open source. Autant les dépendances que d'autres aspects du projet comme son nom doivent être grandment vérifier afin qu'il n'y est pas de
+problèmes légaux liés à ceux-ci. Il faut également protéger le projet, mais cela ce fait bien plus facilement à l'aide d'une licence.
 
-- [How to Contribute to Open Source](https://opensource.guide/how-to-contribute/)
-- [Starting an Open Source Project](https://opensource.guide/starting-a-project/)
-- [Best Practices for Maintainers](https://opensource.guide/best-practices/)
-- [Leadership and Governance](https://opensource.guide/leadership-and-governance/)
-- [Your Code of Conduct](https://opensource.guide/code-of-conduct/)
-- [The Legal Side of Open Source](https://opensource.guide/legal/)
+3. Nous avons été particulièrement surpris par la capacité que n'importe qui peut contribuer à un projet open source, peu importe leurs connaisances. Quelqu'un 
+qui aime écrire peut aider un projet en écrivant de la documentation, quelqu'un qui aime la conception peut aider un projet avec sa conception afin de rendre le projet plus facile à utiliser,
+quelqu'un qui aime planifier des événements peut aider en organsisant une conférence pour le projet afin qu'il soit plus connu, etc.
 
-Puis, répondez aux questions suivantes dans le fichier `exercices/tp4.md` :
-
-1. Nommez 3 avantages à contribuer à des projets open source en tant qu'entreprise et justifiez en quoi cela peut être bénéfique pour tous.
-2. Décrivez 3 défis qu'impose la mise en place d'un projet open source et justifiez.
-3. Quelle information vous a-t-elle le plus surprise à propos de l'open source?
 
 ## Exécution
 
