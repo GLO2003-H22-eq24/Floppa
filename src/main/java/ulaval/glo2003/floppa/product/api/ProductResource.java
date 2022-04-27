@@ -7,11 +7,11 @@ import org.javatuples.Pair;
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
 import ulaval.glo2003.floppa.offers.api.OffersAssembler;
-import ulaval.glo2003.floppa.offers.api.message.OffersRequest;
+import ulaval.glo2003.floppa.offers.api.request.OffersRequest;
 import ulaval.glo2003.floppa.offers.applicative.OffersDto;
 import ulaval.glo2003.floppa.offers.applicative.OffersService;
-import ulaval.glo2003.floppa.product.api.message.ProductCreationRequest;
-import ulaval.glo2003.floppa.product.api.message.ProductResponse;
+import ulaval.glo2003.floppa.product.api.request.ProductCreationRequest;
+import ulaval.glo2003.floppa.product.api.response.ProductResponse;
 import ulaval.glo2003.floppa.product.applicative.ProductDto;
 import ulaval.glo2003.floppa.product.applicative.ProductService;
 import ulaval.glo2003.floppa.product.domain.ConditionProductDtoBuilder;
@@ -67,7 +67,7 @@ public class ProductResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveProduct(@PathParam("productId") String id) throws ErrorException {
-		Product product = this.productService.retrieveOneProductWithConditions(new ConditionProductDtoBuilder().addProductId(id).build());
+		Product product = this.productService.retrieveOneProductWithConditions(new ConditionProductDtoBuilder().addProductId(fetchProductId(id)).build());
 		Seller seller = this.productService.retrieveSellerByProduct(product);
 		ProductResponse productWithSellerDtoResponse = productAssembler.toResponse(product, seller, false);
 		return Response.ok().entity(productWithSellerDtoResponse).build();
@@ -88,6 +88,10 @@ public class ProductResource {
 	}
 
 	private String retrieveSellerIdFromHeaders(HttpHeaders headers) throws ErrorException {
-		return Optional.ofNullable(headers.getRequestHeaders().getFirst("X-Seller-Id")).orElseThrow(() -> new ErrorException(ErrorCode.MISSING_PARAMETER));
+		return fetchProductId(headers.getRequestHeaders().getFirst("X-Seller-Id"));
+	}
+
+	private String fetchProductId(String id) throws ErrorException {
+		return Optional.ofNullable(id).orElseThrow(() -> new ErrorException(ErrorCode.MISSING_PARAMETER));
 	}
 }

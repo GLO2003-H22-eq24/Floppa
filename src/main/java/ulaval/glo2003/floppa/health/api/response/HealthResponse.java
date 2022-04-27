@@ -1,4 +1,4 @@
-package ulaval.glo2003.floppa.health.api.message;
+package ulaval.glo2003.floppa.health.api.response;
 
 public class HealthResponse {
 	private boolean db;

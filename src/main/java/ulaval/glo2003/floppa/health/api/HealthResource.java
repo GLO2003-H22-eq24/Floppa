@@ -7,7 +7,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import ulaval.glo2003.floppa.health.api.message.HealthResponse;
+import ulaval.glo2003.floppa.health.api.response.HealthResponse;
 import ulaval.glo2003.floppa.health.applicative.HealthService;
 
 @Path("health")

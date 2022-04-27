@@ -2,9 +2,9 @@ package ulaval.glo2003.floppa.offers.api;
 
 import ulaval.glo2003.floppa.app.domain.ErrorCode;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
-import ulaval.glo2003.floppa.offers.api.message.OfferItemResponse;
-import ulaval.glo2003.floppa.offers.api.message.OffersRequest;
-import ulaval.glo2003.floppa.offers.api.message.OffersResponse;
+import ulaval.glo2003.floppa.offers.api.response.OfferItemResponse;
+import ulaval.glo2003.floppa.offers.api.request.OffersRequest;
+import ulaval.glo2003.floppa.offers.api.response.OffersResponse;
 import ulaval.glo2003.floppa.offers.applicative.OffersDto;
 import ulaval.glo2003.floppa.offers.domain.Email;
 import ulaval.glo2003.floppa.offers.domain.PhoneNumber;
@@ -12,6 +12,7 @@ import ulaval.glo2003.floppa.product.domain.Product;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ public class OffersAssembler {
 		if (detailledItems){
 			min = Optional.ofNullable(product.computeMinOffers()).map(this::computeAs2DecimalPoint).orElse(null);
 			max = Optional.ofNullable(product.computeMaxOffers()).map(this::computeAs2DecimalPoint).orElse(null);
-			items = Optional.ofNullable(product.getOffers()).filter(offers -> !offers.isEmpty()).map(offerItemAssembler::toResponse).orElse(null);
+			items = Optional.ofNullable(product.getOffers()).filter(offers -> !offers.isEmpty()).map(offerItemAssembler::toResponse).orElse(new ArrayList<>());
 		}
 
 		return new OffersResponse(mean, product.computeNumberOfOffers(), min, max, items);
@@ -43,9 +44,9 @@ public class OffersAssembler {
 	public OffersDto toDto(OffersRequest offersRequest) throws ErrorException {
 		Double amount = Optional.ofNullable(offersRequest.getAmount()).orElseThrow(() -> new ErrorException(ErrorCode.MISSING_PARAMETER));
 		String name = Optional.ofNullable(offersRequest.getName()).filter(val -> ! val.isBlank()).orElseThrow(() -> new ErrorException(ErrorCode.MISSING_PARAMETER));
-		Email email = new Email(Optional.ofNullable(offersRequest.getEmail()).filter(val -> !val.isBlank()).orElseThrow(() -> new ErrorException(ErrorCode.MISSING_PARAMETER)));
-		PhoneNumber phoneNumber = new PhoneNumber(Optional.ofNullable(offersRequest.getPhoneNumber()).filter(val -> !val.isBlank()).orElseThrow(() -> new ErrorException(ErrorCode.MISSING_PARAMETER)));
+		String email = Optional.ofNullable(offersRequest.getEmail()).filter(val -> !val.isBlank()).orElseThrow(() -> new ErrorException(ErrorCode.MISSING_PARAMETER));
+		String phoneNumber = Optional.ofNullable(offersRequest.getPhoneNumber()).filter(val -> !val.isBlank()).orElseThrow(() -> new ErrorException(ErrorCode.MISSING_PARAMETER));
 		String message = Optional.ofNullable(offersRequest.getMessage()).filter(val -> !val.isBlank()).orElseThrow(() -> new ErrorException(ErrorCode.MISSING_PARAMETER));
-		return new OffersDto(name, email, phoneNumber, amount, message);
+		return new OffersDto(name, new Email(email), new PhoneNumber(phoneNumber), amount, message);
 	}
 }

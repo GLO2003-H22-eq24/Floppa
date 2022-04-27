@@ -49,6 +49,6 @@ public class RepositoryFactory {
 	private SellerRepository createMongoRepository(String sourcePackage, DbConfigDto dbConfigDto) throws ConnectException {
 		MongoClient mongoClient = mongoClientFactory.createMongoClient(dbConfigDto.getDbUrl());
 		Datastore datastore = dataStoreFactory.createDataStore(dbConfigDto.getDbName(), sourcePackage, mongoClient);
-		return new SellerRepositoryMongo(datastore, new MorphiaFilterSellerFactory(new MorphiaFilterProductFactory()));
+		return new SellerRepositoryMongo(datastore, new MorphiaFilterSellerFactory(new MorphiaFilterProductFactory()), new FilterInMemoryProductFactory());
 	}
 }
