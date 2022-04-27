@@ -68,12 +68,89 @@ Maintenant que vous êtes mieux renseignés sur l'open source, vous savez qu'il 
 
 # Outils de métriques
 
-Afin de s'assurer que la qualité de votre code respecte les standards de l'industrie, on vous demande d'intégrer **3** outils d'analyse et de métrique du code. Ainsi, vous devez trouver et intégrer :
+## Outil d'analyse de la qualité du code: **test**
+![img.png](Screenshots/TP4/screen1.png)
+![img.png](Screenshots/TP4/screen2.png)
 
-- 1 outil d'analyse de la **qualité du code**
-- 1 outil de détection de **failles de sécurité**
-- 1 outil de mesure du **test coverage**
+## outil de détection de failles de sécurité: **CodeQL**
+![img.png](Screenshots/TP4/CodeQLscreen1.png)
+![img.png](Screenshots/TP4/CodeQLscreen2.png)
 
-Remettez au moins **2 screenshot par outil** afin de bien montrer les résultats des analyses dans le fichier `exercices/tp4.md`.
+## outil de mesure du test coverage: **Code coverage**
+![img.png](Screenshots/TP4/screen1.png)
+![img.png](Screenshots/TP4/screen2.png)
 
-**🚨 IMPORTANT 🚨** Vos outils doivent s'intégrer à votre code de manière continue, soit par le pipeline CI, soit en y connectant votre repository Github. Ces outils ne **peuvent pas** être des outils exécutés manuellement (ex : par IntelliJ).
+# Story: Statistique 
+
+##  Description
+En tant que vendeur, je veux pouvoir ajouter une vue sur un produit afin de signaler l'intérêt pour ce produit ainsi que de visualiser cet intérêt.
+
+##  Critères de succès
+1. On peut incrémenter le nombre de vue pour un produit.
+2. On peut visualiser le nombre de vue par produit. 
+3. Le vendeur courant peut visualiser ses vues.
+
+##  Détails techniques
+
+### Requête ajouter view
+
+#### *Route*
+```
+POST /products/{productId}/views
+```
+
+### Réponse status
+
+- <code> 200 OK </code>
+
+### Exceptions
+ 
+- <code> ITEM_NOT_FOUND </code> si le produit n'existe pas.
+- <code> MISSING_PARAMETER </code> si product ID est manquant (<code> null </code>).
+
+### Requête voir views
+
+#### *Route*
+```
+GET /products/@me 
+```
+ *Headers*
+- <code> X-Seller-Id </code>: <code> String </code>
+    - ID du vendeur
+
+### Payload 
+```javascript
+[
+    {
+      productId: string,
+      views: int,
+    }
+]
+```
+
+### Exemple de payload valide
+```javascript
+[
+    {
+        "productId": "7f12e673-4250-2177-91ec-7a675042607c",
+        "views": 7
+    },
+    {
+        "productId": "6f00e6b3-4250-4177-91ec-8b675042607c",
+        "views": 8
+    },
+
+]
+``` 
+
+### Réponse status
+
+- <code> 200 OK </code>
+
+### Exceptions
+ 
+- <code> ITEM_NOT_FOUND </code> si le seller Id n'existe pas.
+- <code> MISSING_PARAMETER </code> si le seller Id est manquant (<code> null </code>).
+
+
+
