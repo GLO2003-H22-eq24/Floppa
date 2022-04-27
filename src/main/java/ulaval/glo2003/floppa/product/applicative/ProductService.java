@@ -59,4 +59,8 @@ public class ProductService {
 		this.sellerRepository.retrieveSeller(conditionSellerDto.getSellerId());
 		return this.sellerRepository.findProducts(conditionSellerDto);
 	}
+
+	public void addViewToProduct(String productId) {
+		//todo: ajouter le code pour ajouter une view dans un product Id
+	}
 }
