@@ -67,63 +67,35 @@ Maintenant que vous êtes mieux renseignés sur l'open source, vous savez qu'il 
 
 # Outils de métriques
 
-## Outil d'analyse de la qualité du code: **SonarQube**
-- screen 1
-- screen 2
+## Outil d'analyse de la qualité du code: **test**
+![img.png](Screenshots/TP4/screen1.png)
+![img.png](Screenshots/TP4/screen2.png)
 
-## outil de détection de failles de sécurité: **SonarQube**
-- screen 1
-- screen 2
+## outil de détection de failles de sécurité: **CodeQL**
+![img.png](Screenshots/TP4/CodeQLscreen1.png)
+![img.png](Screenshots/TP4/CodeQLscreen2.png)
 
-## outil de mesure du test coverage: **Checkstyle**
-- screen 1
-- screen 2
-
-- 1 outil d'analyse de la **qualité du code**
-- 1 outil de détection de **failles de sécurité**
-- 1 outil de mesure du **test coverage**
-
-Remettez au moins **2 screenshot par outil** afin de bien montrer les résultats des analyses dans le fichier `exercices/tp4.md`.
-
-**🚨 IMPORTANT 🚨** Vos outils doivent s'intégrer à votre code de manière continue, soit par le pipeline CI, soit en y connectant votre repository Github. Ces outils ne **peuvent pas** être des outils exécutés manuellement (ex : par IntelliJ).
+## outil de mesure du test coverage: **Code coverage**
+![img.png](Screenshots/TP4/screen1.png)
+![img.png](Screenshots/TP4/screen2.png)
 
 # Story: Statistique 
 
 ##  Description
-En tant qu'acheteur, je veux effectuer une offre sur un produit afin de signaler mon intérêt d'achat.
+En tant que vendeur, je veux pouvoir ajouter une vue sur un produit afin de signaler l'intérêt pour ce produit ainsi que de visualiser cet intérêt.
 
 ##  Critères de succès
-1. L'offre est sauvegardée dans l'application.
-2. Les nouvelles offres aparaissent dans les informations du produit associé (tel que décrit dans get product et filter products).
-3. Les formats de email et de numéro de téléphones sont validés.
-4. Le montant de l'offre doit être supérieur ou égal au montant suggéré du produit.
-
-
+1. On peut incrémenter le nombre de vue pour un produit.
+2. On peut visualiser le nombre de vue par produit. 
+3. Le vendeur courant peut visualiser ses vues.
 
 ##  Détails techniques
 
-### Requête
+### Requête ajouter view
 
 #### *Route*
 ```
-POST /products/{productId}/offers
-```
-
-#### *Payload*
-```javascript
-{ 
-    "test": "mon payload" 
-    "test": [
-        "allo",
-        "allo2"
-    ] 
-}
-```
-
-#### *Exemple Valide*
-
-```javascript
-{ "test": "mon payload" }
+POST /products/{productId}/views
 ```
 
 ### Réponse status
@@ -133,8 +105,51 @@ POST /products/{productId}/offers
 ### Exceptions
  
 - <code> ITEM_NOT_FOUND </code> si le produit n'existe pas.
-- <code> INVALID_PARAMETER </code> si un des champs est invalide.
-- <code> MISSING_PARAMETER </code> si un des champs est manquant (<code> null </code>).
+- <code> MISSING_PARAMETER </code> si product ID est manquant (<code> null </code>).
+
+### Requête voir views
+
+#### *Route*
+```
+GET /products/@me 
+```
+ *Headers*
+- <code> X-Seller-Id </code>: <code> String </code>
+    - ID du vendeur
+
+### Payload 
+```javascript
+[
+    {
+      productId: string,
+      views: int,
+    }
+]
+```
+
+### Exemple de payload valide
+```javascript
+[
+    {
+        "productId": "7f12e673-4250-2177-91ec-7a675042607c",
+        "views": 7
+    },
+    {
+        "productId": "6f00e6b3-4250-4177-91ec-8b675042607c",
+        "views": 8
+    },
+
+]
+``` 
+
+### Réponse status
+
+- <code> 200 OK </code>
+
+### Exceptions
+ 
+- <code> ITEM_NOT_FOUND </code> si le seller Id n'existe pas.
+- <code> MISSING_PARAMETER </code> si le seller Id est manquant (<code> null </code>).
 
 
 
