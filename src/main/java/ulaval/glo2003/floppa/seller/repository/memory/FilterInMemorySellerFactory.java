@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public class FilterInMemorySellerFactory {
-	private FilterInMemoryProductFactory filterInMemoryProductFactory;
+	private final FilterInMemoryProductFactory filterInMemoryProductFactory;
 
 	public FilterInMemorySellerFactory(FilterInMemoryProductFactory filterInMemoryProductFactory) {
 		this.filterInMemoryProductFactory = filterInMemoryProductFactory;
@@ -22,7 +22,8 @@ public class FilterInMemorySellerFactory {
 	public List<Function<Seller, Boolean>> createConditionsSellerFunction(ConditionSellerDto conditionSellerDto){
 		List<Function<Seller, Boolean>> sellerConditions = new ArrayList<>();
 		this.addSellerIdCondition(conditionSellerDto.getSellerId(), sellerConditions);
-		this.addProductFilterCondition(sellerConditions, conditionSellerDto.getConditionProductDto());
+		Optional.ofNullable(conditionSellerDto.getConditionProductDto())
+				.ifPresent(conditionProductDto -> this.addProductFilterCondition(sellerConditions, conditionProductDto));
 		this.addDefaultTrueCondition(sellerConditions);
 		return sellerConditions;
 	}
