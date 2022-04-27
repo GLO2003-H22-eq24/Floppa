@@ -112,7 +112,7 @@ public class ProductResourceGetFilterITTest extends ServerTestIT {
 
 		ProductResponse[] productRespons = retrieveProductWithFilter(null, null, null, null, null).as(ProductResponse[].class);
 
-		Assertions.assertTrue(productRespons.length > 1);
+		Assertions.assertTrue(productRespons.length >= 1);
 	}
 
 	@Test
