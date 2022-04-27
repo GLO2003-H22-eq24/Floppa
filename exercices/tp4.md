@@ -67,7 +67,17 @@ Maintenant que vous êtes mieux renseignés sur l'open source, vous savez qu'il 
 
 # Outils de métriques
 
-Afin de s'assurer que la qualité de votre code respecte les standards de l'industrie, on vous demande d'intégrer **3** outils d'analyse et de métrique du code. Ainsi, vous devez trouver et intégrer :
+## Outil d'analyse de la qualité du code: **SonarQube**
+- screen 1
+- screen 2
+
+## outil de détection de failles de sécurité: **SonarQube**
+- screen 1
+- screen 2
+
+## outil de mesure du test coverage: **Checkstyle**
+- screen 1
+- screen 2
 
 - 1 outil d'analyse de la **qualité du code**
 - 1 outil de détection de **failles de sécurité**
@@ -76,3 +86,55 @@ Afin de s'assurer que la qualité de votre code respecte les standards de l'indu
 Remettez au moins **2 screenshot par outil** afin de bien montrer les résultats des analyses dans le fichier `exercices/tp4.md`.
 
 **🚨 IMPORTANT 🚨** Vos outils doivent s'intégrer à votre code de manière continue, soit par le pipeline CI, soit en y connectant votre repository Github. Ces outils ne **peuvent pas** être des outils exécutés manuellement (ex : par IntelliJ).
+
+# Story: Statistique 
+
+##  Description
+En tant qu'acheteur, je veux effectuer une offre sur un produit afin de signaler mon intérêt d'achat.
+
+##  Critères de succès
+1. L'offre est sauvegardée dans l'application.
+2. Les nouvelles offres aparaissent dans les informations du produit associé (tel que décrit dans get product et filter products).
+3. Les formats de email et de numéro de téléphones sont validés.
+4. Le montant de l'offre doit être supérieur ou égal au montant suggéré du produit.
+
+
+
+##  Détails techniques
+
+### Requête
+
+#### *Route*
+```
+POST /products/{productId}/offers
+```
+
+#### *Payload*
+```javascript
+{ 
+    "test": "mon payload" 
+    "test": [
+        "allo",
+        "allo2"
+    ] 
+}
+```
+
+#### *Exemple Valide*
+
+```javascript
+{ "test": "mon payload" }
+```
+
+### Réponse status
+
+- <code> 200 OK </code>
+
+### Exceptions
+ 
+- <code> ITEM_NOT_FOUND </code> si le produit n'existe pas.
+- <code> INVALID_PARAMETER </code> si un des champs est invalide.
+- <code> MISSING_PARAMETER </code> si un des champs est manquant (<code> null </code>).
+
+
+
