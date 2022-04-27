@@ -123,7 +123,7 @@ public class ProductResourceGetFilterITTest extends ServerTestIT {
 		createProduct(otherTitle, savedDescription, savedPrice, savedCategories, savedSellerId);
 		createProduct(otherTitle, savedDescription, savedPrice, savedCategories, savedSellerId);
 
-		ProductResponse[] productRespons = retrieveProductWithFilter(null, "Special", null, null, null).as(ProductResponse[].class);
+		ProductResponse[] productRespons = retrieveProductWithFilter(savedSellerId, "Special", null, null, null).as(ProductResponse[].class);
 
 		Assertions.assertEquals(2, productRespons.length);
 	}
