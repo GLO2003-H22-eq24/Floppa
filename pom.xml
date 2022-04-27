@@ -15,6 +15,8 @@
         <port/>
         <dbName/>
         <dbUrl/>
+        <sonar.organization>glo2003-h22-eq24</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
     <profiles>
         <profile>
