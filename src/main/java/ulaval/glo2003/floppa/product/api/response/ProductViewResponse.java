@@ -1,5 +1,8 @@
 package ulaval.glo2003.floppa.product.api.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductViewResponse {
 	private String productId;
 	private Integer views;

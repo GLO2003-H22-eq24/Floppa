@@ -15,12 +15,14 @@ public class FilterInMemoryProductFactory {
 
 	public List<Function<Product, Boolean>> createConditionsProductFunction(ConditionProductDto conditionProductDto) {
 		List<Function<Product, Boolean>> productConditions = new ArrayList<>();
-		this.addProductIdCondition(conditionProductDto.getProductId(), productConditions);
-		this.addProductTitleCondition(conditionProductDto.getTitle(), productConditions);
-		this.addCategoriesCondition(conditionProductDto.getProductCategories(), productConditions);
-		this.addMinPriceCondition(conditionProductDto.getMinPrice(), productConditions);
-		this.addMaxPriceCondition(conditionProductDto.getMaxPrice(), productConditions);
-		this.addDefaultTrueCondition(productConditions);
+		Optional.ofNullable(conditionProductDto).ifPresentOrElse(conditions -> {
+			this.addProductIdCondition(conditionProductDto.getProductId(), productConditions);
+			this.addProductTitleCondition(conditionProductDto.getTitle(), productConditions);
+			this.addCategoriesCondition(conditionProductDto.getProductCategories(), productConditions);
+			this.addMinPriceCondition(conditionProductDto.getMinPrice(), productConditions);
+			this.addMaxPriceCondition(conditionProductDto.getMaxPrice(), productConditions);
+			this.addDefaultTrueCondition(productConditions);
+		}, () -> this.addDefaultTrueCondition(productConditions));
 		return productConditions;
 	}
 

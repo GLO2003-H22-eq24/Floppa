@@ -78,6 +78,6 @@ public class ProductAssembler {
 	}
 
 	public List<ProductViewResponse> toResponseViews(List<Product> products) {
-		return new ArrayList<>(); //TODO: mettre chaque product dans un ProductViewResponse
+		return products.stream().map(product -> new ProductViewResponse(product.getId(), product.getViews())).collect(Collectors.toList());
 	}
 }
