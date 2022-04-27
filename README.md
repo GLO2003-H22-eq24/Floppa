@@ -41,7 +41,7 @@ mvn exec:java -Dport={int} -DdbName={string} -DdbUrl={string}
 - Changer l'url de la DB via -DdbUrl.
 ##### Exemple custom args
 ```
-mvn clean install exec:java "-DdbName=floppa-staging" "-Dport=8080" "-DdbUrl=mongodb+srv://floppa-api:XxIDt04RxHTps0YZ@floppa.3oieg.mongodb.net/Floppa?retryWrites=true&w=majority"
+mvn clean install exec:java "-DdbName=floppa-staging" "-Dport=8080" "-DdbUrl=mongodb+srv://floppa-api:XxIDt04RxHTps0YZ@floppa.3oieg.mongodb.net/Floppa?retryWrites=true"
 ```
 #### Comment utiliser
 - Aller sur l'adresse "http://localhost:8080/" 
@@ -49,7 +49,7 @@ mvn clean install exec:java "-DdbName=floppa-staging" "-Dport=8080" "-DdbUrl=mon
 ## Mongo
 ### DB Urls
 - ATLAS_CONNECTION_URL = "mongodb+srv://floppa-api:
-  XxIDt04RxHTps0YZ@floppa.3oieg.mongodb.net/Floppa?retryWrites=true&w=majority";
+  XxIDt04RxHTps0YZ@floppa.3oieg.mongodb.net/Floppa?retryWrites=true";
 - LOCAL_CONNECTION_URL = "mongodb://localhost";
 
 ### DB names
