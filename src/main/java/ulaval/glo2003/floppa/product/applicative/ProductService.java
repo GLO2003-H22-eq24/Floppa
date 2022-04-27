@@ -54,4 +54,8 @@ public class ProductService {
 		}
 		return pairsSellerProduct;
 	}
+
+	public List<Product> retrieveOnlyProductBySellerWithConditions(ConditionSellerDto conditionSellerDto) {
+		return this.sellerRepository.findProducts(conditionSellerDto);
+	}
 }
