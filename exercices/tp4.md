@@ -56,22 +56,35 @@
 
 ## Préparation
 
-1. Une compagnie qui contribue à des projet open source obtient plusieurs bénéfices. Tout d'abord, si le projet est créé par la compagnie, les utilisateurs du projet seront en mesure d'aider à régler un bug lorsqu'ils en trouvent un.
-Cela fait en sorte qu'il y aura moins d'effort nécessaires pour l'équipe de maintenance afin de garder le projet stable. Cela bénéficie à tous, car il y aura moins de problème avec le projet,
-donc les utilisateurs seront plus satisfait avec le projet. Également, rendre le projet open source permet une plus grande adoption, ce qui peut être bénéfique pour l'entreprise, car cela amène
-un nouvelle intérêt envers l'entreprise qui n'aurait pas été présent si le projet aurait été closed source. Dans le cas où le projet ne provient pas de l'entreprise, il est tout de même à son 
-avantage de contribuer à ce type de projet, car elle pourrait simplement engager quelqu'un afin de faire des modifications à un projet qui existe déjà afin que celui-ci réponde plus aux besoins 
-de l'entreprise au lieu de créer un nouveau projet closed source qui prendrait beaucoup plus de temps afin d'obtenir le même résultat.
+1. Nommez 3 avantages à contribuer à des projets open source en tant qu'entreprise et justifiez en quoi cela peut être bénéfique pour tous.
+   1. Trouver des prospects. Ainsi, il est possible de rencontrer des développeurs passionnés et
+      d’évaluer leurs compétences sans faire d’entrevues ou faire de recherches. Ainsi, cela permet
+      aussi aux développeurs intéressés de potentiellement se trouver un emploi dans le domaine.
+   2. Monter en compétences des développeurs. Ainsi, le fait de favoriser les échanges entre le
+      développeur assure un échange de connaissances et, donc, une potentielle monté en
+      compétence.
+   3. Augmenter la vélocité des projets. Par conséquent, autant l’entreprise que les utilisateurs du
+      projet peuvent bénéficier d’une meilleure vélocité.
+   4. Finalement, le fait d’exposer le projet en open source augmente le nombre d’utilisateurs qui
+      peuvent trouver des bugs ou suggérer des nouvelles fonctionnalités.
 
-2. Il est important de créer une bonne documentation afin que peu importe ce qu'une personne cherche, elle est en mesure de le trouver dans la documentation. Par exemple, il est important 
-d'avoir un README afin que de nouveaux utilisateurs soient en mesure de savoir comment utiliser le projet. Un projet open source peut devenir trop grand pour l'équipe en place, cela peut 
-causer plusieurs problèmes, car l'équipe ne serait pas en mesure de répondre à la quantité de demandes qui ne feraiewnt qu'augmenter au point de perdre le contrôle du projet. Il peut également
-être difficile de gérer la partie légale d'un projet open source. Autant les dépendances que d'autres aspects du projet comme son nom doivent être grandment vérifier afin qu'il n'y est pas de
-problèmes légaux liés à ceux-ci. Il faut également protéger le projet, mais cela ce fait bien plus facilement à l'aide d'une licence.
+2. Décrivez 3 défis qu'impose la mise en place d'un projet open source et justifiez.
+   1. Risque de ne pas respecter des standards. Ainsi beaucoup de contributeurs implique beaucoup
+      de façon de voir les choses. Si certains standards ne sont pas respecté, le projet peu facilement
+      devenir chaotique.
+   2. Un risque de ne pas avoir de ne pas définir clairement les tâches. Il devient potentiellement
+      difficile d’implémenter des nouveaux features complexe si il n’y a pas un processus clair pour
+      définir les tâches à réaliser.
+   3. Finalement, il faut que tous aient une vision commune du projet. En effet, le projet doit garder
+      un et une seule direction sinon il risque d’avoir beaucoup de conflits et peu d’implémentation.
+3. Quelle information vous a-t-elle le plus surprise à propos de l'open source?
+   - Faire de la contribution n’est pas nécessairement faire du code. En effet, il est possible de contribuer de
+     plusieurs façon. Par exemple, on peut organiser des évènements, faire le design de l’application (autant
+     architecture que des design visuel).. etc.
 
-3. Nous avons été particulièrement surpris par la capacité que n'importe qui peut contribuer à un projet open source, peu importe leurs connaisances. Quelqu'un 
-qui aime écrire peut aider un projet en écrivant de la documentation, quelqu'un qui aime la conception peut aider un projet avec sa conception afin de rendre le projet plus facile à utiliser,
-quelqu'un qui aime planifier des événements peut aider en organsisant une conférence pour le projet afin qu'il soit plus connu, etc.
+
+
+
 
 ## Choix de la license: MIT License
 - La license est permissive. Ca vveut donc dire qu'elle se caractérise par des exigences minimales sur la manière dont un logiciel peut être redistribué
