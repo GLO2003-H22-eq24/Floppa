@@ -1,20 +1,6 @@
 # TP4
 # Planification du travail sur Github
 
-L'ensemble de votre travail doit être documenté et planifier sur Github Project en respectant les meilleures pratiques de développement et de processus logiciel. Vous devez donc :
-
-1. Créer un *Project* pour l'ensemble du projet. 
-    
-2. Créer un *milestone* pour le contenu du TP2
-
-3. Créer des issues afin de planifier et séparer le travail. 
-   
-4. Créer des *Pull Requests* (PR) afin d'intégrer (*merge*) les changements. 
-   
-5. Décidez d'une stratégie de commits et de branches afin d'uniformiser et optimiser votre processus.
-
-
-Afin de vous évaluer, **vous devez fournir ces captures d'écran** dans le fichier `exerices/tp4.md` :
 
 - **1** pour le ***Project*** comprenant les colonnes et les issues associées
 - **1** pour le ***milestone*** comprenant le titre, la description et les issues associées
@@ -27,13 +13,26 @@ Afin de vous évaluer, **vous devez fournir ces captures d'écran** dans le fich
 
 # Rétrospective finale
 
-Répondez aux questions suivantes dans le fichier `exercices/tp4.md`.
-
 1. Décrivez 2 problématiques que possèdent votre processus et développer 2 plans distincts afin de les résoudres. Soyez constructifs dans vos critiques et évitez de mettre la faute sur une ou un groupe de personne en particulier.
+<br></br>
 2. Décrivez la démarche que vous aviez entrepris afin d'intégrer de nouveaux outils technologiques. Quelles étaient les étapes du processus? Comment avez-vous réagis aux différents bogues? Exploriez-vous à l'aide de tests unitaires ou manuels? Qu'avez-vous appris suite à cette démarche?
+<br></br>
 3. Quels sont les bons coups de votre équipe? De quelles parties êtes-vous fiers? Nommez-en 3.
+    - Beaucoup de communication
+    - On bon travail au niveau de la rigueur dans git
+    - le respect des standards établis dans le contract d'équipe ainsi qu'au niveau de la programmtion
+    <br></br>
+
 4. Quel conseil donneriez-vous aux prochains étudiants qui doivent faire ce projet?
+
+    - S'assurer d'établir une bonne architecture dès le départ. Cela va éviter beaucoup de problèmes d'intégration plus tard. Avoir une bonne fondation va aussi permettre aux étudiants de se retrouver facilement dans leur code, et leur donner la possibilité de "Keep It Stupid Simple".
+    <br></br>
+    
 5. Quels apprentissages, trucs ou techniques appris dans ce projet croyez-vous pouvoir utiliser plus tard? Décrivez-en au moins 2. Cela peut être des apprentissages techniques, pratiques, sur le travail d'équipe ou encore par rapport au processus.
+
+    - Avoir une gestion de Git demande beaucoup d'effort, mais ca en vaut la peine. 
+    - aaaaa
+    <br></br>
 
 # Open source
 
@@ -56,6 +55,10 @@ problèmes légaux liés à ceux-ci. Il faut également protéger le projet, mai
 qui aime écrire peut aider un projet en écrivant de la documentation, quelqu'un qui aime la conception peut aider un projet avec sa conception afin de rendre le projet plus facile à utiliser,
 quelqu'un qui aime planifier des événements peut aider en organsisant une conférence pour le projet afin qu'il soit plus connu, etc.
 
+## Choix de la license: MIT
+- Raison 1
+- Raison 2
+- Raison 3
 
 ## Exécution
 
@@ -68,7 +71,7 @@ Maintenant que vous êtes mieux renseignés sur l'open source, vous savez qu'il 
 
 # Outils de métriques
 
-## Outil d'analyse de la qualité du code: **test**
+## Outil d'analyse de la qualité du code: **SonarCloud**
 ![img.png](Screenshots/TP4/screen1.png)
 ![img.png](Screenshots/TP4/screen2.png)
 
