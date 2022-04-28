@@ -15,7 +15,7 @@
 ![img.png](Screenshots/TP4/pr2.png)
 ![img.png](Screenshots/TP4/pr3.png)
 ## Arbre de commits et de branches
-![img.png](Screenshots/TP4/arbre.png)
+![img.png](Screenshots/arbre/img.png)
 
 # Rétrospective finale
 
