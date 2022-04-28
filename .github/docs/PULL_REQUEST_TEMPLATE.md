@@ -1,6 +1,6 @@
 ### Description
 
-Please explain the changes you made here.
+Description des changements.
 
 ## Checklist
 ### Quality
