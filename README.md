@@ -1,4 +1,4 @@
-##Badges
+## Badges
 ### Quality
 - [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=GLO2003-H22-eq24_Floppa&metric=bugs)](https://sonarcloud.io/summary/new_code?id=GLO2003-H22-eq24_Floppa)
 - [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=GLO2003-H22-eq24_Floppa&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=GLO2003-H22-eq24_Floppa)
