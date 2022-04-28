@@ -9,6 +9,9 @@ import java.util.Optional;
 public class HttpParamUtil {
 	public static final String SELLER_ID_HEADER = "X-Seller-Id";
 
+	private HttpParamUtil() {
+	}
+
 	public static String retrieveSellerIdFromHeaders(HttpHeaders headers) throws ErrorException {
 		return fetchId(headers.getRequestHeaders().getFirst(SELLER_ID_HEADER));
 	}
