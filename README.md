@@ -62,3 +62,6 @@ mvn clean install exec:java "-DdbName=floppa-staging" "-Dport=8080" "-DdbUrl=mon
 ```
 mvn verify -PTestIT
 ```
+
+## Badges Pipeline CI/CD
+![img.png](exercices/Screenshots/TP4/badgeReadMe.png)

@@ -2,21 +2,39 @@
 # Planification du travail sur Github
 
 
-- **1** pour le ***Project*** comprenant les colonnes et les issues associées
-- **1** pour le ***milestone*** comprenant le titre, la description et les issues associées
-- **3** pour les **issues** avec tous les éléments demandés visibles
-- **3** pour les **PR** avec tous les éléments demandés visibles
-- **1** pour votre **arbre de commits et de branches** (au moins 3 branches et/ou 10 commits visibles)
-
-**Vos captures d'écran doivent être cohérentes et prise à un moment fixe de votre développement**.
-
+## Projet
+![img.png](Screenshots/TP4/projet.png)
+## Milestone
+![img.png](Screenshots/TP4/milestone.png)
+## Issues
+![img.png](Screenshots/TP4/issues1.png)
+![img.png](Screenshots/TP4/issues2.png)
+![img.png](Screenshots/TP4/issues3.png)
+## PR
+![img.png](Screenshots/TP4/pr1.png)
+![img.png](Screenshots/TP4/pr2.png)
+![img.png](Screenshots/TP4/pr3.png)
+## Arbre de commits et de branches
+![img.png](Screenshots/TP4/arbre.png)
 
 # Rétrospective finale
 
 1. Décrivez 2 problématiques que possèdent votre processus et développer 2 plans distincts afin de les résoudres. Soyez constructifs dans vos critiques et évitez de mettre la faute sur une ou un groupe de personne en particulier.
-<br></br>
+
+    Nous avions une approche très agile pour le développement de Floppa, car nous étions une relativement petite équipe qui travaillait sur un projet de petite envergure. Par contre, nous avons tout de même négligé certaines parties importante du processus agile (surtout au début du projet).
+
+    - Nous avons négligé grandement la phase de démarrage. Il y a donc eu un manque de planification de notre part et une architecture pas assez établie. Nous avons fait cela simplement parce que nous avions hate de commencer à implémenter (ce qui n'est pas mauvais en agile), mais il faut quand même s'assurer d'avoir une bonne base avant de commencer à coder.
+    - Nous n'avons pas développé en TDD, ce qui a compliqué beaucoup de choses au cours du projet, comme l'intégration de plusieurs parties de code ainsi que l'ajout de nouvelles features. Nous étions simplement pas au courant des avantages qu'apportent le TDD (surtout au niveau de l'organisation du code) 
+    <br></br>
+
 2. Décrivez la démarche que vous aviez entrepris afin d'intégrer de nouveaux outils technologiques. Quelles étaient les étapes du processus? Comment avez-vous réagis aux différents bogues? Exploriez-vous à l'aide de tests unitaires ou manuels? Qu'avez-vous appris suite à cette démarche?
-<br></br>
+
+    - Notre mentalité pour la dernière itération du projet Floppa était de toujours y aller au plus simple. Nous avons donc essayé de trouver les outils directement sur git, pour ensuite aller voir un peu la documentation pour voir si l'intégration de l'outil au pipeline semble simple ou pas.  
+    - Nous avons aussi jamais laissé une seule personne intégrer un outil seul. Nous nous sommes inspiré de la méthode agile XP (programmation en paire). 
+    Cela nous a permis d'être encore plus sur de notre chois d'outils et cela a aussi facilité grandement le débugging
+    - La chose qu'on retient le plus de notre expérience d'intégration d'outils, c'est le fait que le choix d'outil est très important. Certains outils peuvent sembler simple et efficace, mais ils ne réalisent pas ce qu'on souhaite. Il est donc très important de bien lire la documentation avant de commencer à intégrer.
+    <br></br>
+
 3. Quels sont les bons coups de votre équipe? De quelles parties êtes-vous fiers? Nommez-en 3.
     - Beaucoup de communication
     - On bon travail au niveau de la rigueur dans git
@@ -31,7 +49,7 @@
 5. Quels apprentissages, trucs ou techniques appris dans ce projet croyez-vous pouvoir utiliser plus tard? Décrivez-en au moins 2. Cela peut être des apprentissages techniques, pratiques, sur le travail d'équipe ou encore par rapport au processus.
 
     - Avoir une gestion de Git demande beaucoup d'effort, mais ca en vaut la peine. 
-    - aaaaa
+    - Il est très important d'avoir une bonne ambiance d'équipe pour que le projet soit un succès. Il ne faut donc surtout pas négliger de travailler sur le coté communication du travaille en équipe. 
     <br></br>
 
 # Open source
@@ -55,33 +73,24 @@ problèmes légaux liés à ceux-ci. Il faut également protéger le projet, mai
 qui aime écrire peut aider un projet en écrivant de la documentation, quelqu'un qui aime la conception peut aider un projet avec sa conception afin de rendre le projet plus facile à utiliser,
 quelqu'un qui aime planifier des événements peut aider en organsisant une conférence pour le projet afin qu'il soit plus connu, etc.
 
-## Choix de la license: MIT
-- Raison 1
-- Raison 2
-- Raison 3
+## Choix de la license: MIT License
+- La license est permissive. Ca vveut donc dire qu'elle se caractérise par des exigences minimales sur la manière dont un logiciel peut être redistribué
+- La license est très populaire. Étant donnée que c'est notre première fois qu'on "joue" avec le open source, on préfère prendre une license qui est populaire pour éviter les problèmes. 
+- Il est possible d'intégrer la license MIT avec GPL, ce qui donne beaucoup de liberté au développeur propriétaire
 
 ## Exécution
 
-Maintenant que vous êtes mieux renseignés sur l'open source, vous savez qu'il vous faut mettre en place des pratiques permettant de partager votre vision et l'information requise pour contribuer au projet. Ainsi, vous devez :
-
-1. Créer un fichier pour le "Code of conduct" en suivant les meilleures pratique. Si vous utilisez un template, vous **devez en citer la source** et **expliquer pourquoi** vous l'avez utilisé.
-2. Créer un fichier pour la licence en suivant les meilleures pratiques. Indiquez les **3 raisons principales** (dans le fichier d'exercice) pour lesquelles vous avez choisi cette licence par rapport aux autres.
-3. Créer un fichier pour la contribution décrivant les meilleures pratiques de collaboration et de développement que vous voulez encourager au sein du projet. Si vous utilisez un template, vous **devez en citer la source** et **expliquer pourquoi** vous l'avez utilisé.
-4. Mettre à jour le README afin de décrire le projet, mettre en lien les différents fichiers pour l'open source, et **ajouter les badges pour les pipelines CI** (voir la documentation sur Github).
-
 # Outils de métriques
 
-## Outil d'analyse de la qualité du code: **SonarCloud**
-![img.png](Screenshots/TP4/screen1.png)
-![img.png](Screenshots/TP4/screen2.png)
+## Outil d'analyse de la qualité du code ET du test coverage: **SonarCloud**
+![img.png](Screenshots/TP4/sonar1.png)
+![img.png](Screenshots/TP4/sonar2.png)
+![img.png](Screenshots/TP4/sonar3.png)
 
 ## outil de détection de failles de sécurité: **CodeQL**
 ![img.png](Screenshots/TP4/CodeQLscreen1.png)
 ![img.png](Screenshots/TP4/CodeQLscreen2.png)
 
-## outil de mesure du test coverage: **Code coverage**
-![img.png](Screenshots/TP4/screen1.png)
-![img.png](Screenshots/TP4/screen2.png)
 
 # Story: Statistique 
 
