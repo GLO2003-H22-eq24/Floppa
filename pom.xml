@@ -17,6 +17,12 @@
         <dbUrl/>
         <sonar.organization>glo2003-h22-eq24</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.jacoco.reportsPaths>${project.build.directory}/jacoco-ut.exec</sonar.jacoco.reportsPaths>
+        <sonar.tests>src/test/java</sonar.tests>
     </properties>
     <profiles>
         <profile>
@@ -46,20 +52,33 @@
             <build>
                 <plugins>
                     <plugin>
+                        <groupId>org.sonarsource.scanner.maven</groupId>
+                        <artifactId>sonar-maven-plugin</artifactId>
+                        <version>3.7.0.1746</version>
+                    </plugin>
+                    <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>prepare-agent</id>
+                                <id>default-prepare-agent</id>
                                 <goals>
                                     <goal>prepare-agent</goal>
                                 </goals>
+                                <configuration>
+                                    <destFile>${project.build.directory}/jacoco-ut.exec</destFile>
+                                </configuration>
                             </execution>
                             <execution>
-                                <id>report</id>
+                                <id>default-report</id>
                                 <goals>
                                     <goal>report</goal>
                                 </goals>
+                                <configuration>
+                                    <dataFile>${project.build.directory}/jacoco-ut.exec</dataFile>
+                                    <outputEncoding>UTF-8</outputEncoding>
+                                    <outputDirectory>${project.build.directory}</outputDirectory>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
