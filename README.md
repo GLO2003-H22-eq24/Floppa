@@ -14,7 +14,7 @@
 - [![Sonar cloud analyse CI](https://github.com/GLO2003-H22-eq24/Floppa/actions/workflows/sonarCloud.yml/badge.svg)](https://github.com/GLO2003-H22-eq24/Floppa/actions/workflows/sonarCloud.yml)
 # Floppa
 
-Le meilleur site de vente anonyme au Québec?
+Le meilleur site de vente anonyme au Québec!
 
 ## Requis
 
