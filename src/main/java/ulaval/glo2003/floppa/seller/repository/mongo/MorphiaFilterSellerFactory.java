@@ -20,7 +20,8 @@ public class MorphiaFilterSellerFactory {
 	public List<Filter> createConditionsSellerFunction(ConditionSellerDto conditionSellerDto){
 		List<Filter> sellerConditions = new ArrayList<>();
 		this.addSellerIdCondition(conditionSellerDto.getSellerId(), sellerConditions);
-		this.addProductFilterCondition(conditionSellerDto.getConditionProductDto(), sellerConditions);
+		Optional.ofNullable(conditionSellerDto.getConditionProductDto())
+				.ifPresent(conditionProductDto -> this.addProductFilterCondition(conditionProductDto, sellerConditions));
 		return sellerConditions;
 	}
 

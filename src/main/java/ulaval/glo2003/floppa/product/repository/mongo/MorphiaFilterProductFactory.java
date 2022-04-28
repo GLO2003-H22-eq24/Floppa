@@ -8,6 +8,7 @@ import ulaval.glo2003.floppa.product.domain.ProductCategory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class MorphiaFilterProductFactory {
@@ -16,6 +17,8 @@ public class MorphiaFilterProductFactory {
 		List<Filter> productConditions = new ArrayList<>();
 		this.addProductIdCondition(conditionProductDto.getProductId(), productConditions);
 		this.addCategoriesCondition(conditionProductDto.getProductCategories(), productConditions);
+		this.addProductTitleCondition(conditionProductDto.getTitle(), productConditions);
+
 		this.addMinPriceCondition(conditionProductDto.getMinPrice(), productConditions);
 		this.addMaxPriceCondition(conditionProductDto.getMaxPrice(), productConditions);
 		return productConditions;
@@ -23,6 +26,10 @@ public class MorphiaFilterProductFactory {
 
 	private void addProductIdCondition(String id, List<Filter> productConditions) {
 		Optional.ofNullable(id).ifPresent(productId -> productConditions.add(Filters.eq(ProductMapping.ID, productId)));
+	}
+
+	private void addProductTitleCondition(String title, List<Filter> productConditions) {
+		Optional.ofNullable(title).ifPresent(val -> productConditions.add(Filters.eq(ProductMapping.TITLE, Pattern.compile(title, Pattern.CASE_INSENSITIVE))));
 	}
 
 	private void addCategoriesCondition(List<ProductCategory> productCategories, List<Filter> productConditions) {

@@ -8,10 +8,11 @@ import ulaval.glo2003.floppa.product.applicative.ProductDto;
 import java.util.UUID;
 
 public class ProductFactory {
+	public static final int STARTING_VIEWS = 0;
 	public Product createProduct(ProductDto productDto) throws ErrorException {
 		this.validatePrice(productDto.getSuggestedPrice());
 		return new Product(productDto.getTitle(), productDto.getDescription(), productDto.getSuggestedPrice(),
-				productDto.getCategories(), UUID.randomUUID().toString(), DateUtil.getUtcNow());
+				productDto.getCategories(), UUID.randomUUID().toString(), DateUtil.getUtcNow(), STARTING_VIEWS);
 	}
 
 	private void validatePrice(Double suggestedPrice) throws ErrorException {

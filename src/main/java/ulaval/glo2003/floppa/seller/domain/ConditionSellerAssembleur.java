@@ -19,4 +19,8 @@ public class ConditionSellerAssembleur {
 	public ConditionSellerDto toDto(ConditionProductDto conditionProductDto) {
 		return new ConditionSellerDto(conditionProductDto, null);
 	}
+
+	public ConditionSellerDto toDto(String sellerId) {
+		return new ConditionSellerDto(null, sellerId);
+	}
 }

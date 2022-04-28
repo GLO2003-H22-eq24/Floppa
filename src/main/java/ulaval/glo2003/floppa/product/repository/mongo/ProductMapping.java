@@ -8,6 +8,7 @@ public class ProductMapping {
 	public static final String SUGGESTED_PRICE = "suggestedPrice";
 	public static final String CATEGORIES = "categories";
 	public static final String OFFERS = "offers";
+	public static final String VIEWS = "views";
 
 	private ProductMapping() { //hide useless constructor
 	}

@@ -14,6 +14,7 @@ import ulaval.glo2003.floppa.seller.domain.SellerRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class SellerRepositoryMongo implements SellerRepository {
