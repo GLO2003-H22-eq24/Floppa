@@ -51,6 +51,15 @@ public class ProductResource {
 	}
 
 	@POST
+	@Path("/{productId}/views")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addView(@PathParam("productId") String productId) throws ErrorException {
+		this.productService.addViewToProduct(HttpParamUtil.fetchId(productId));
+		return Response.ok().build();
+	}
+
+	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createProduct(ProductCreationRequest productCreationRequest, @Context UriInfo uriInfo, @Context HttpHeaders headers) throws ErrorException {
