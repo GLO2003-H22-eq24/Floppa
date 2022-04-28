@@ -75,4 +75,4 @@ This Code of Conduct is adapted from the Contributor Covenant,
 version 2.1, available at
 [https://www.contributor-covenant.org/version/2/1/code_of_conduct.html]().
 
-Ce template a été utilisée puisqu'il réflète les valeurs recherchées par notre équipe et constitu un modèle complet de code de conduite à adopter au sein d'une communauté publique. On identifie les normes et les valeurs, ainsi que les actions qui seront portées en cas de non respect du Code of Conduit. Les droits et devoirs des membres y sont très clairs.
+Ce template a été utilisé puisqu'il réflète les valeurs recherchées par notre équipe et constitu un modèle complet de code de conduite à adopter au sein d'une communauté publique. On identifie les normes et les valeurs, ainsi que les actions qui seront portées en cas de non respect du Code of Conduit. Les droits et devoirs des membres y sont très clairs.

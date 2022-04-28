@@ -1,4 +1,4 @@
-## Badges
+##Badges
 ### Quality
 - [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=GLO2003-H22-eq24_Floppa&metric=bugs)](https://sonarcloud.io/summary/new_code?id=GLO2003-H22-eq24_Floppa)
 - [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=GLO2003-H22-eq24_Floppa&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=GLO2003-H22-eq24_Floppa)
@@ -14,7 +14,7 @@
 - [![Sonar cloud analyse CI](https://github.com/GLO2003-H22-eq24/Floppa/actions/workflows/sonarCloud.yml/badge.svg)](https://github.com/GLO2003-H22-eq24/Floppa/actions/workflows/sonarCloud.yml)
 # Floppa
 
-Le meilleur site de vente anonyme au Québec!
+Le meilleur site de vente anonyme au Québec?
 
 ## Requis
 
@@ -55,7 +55,7 @@ mvn exec:java -Dport={int} -DdbName={string} -DdbUrl={string}
 - Changer l'url de la DB via -DdbUrl.
 ##### Exemple custom args
 ```
-mvn clean install exec:java "-DdbName=floppa-staging" "-Dport=8080" "-DdbUrl=mongodb+srv://floppa-api:XxIDt04RxHTps0YZ@floppa.3oieg.mongodb.net/Floppa?retryWrites=true&w=majority"
+mvn clean install exec:java "-DdbName=floppa-staging" "-Dport=8080" "-DdbUrl=mongodb+srv://floppa-api:XxIDt04RxHTps0YZ@floppa.3oieg.mongodb.net/Floppa?retryWrites=true"
 ```
 #### Comment utiliser
 - Aller sur l'adresse "http://localhost:8080/" 
@@ -63,7 +63,7 @@ mvn clean install exec:java "-DdbName=floppa-staging" "-Dport=8080" "-DdbUrl=mon
 ## Mongo
 ### DB Urls
 - ATLAS_CONNECTION_URL = "mongodb+srv://floppa-api:
-  XxIDt04RxHTps0YZ@floppa.3oieg.mongodb.net/Floppa?retryWrites=true&w=majority";
+  XxIDt04RxHTps0YZ@floppa.3oieg.mongodb.net/Floppa?retryWrites=true";
 - LOCAL_CONNECTION_URL = "mongodb://localhost";
 
 ### DB names
@@ -76,9 +76,18 @@ mvn clean install exec:java "-DdbName=floppa-staging" "-Dport=8080" "-DdbUrl=mon
 ```
 mvn verify -PTestIT
 ```
-
 ## Outils de vérification
 Utilise SonarCloud via la commande
 ```
 mvn verify sonar:sonar -Pcoverage "-Dsonar.host.url=https://sonarcloud.io" "-Dsonar.organization=glo2003-h22-eq24" "-Dsonar.projectKey=GLO2003-H22-eq24_Floppa"
 ```
+
+## Badges Pipeline CI/CD
+![img.png](exercices/Screenshots/TP4/badgeReadMe.png)
+
+## CODE OF CONDUCTS
+Lire le [code de conduite](https://github.com/GLO2003-H22-eq24/Floppa/blob/main/CodeOfConduct.md) 
+##Contribution
+Lire les bonnes pratiques de contribution : [CONTRIBUTION](https://github.com/GLO2003-H22-eq24/Floppa/blob/main/CONTRIBUTING.md) 
+
+

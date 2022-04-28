@@ -77,7 +77,7 @@ public class SellerRepositoryMongo implements SellerRepository {
 		}
 	}
 
-	private void callDb() throws RuntimeException {
+	private void callDb() {
 		this.datastore.getDatabase().listCollections().first();
 	}
 }

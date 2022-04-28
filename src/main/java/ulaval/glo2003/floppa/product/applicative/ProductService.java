@@ -59,4 +59,12 @@ public class ProductService {
 		this.sellerRepository.retrieveSeller(conditionSellerDto.getSellerId());
 		return this.sellerRepository.findProducts(conditionSellerDto);
 	}
+
+	public void addViewToProduct(String productId) throws ErrorException {
+		ConditionProductDto conditionProductDto = new ConditionProductDtoBuilder().addProductId(productId).build();
+		ConditionSellerDto conditionSellerDto = conditionSellerAssembleur.toDto(conditionProductDto);
+		Product product = sellerRepository.findProducts(conditionSellerDto).stream().findFirst().orElseThrow(() -> new ErrorException(ErrorCode.ITEM_NOT_FOUND));
+		product.addView();
+		sellerRepository.updateProduct(product);
+	}
 }

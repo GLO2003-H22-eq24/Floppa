@@ -18,7 +18,6 @@ import static ulaval.glo2003.floppa.product.domain.ProductFactory.STARTING_VIEWS
 
 @ExtendWith(MockitoExtension.class)
 class ProductTest {
-	private Double suggestedPrice = 1.2;
 	private Product anyProduct;
 
 	@BeforeEach
@@ -26,6 +25,7 @@ class ProductTest {
 		String name = "name";
 		String desc = "desc";
 		String id = "id";
+		Double suggestedPrice = 1.2;
 		anyProduct = new Product(name, desc, suggestedPrice, List.of(ProductCategory.APPAREL), id, LocalDateTime.now(), STARTING_VIEWS);
 	}
 
@@ -50,8 +50,6 @@ class ProductTest {
 
 		assertNull(meanOffers);
 	}
-
-
 
 	@Test
 	void givenOffers_whenComputeNumberOfOffers_thenNumberOfOffers() throws ErrorException {
@@ -80,15 +78,24 @@ class ProductTest {
 
 	@Test
 	void givenSmallOffers_whenComputeMinOffers_thenSmallOffers() throws ErrorException {
-		Double smallPrice = 20.;
+		Double smallPrice = 10.;
 		Offers smallOffers = mockOffers(smallPrice);
-		Offers offers2 = mockOffers(10.);
+		Offers offers2 = mockOffers(20.);
 		anyProduct.addOffer(smallOffers);
 		anyProduct.addOffer(offers2);
 
-		Double minOffers = anyProduct.computeMaxOffers();
+		Double minOffers = anyProduct.computeMinOffers();
 
 		Assertions.assertEquals(smallPrice, minOffers);
+	}
+
+	@Test
+	void givenProduct_whenAddViews_thenIncrementViews() {
+		Integer views = anyProduct.getViews();
+
+		anyProduct.addView();
+
+		Assertions.assertEquals(views + 1, anyProduct.getViews());
 	}
 
 	private Offers mockOffers(Double price) {
