@@ -85,3 +85,9 @@ mvn verify sonar:sonar -Pcoverage "-Dsonar.host.url=https://sonarcloud.io" "-Dso
 ## Badges Pipeline CI/CD
 ![img.png](exercices/Screenshots/TP4/badgeReadMe.png)
 
+## CODE OF CONDUCTS
+Lire le [code de conduite](https://github.com/GLO2003-H22-eq24/Floppa/blob/main/CodeOfConduct.md) 
+##Contribution
+Lire les bonnes pratiques de contribution : [CONTRIBUTION](https://github.com/GLO2003-H22-eq24/Floppa/blob/main/CONTRIBUTING.md) 
+
+
