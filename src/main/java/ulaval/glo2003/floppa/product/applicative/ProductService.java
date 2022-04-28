@@ -54,4 +54,9 @@ public class ProductService {
 		}
 		return pairsSellerProduct;
 	}
+
+	public List<Product> retrieveOnlyProductBySellerWithConditions(ConditionSellerDto conditionSellerDto) throws ErrorException {
+		this.sellerRepository.retrieveSeller(conditionSellerDto.getSellerId());
+		return this.sellerRepository.findProducts(conditionSellerDto);
+	}
 }

@@ -1,4 +1,4 @@
-package ulaval.glo2003.floppa.product.api.message;
+package ulaval.glo2003.floppa.product.api.request;
 import jakarta.json.bind.annotation.JsonbProperty;
 
 import java.util.List;

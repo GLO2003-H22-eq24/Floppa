@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.floppa.ServerTestIT;
-import ulaval.glo2003.floppa.product.api.message.ProductResponse;
-import ulaval.glo2003.floppa.seller.api.message.SellerResponse;
+import ulaval.glo2003.floppa.product.api.response.ProductResponse;
+import ulaval.glo2003.floppa.seller.api.response.SellerResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -3,9 +3,10 @@ package ulaval.glo2003.floppa.seller.api;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
+import ulaval.glo2003.floppa.app.api.HttpParamUtil;
 import ulaval.glo2003.floppa.app.domain.ErrorException;
-import ulaval.glo2003.floppa.seller.api.message.SellerRequest;
-import ulaval.glo2003.floppa.seller.api.message.SellerResponse;
+import ulaval.glo2003.floppa.seller.api.request.SellerRequest;
+import ulaval.glo2003.floppa.seller.api.response.SellerResponse;
 import ulaval.glo2003.floppa.seller.applicative.SellerDto;
 import ulaval.glo2003.floppa.seller.applicative.SellerService;
 import ulaval.glo2003.floppa.seller.domain.Seller;
@@ -16,7 +17,6 @@ import java.net.URI;
 public class SellerResource {
     private final SellerService sellerService;
     private final SellerAssembler sellerAssembler;
-    private static final String SELLER_ID_HEADER = "X-Seller-Id";
 
     @Inject
     public SellerResource(SellerService sellerService, SellerAssembler sellerAssembler) {
@@ -41,14 +41,14 @@ public class SellerResource {
         if (id.equals("@me") || id.equals("%40me")){
             return retrieveMeSeller(httpheaders);
         }else {
-            Seller seller = sellerService.retrieveSeller(id);
+            Seller seller = sellerService.retrieveSeller(HttpParamUtil.fetchId(id));
             SellerResponse sellerResponse = sellerAssembler.toResponse(seller, false);
             return Response.ok().entity(sellerResponse).build();
         }
     }
 
     private Response retrieveMeSeller(HttpHeaders httpheaders) throws ErrorException {
-        String idSeller = httpheaders.getHeaderString(SELLER_ID_HEADER);
+        String idSeller = HttpParamUtil.retrieveSellerIdFromHeaders(httpheaders);
         Seller seller = sellerService.retrieveSeller(idSeller);
         SellerResponse sellerResponse = sellerAssembler.toResponse(seller, true);
         return Response.ok().entity(sellerResponse).build();

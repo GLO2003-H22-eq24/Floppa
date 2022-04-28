@@ -1,7 +1,7 @@
-package ulaval.glo2003.floppa.seller.api.message;
+package ulaval.glo2003.floppa.seller.api.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ulaval.glo2003.floppa.product.api.message.ProductResponse;
+import ulaval.glo2003.floppa.product.api.response.ProductResponse;
 
 import java.util.List;
 

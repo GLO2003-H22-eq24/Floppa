@@ -1,8 +1,8 @@
 package ulaval.glo2003.floppa.offers.api;
 
 import ulaval.glo2003.floppa.app.domain.DateUtil;
-import ulaval.glo2003.floppa.offers.api.message.BuyerResponse;
-import ulaval.glo2003.floppa.offers.api.message.OfferItemResponse;
+import ulaval.glo2003.floppa.offers.api.response.BuyerResponse;
+import ulaval.glo2003.floppa.offers.api.response.OfferItemResponse;
 import ulaval.glo2003.floppa.offers.domain.Offers;
 
 import java.util.List;

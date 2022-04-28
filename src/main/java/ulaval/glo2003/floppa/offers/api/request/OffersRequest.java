@@ -1,4 +1,4 @@
-package ulaval.glo2003.floppa.offers.api.message;
+package ulaval.glo2003.floppa.offers.api.request;
 
 public class OffersRequest {
 	private String name;
