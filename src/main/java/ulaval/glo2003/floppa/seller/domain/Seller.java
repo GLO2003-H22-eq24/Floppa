@@ -59,7 +59,7 @@ public class Seller {
     }
 
     public List<Product> getProducts() {
-        Optional.ofNullable(this.products).orElseGet(() -> this.products = new ArrayList<>());
+        this.products =Optional.ofNullable(this.products).orElseGet(ArrayList::new);
         return this.products;
     }
 

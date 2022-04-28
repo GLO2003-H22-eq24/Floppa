@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
-public class OffersServiceTest {
+class OffersServiceTest {
 	@Mock
 	private SellerRepository sellerRepository;
 	@Mock
