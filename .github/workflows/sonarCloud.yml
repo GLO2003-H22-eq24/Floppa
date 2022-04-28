@@ -30,7 +30,11 @@ name: Sonar cloud analyse CI
 
 on:
   push:
+    branches:
+      - main
+      - dev
   pull_request:
+    types: [ opened, synchronize, reopened ]
   workflow_dispatch:
 
 jobs:

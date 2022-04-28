@@ -1,6 +1,6 @@
 ### Description
 
-Description des changements.
+Description des changements...
 
 ## Checklist
 ### Quality
