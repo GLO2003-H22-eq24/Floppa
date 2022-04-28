@@ -21,6 +21,7 @@ public class FloppaRunnable implements Runnable {
         AppConfigFactory appConfigFactory = new AppConfigFactory(new ArgConfigResolver(), new SystemConfigResolver(), new DefaultConfigResolver());
         FloppaRunnable floppaRunnable = new FloppaRunnable(appConfigFactory.createAppConfig(args));
         floppaRunnable.run();
+        System.out.println("asd");
     }
 
     @Override
