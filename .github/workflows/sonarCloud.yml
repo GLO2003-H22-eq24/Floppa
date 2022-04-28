@@ -55,13 +55,13 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Run tests
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        - name: Run tests
         run: mvn sonar:sonar -Pcoverage
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
         with:
           args:             
             -Dsonar.projectKey=GLO2003-H22-eq24_Floppa
