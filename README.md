@@ -1,3 +1,4 @@
+[![tests](https://github.com/GLO2003-H22-eq24/Floppa/actions/workflows/.github-actions.yml/badge.svg)](https://github.com/GLO2003-H22-eq24/Floppa/actions/workflows/.github-actions.yml)
 # Floppa
 
 Le meilleur site de vente anonyme au Québec?
