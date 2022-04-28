@@ -1,3 +1,8 @@
+[![tests](https://github.com/GLO2003-H22-eq24/Floppa/actions/workflows/.github-actions.yml/badge.svg)](https://github.com/GLO2003-H22-eq24/Floppa/actions/workflows/.github-actions.yml)
+[![CodeQL](https://github.com/GLO2003-H22-eq24/Floppa/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/GLO2003-H22-eq24/Floppa/actions/workflows/codeql-analysis.yml)
+[![Deploy Staging](https://github.com/GLO2003-H22-eq24/Floppa/actions/workflows/deploy-staging.yml/badge.svg)](https://github.com/GLO2003-H22-eq24/Floppa/actions/workflows/deploy-staging.yml)
+[![Sonar cloud analyse CI](https://github.com/GLO2003-H22-eq24/Floppa/actions/workflows/sonarCloud.yml/badge.svg)](https://github.com/GLO2003-H22-eq24/Floppa/actions/workflows/sonarCloud.yml)
+
 # Floppa
 
 Le meilleur site de vente anonyme au Québec?
@@ -61,4 +66,10 @@ mvn clean install exec:java "-DdbName=floppa-staging" "-Dport=8080" "-DdbUrl=mon
 ## Tests d'intégration (TestIT)
 ```
 mvn verify -PTestIT
+```
+
+## Outils de vérification
+Utilise SonarCloud via la commande
+```
+mvn verify sonar:sonar -Pcoverage "-Dsonar.host.url=https://sonarcloud.io" "-Dsonar.organization=glo2003-h22-eq24" "-Dsonar.projectKey=GLO2003-H22-eq24_Floppa"
 ```
